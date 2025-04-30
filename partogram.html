@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>藍單大幫手</title>
+  <link rel="icon" href="/ntuh_partogram/favicon.png" type="image/x-icon">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f8ff;
+      color: #333;
+    }
+    h1 {
+      color: #0066cc;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .credit-line {
+      text-align: center;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      color: #4a86e8;
+      margin-top: -20px;
+      margin-bottom: 25px;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .credit-line::before,
+    .credit-line::after {
+      content: "✦";
+      display: inline-block;
+      padding: 0 10px;
+      color: #8ab4f8;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .input-section {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    .main-block {
+      margin-bottom: 30px;
+    }
+    .main-title {
+      background-color: #0066cc;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+    .sub-block {
+      margin-bottom: 20px;
+    }
+    .sub-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #0066cc;
+    }
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      resize: vertical;
+      font-family: Arial, sans-serif;
+      box-sizing: border-box; /* Add this line */
+    }
+    .remark {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-left: 3px solid #999;
+      font-size: 0.9em;
+      color: #666;
+      border-radius: 3px;
+    }
+
+    .remark p {
+      margin: 5px 0;
+    }
+
+    .remark a {
+      color: #0066cc;
+      text-decoration: none;
+      border-bottom: 1px dotted #0066cc;
+      transition: color 0.2s, border-bottom-color 0.2s;
+    }
+
+    .remark a:hover {
+      color: #004080;
+      border-bottom-color: #004080;
+    }
+
+    .remark a:visited {
+      color: #551A8B;
+      border-bottom-color: #551A8B;
+    }
+    /* Add these styles to your existing CSS */
+    .labor-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      font-size: 14px;
+    }
+
+    .labor-table tr {
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .labor-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .labor-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-right: 1px solid #e0e0e0;
+    }
+
+    .labor-table td:last-child {
+      border-right: none;
+    }
+
+    /* Style for the first column (labels) */
+    .labor-table .label-cell {
+      background-color: #e6f0fa;
+      font-weight: bold;
+      width: 25%;
+    }
+
+    /* Style for the stage cells (first 3 rows of third column) */
+    .labor-table .stage-cell {
+      background-color: #f0f7ed;
+      font-weight: bold;
+      width: 25%;
+    }
+
+    /* Style for the total cell (last row of third column) */
+    .labor-table .total-cell {
+      background-color: #fcf5e6;
+      font-weight: bold;
+      width: 25%;
+    }
+
+    /* Add a subtle hover effect */
+    .labor-table tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    /* Ensure the cells with data values stand out */
+    .labor-table td:nth-child(2),
+    .labor-table td:nth-child(4) {
+      font-family: 'Courier New', monospace;
+    }
+    .btn-submit {
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+      transition: background-color 0.3s;
+    }
+    .btn-submit:hover {
+      background-color: #004999;
+    }
+    .hint {
+      font-size: 13px;
+      color: #777;
+      margin-top: 5px;
+      /* font-style: italic; */
+    }
+    .output-section {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: none;
+    }
+    .output-block {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 20px;
+    }
+    .output-title {
+      font-weight: bold;
+      color: #0066cc;
+      margin-bottom: 10px;
+    }
+    .output-content {
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-radius: 5px;
+      border-left: 3px solid #0066cc;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>藍單大幫手</h1>
+    <div class="credit-line">Created by B09 phantominor • Launched April 15, 2025</div>
+    
+    <!-- Input Section -->
+    <div class="input-section">
+      <div class="main-block">
+        <div class="main-title">入院紀錄 (Admission Note)</div>
+        <div class="hint">Path: EMR > 住院 > [日期] > 入院紀錄 > [日期]</div>
+        
+        <div class="sub-block">
+          <div class="sub-title">病史 (Patient History)</div>
+          <textarea id="patientHistory" placeholder="Paste the patient history here..."></textarea>
+        </div>
+        
+        <div class="sub-block">
+          <div class="sub-title">身體診察 (Physical Examination)</div>
+          <textarea id="physicalExam" placeholder="Paste the physical examination details here..."></textarea>
+        </div>
+        
+        <div class="sub-block">
+          <div class="sub-title">檢查紀錄 (Examination Report)</div>
+          <textarea id="examReport" placeholder="Paste the examination report here..."></textarea>
+          <div class="remark">
+            <p>假如檢查紀錄是 "nil"，那你只能怪自己在寫 admission 的時候耍白癡沒帶入，但很幸運地 EMR 裡什麼都有。請參考以下位置：</p>
+            <p>Path: EMR > 置頂 > 報告 > 超音波報告 > [貼上最近一次的內容(最上面那欄)]</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="main-block">
+        <div class="main-title">生產紀錄 (Vacuum Note)</div>
+        <div class="hint">Path: EMR > 住院 > [日期] > 病程紀錄 > [日期] > &lt;Vacuum Note&gt;</div>
+        <div class="sub-block">
+          <textarea id="vacuumNote" placeholder="Paste the vacuum note here..."></textarea>
+        </div>
+      </div>
+
+      <div class="main-block">
+        <div class="main-title">護理過程紀錄 (Nursing Process)</div>
+        <div class="hint">Path: EMR > 住院 > [日期] > 護理紀錄 > 護理過程記錄</div>
+        <div class="sub-block">
+          <textarea id="nursingProcess" placeholder="Paste the nursing process here..."></textarea>
+        </div>
+      </div>
+      
+      <div class="main-block">
+        <div class="main-title">自然分娩處置暨評估紀錄 (NSD evaluation)</div>
+        <div class="hint">Path: EMR > 住院 > [日期] > 自然分娩處置暨評估紀錄</div>
+        <div class="sub-block">
+          <textarea id="nsdEvaluation" placeholder="Paste the NSD evaluation here..."></textarea>
+        </div>
+      </div>
+      
+      <button id="submitBtn" class="btn-submit">Submit</button>
+    </div>
+    
+    <!-- Output Section -->
+    <div id="outputSection" class="output-section">
+      <div class="main-title">Organized Medical Data</div>
+      
+      <div class="output-block">
+        <div class="output-title">1. OBS/GYN history</div>
+        <div id="obsGynHistory" class="output-content"></div>
+      </div>
+      
+      <div class="output-block">
+        <div class="output-title">2. Special conditions or complications during this pregnancy course & <br>3. Systemic disease</div>
+        <div id="specialConditionsAndSystemicDisease" class="output-content"></div>
+        <div class="remark">
+          <p>For other trivial information (eg. cervical cerclage, tocolysis, IVF, PCOS, fetal reduction; or other systemic problems), please refer to OPD notes or progress notes, but they are highly likely to be negative findings as they were not presented in the admission note.</p>
+        </div>
+      </div>
+      
+      <div class="output-block">
+        <div class="output-title">4. Past major operation</div>
+        <div id="pastOperation" class="output-content"></div>
+      </div>
+      
+      <div class="output-block">
+        <div class="output-title">5. Physical examination and laboratory data</div>
+        <div id="physicalLabData" class="output-content"></div>
+        <div class="remark">
+          <p>Weight before pregnancy: EMR > 住院 > [日期] > 病程紀錄 > [日期] > 成人營養評估 (最久之前的評估紀錄)</p>
+        </div>
+      </div>
+      
+      <div class="output-block">
+        <div class="output-title">6. Pelvic examination</div>
+        <div id="pelvicExam" class="output-content"></div>
+        <div class="remark">
+          <p>The data here are supposed to be showing the result of pelvic examination ON ADMISSION, so usually ROM and onset of labor are negative findings (if they're positive, then they must present in the result of PE on admission, so DO NOT write the onset of labor time afterwards! Just tick up the negative one.)</p>
+        </div>
+      </div>
+      
+      <div class="output-block">
+        <div class="output-title">7. Sonar finding</div>
+        <div id="sonarFinding" class="output-content"></div>
+        <div class="remark">
+          <p>Normal placenta grading: <a href="https://radiopaedia.org/articles/placental-grading" target="_blank">https://radiopaedia.org/articles/placental-grading</a></p>
+          <p>Normal placenta location: <a href="https://ultrasoundcare.com.au/pregnancy-ultrasounds/placental-location/" target="_blank">https://ultrasoundcare.com.au/pregnancy-ultrasounds/placental-location/</a></p>
+        </div>
+      </div>
+      
+      <div class="output-block">
+        <div class="output-title">8. Admission diagnosis</div>
+        <div class="remark">
+          <p>Please refer to the "Tentative diagnosis" section in the admission note yourself.</p>
+          <p>It would be idiotic if you copy this here yourself and see the output results exactly the same...</p>
+          <p>General format: Pregnancy for __+_ weeks, (with ____), (with induction) without labor sign.</p>
+        </div>
+      </div>
+      
+      <div class="output-block">
+        <div class="output-title">9. Labor course</div>
+        <div id="laborCourse" class="output-content"></div>
+      </div>
+      
+      <div class="output-block">
+        <div class="output-title">10. Course of labor</div>
+        <div id="courseOfLabor" class="output-content"></div>
+      </div>
+      
+      <div class="output-block">
+        <div class="output-title">11. Type of delivery</div>
+        <div id="typeOfDelivery" class="output-content"></div>
+        <div class="remark">
+          <p>You SHOULD know whether it's NSD or C/S, don't ask me.</p>
+          <p><b>Median episiotomy</b> is the standard due to better healing and less bleeding, whereas mediolateral is used only when reducing the risk of extension outweighs its drawbacks.</p>
+        </div>
+      </div>
+      
+      <div class="output-block">
+        <div class="output-title">12. Findings of placenta cord and membrane</div>
+        <div id="placentaFindings" class="output-content"></div>
+      </div>
+      
+      <div class="output-block">
+        <div class="output-title">13. Findings of newborn</div>
+        <div id="newbornFindings" class="output-content"></div>
+        <div class="remark">
+          <p>Apgar's score should be jotted down at 1 min and 5 min.</p>
+        </div>
+      </div>
+      
+      <div class="output-block">
+        <div class="output-title">14. Other finding</div>
+        <div id="otherFindings" class="output-content"></div>
+        <div class="remark">
+          <p>Cord milking (-), if not specified.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.getElementById('submitBtn').addEventListener('click', function() {
+      // Extract data from input fields
+      const patientHistoryText = document.getElementById('patientHistory').value;
+      const examReportText = document.getElementById('examReport').value;
+      const physicalExamText = document.getElementById('physicalExam').value;
+      const nsdEvaluationText = document.getElementById('nsdEvaluation').value;
+      const nursingProcessText = document.getElementById('nursingProcess').value;
+      const vacuumNoteText = document.getElementById('vacuumNote').value;
+      
+      // ===== OUTPUT block 1: OBS/GYN history =====
+      // Extract OBS/GYN history from patient history
+      let obsGynHistory = "";
+      if (patientHistoryText.includes("8. OBGYN history:") && patientHistoryText.includes("9. Prenatal examination")) {
+        const startIndex = patientHistoryText.indexOf("8. OBGYN history:") + "8. OBGYN history:".length;
+        const endIndex = patientHistoryText.indexOf("9. Prenatal examination");
+        obsGynHistory = patientHistoryText.substring(startIndex, endIndex).trim();
+      }
+      
+      // Extract gestational age from patient history
+      let gestationalAge = "";
+      const pregnantWeeksRegex = /pregnant for (\d+\+\d+) weeks/;
+      const pregnantMatch = patientHistoryText.match(pregnantWeeksRegex);
+      if (pregnantMatch && pregnantMatch[1]) {
+        gestationalAge = pregnantMatch[1];
+      }
+      
+      // Extract Fetus information from examination report
+      let fetusType = "";
+      if (examReportText.includes("Fetus No :")) {
+        const fetusLine = examReportText.substring(
+          examReportText.indexOf("Fetus No :"),
+          examReportText.indexOf("\n", examReportText.indexOf("Fetus No :"))
+        );
+        
+        const fetusMatch = fetusLine.match(/Fetus No\s*:\s*(\S+)/);
+        if (fetusMatch && fetusMatch[1]) {
+          const fetusValue = fetusMatch[1].trim();
+          
+          // Determine fetus type based on value
+          switch(fetusValue) {
+            case "1":
+              fetusType = "singleton";
+              break;
+            case "2":
+              fetusType = "twins";
+              break;
+            case "3":
+              fetusType = "triplets";
+              break;
+            case "DCDA":
+              fetusType = "DCDA twins";
+              break;
+            case "MCDA":
+              fetusType = "MCDA twins";
+              break;
+            case "MCMA":
+              fetusType = "MCMA twins";
+              break;
+            default:
+              fetusType = fetusValue; // For any other value, just use as is
+          }
+        }
+      }
+      
+      // Combine the information
+      let finalObsGynHistory = obsGynHistory;
+      
+      // Add gestational age if found
+      if (gestationalAge) {
+        finalObsGynHistory += "\nGestational age: " + gestationalAge + " weeks";
+      }
+      
+      // Add fetus type if found
+      if (fetusType) {
+        finalObsGynHistory += "\n" + fetusType;
+      }
+      
+      // ===== OUTPUT block 2: Systemic disease and special conditions =====
+      // ===== OUTPUT block 3: Prenatal examinations =====
+      // Extract Systemic disease and special conditions information
+      let systemicAndSpecialConditions = "";
+      if (patientHistoryText.includes("Major systemic diseases:")) {
+        // Extract Major systemic diseases
+        const startSystemic = patientHistoryText.indexOf("Major systemic diseases:");
+        const endSystemic = patientHistoryText.indexOf("2. Current medication:");
+        
+        if (startSystemic !== -1 && endSystemic !== -1) {
+          systemicAndSpecialConditions += patientHistoryText.substring(startSystemic, endSystemic).trim() + "\n\n";
+        }
+      }
+
+      // Extract prenatal examination related to systemic conditions
+      if (patientHistoryText.includes("Prenatal examination:") && 
+          patientHistoryText.includes("Other prenatal exam finding:")) {
+        const startPrenatal = patientHistoryText.indexOf("Prenatal examination:");
+        const endPrenatal = patientHistoryText.indexOf("Other prenatal exam finding:");
+        
+        if (startPrenatal !== -1 && endPrenatal !== -1) {
+          systemicAndSpecialConditions += patientHistoryText.substring(startPrenatal, endPrenatal).trim() + "\n\n";
+        }
+      }
+
+      // ===== OUTPUT block 4: Past major operation =====
+      // Extract Past Major Operation (from Operation history in Patient History)
+      let pastOperation = "";
+      if (patientHistoryText.includes("Operation history:")) {
+        const startOperation = patientHistoryText.indexOf("Operation history:");
+        const endOperation = patientHistoryText.indexOf("6. Family history:");
+        
+        if (startOperation !== -1 && endOperation !== -1) {
+          pastOperation = patientHistoryText.substring(startOperation, endOperation).trim();
+        }
+      }
+
+      // ===== OUTPUT block 5: Physical examination and laboratory data =====
+      let physicalExamData = "";
+
+      if (physicalExamText.includes("BH:") && physicalExamText.includes("Neurological Examination:")) {
+        const startPhysical = physicalExamText.indexOf("BH:");
+        const endPhysical = physicalExamText.indexOf("Neurological Examination:");
+        
+        if (startPhysical !== -1 && endPhysical !== -1) {
+          physicalExamData = physicalExamText.substring(startPhysical, endPhysical).trim() + "\n\n";
+        }
+      }
+
+      // Extract Proteinuria information from Patient History
+      let proteinuriaInfo = "";
+      if (patientHistoryText.includes("Proteinuria(")) {
+        const proteinuriaStart = patientHistoryText.indexOf("Proteinuria(");
+        const proteinuriaEnd = patientHistoryText.indexOf(")", proteinuriaStart) + 1;
+        
+        if (proteinuriaStart !== -1 && proteinuriaEnd !== -1) {
+          proteinuriaInfo = "Proteinuria" + patientHistoryText.substring(proteinuriaStart + "Proteinuria".length, proteinuriaEnd);
+        }
+      }
+
+      // Combine the information and add the additional note
+      if (proteinuriaInfo) {
+        physicalExamData += proteinuriaInfo + "\n\n";
+      }
+
+      // ===== OUTPUT block 6: Pelvic examination =====
+      // Extract Pelvic examination data
+      let pelvicExamData = "";
+
+      // Extract from Physical Examination input
+      if (physicalExamText.includes("[Pelvic Examination]")) {
+        const pelvicStart = physicalExamText.indexOf("[Pelvic Examination]") + "[Pelvic Examination]".length;
+        // Take everything after the [Pelvic Examination] label
+        pelvicExamData = physicalExamText.substring(pelvicStart).trim() + "\n\n";
+      }
+
+      let presentationInfo = "";
+
+      if (examReportText.includes("Presentation")) {
+        const presentationStart = examReportText.indexOf("Presentation");
+        const presentationEnd = examReportText.indexOf("FHB", presentationStart);
+        
+        if (presentationStart !== -1 && presentationEnd !== -1) {
+          presentationInfo = examReportText.substring(presentationStart, presentationEnd).trim();
+        }
+      }
+
+      // Combine the information and add the additional note
+      if (presentationInfo) {
+        pelvicExamData += presentationInfo + "\n\n";
+      }
+
+      // ===== OUTPUT block 7: Sonar findings =====
+      // Extract Sonar findings from Examination Report
+      let sonarFindings = "";
+
+      // Extract Presentation and FHB
+      if (examReportText.includes("Presentation : ") && examReportText.includes("Gender")) {
+        const presentationStart = examReportText.indexOf("Presentation :");
+        const presentationEnd = examReportText.indexOf("Gender");
+        
+        if (presentationStart !== -1 && presentationEnd !== -1) {
+          sonarFindings += examReportText.substring(presentationStart, presentationEnd).trim() + "\n\n";
+        }
+      }
+
+      // Extract Estimated weight
+      if (examReportText.includes("EBW")) {
+        const ebwStart = examReportText.indexOf("EBW");
+        const ebwLine = examReportText.substring(ebwStart, examReportText.indexOf("\n", ebwStart));
+        
+        // Extract weight and gestational week
+        const weightMatch = ebwLine.match(/EBW\s*:\s*(\d+\.?\d*)\s*Gram/i);
+        const weekMatch = ebwLine.match(/GW\d+\(US\)\s*=\s*(\d+\.?\d*)\s*wk/i);
+        
+        if (weightMatch && weekMatch) {
+          const weight = parseFloat(weightMatch[1]);
+          const week = parseFloat(weekMatch[1]);
+          
+          // Determine if weight is average/large/small for gestational age
+          let sizeCategory = "average";
+          
+          // This is a simplified calculation - you would want to replace this with actual
+          // fetal weight guidelines based on gestational age
+          if (week >= 37 && week <= 40) {
+            if (weight > 3500) sizeCategory = "large";
+            else if (weight < 2500) sizeCategory = "small";
+          } else if (week >= 34 && week < 37) {
+            if (weight > 3000) sizeCategory = "large";
+            else if (weight < 2200) sizeCategory = "small";
+          } else if (week >= 30 && week < 34) {
+            if (weight > 2500) sizeCategory = "large";
+            else if (weight < 1500) sizeCategory = "small";
+          }
+          // Add more gestational age ranges as needed
+          
+          sonarFindings += `Estimated weight: ${weight} grams (${sizeCategory} for gestational age at ${week} wk)\n\n`;
+        }
+      }
+
+      // Extract Placenta information
+      if (examReportText.includes("Placenta location")) {
+        const placentaStart = examReportText.indexOf("Placenta location");
+        const placentaEnd = examReportText.indexOf("\n", placentaStart);
+        
+        if (placentaStart !== -1 && placentaEnd !== -1) {
+          const placentaInfo = examReportText.substring(placentaStart, placentaEnd).trim();
+          
+          // Check if placenta is normal
+          let isNormal = true;
+          
+          // Check for abnormal signs in the report
+          const abnormalSigns = ["accreta", "increta", "percreta", "previa", "abruption"];
+          for (const sign of abnormalSigns) {
+            if (examReportText.toLowerCase().includes(sign)) {
+              isNormal = false;
+              break;
+            }
+          }
+          
+          // Check placenta grade against gestational age
+          const gradeMatch = placentaInfo.match(/grade\s*:\s*[Ⅰ|Ⅱ|Ⅲ|I|II|III]/i);
+          if (gradeMatch) {
+            const grade = gradeMatch[0].match(/[Ⅰ|Ⅱ|Ⅲ|I|II|III]/)[0];
+            const gestationalWeekMatch = examReportText.match(/GW\d+\(US\)\s*=\s*(\d+\.?\d*)\s*wk/i);
+            
+            if (gestationalWeekMatch) {
+              const week = parseFloat(gestationalWeekMatch[1]);
+              
+              // Simplified grade check - replace with accurate guidelines
+              if ((grade === "Ⅲ" || grade === "III") && week < 36) {
+                isNormal = false;
+              }
+            }
+          }
+          
+          sonarFindings += `Placenta: ${isNormal ? "normal" : "abnormal"}. (${placentaInfo})\n`;
+        }
+      }
+
+      // Extract AFI information (simplified)
+      if (examReportText.includes("AFI")) {
+        // Find "AFI" and then look for the nearest number followed by "mm"
+        const afiIndex = examReportText.indexOf("AFI");
+        if (afiIndex !== -1) {
+          // Find the mm measurement after AFI
+          const mmMatch = examReportText.substring(afiIndex).match(/(\d+\.?\d*)\s*mm/);
+          
+          if (mmMatch) {
+            const afiMm = parseFloat(mmMatch[1]);
+            const afiCm = (afiMm / 10).toFixed(2);
+            
+            sonarFindings += `AFI: ${afiCm} cm`;
+          }
+        }
+      }
+
+      // ===== OUTPUT block 10: Course of labor =====
+      // Extract Course of Labor times
+      let onsetOfLabor = "";
+      let fullOsTime = "";
+      let deliveryTime = "";
+      let placentaDeliveryTime = "";
+
+            // Find placenta delivery time
+            if (nsdEvaluationText.includes("娩出胎盤胎膜:")) {
+        const placentaLine = nsdEvaluationText.split('\n').find(line => 
+          line.includes("娩出胎盤胎膜:"));
+        if (placentaLine) {
+          // Extract date and time after "娩出胎盤胎膜:"
+          const dateTimeMatch = placentaLine.match(/娩出胎盤胎膜:[ \t　]*(\d{4}\/\d{2}\/\d{2} \d{2}:\d{2})/);
+          if (dateTimeMatch && dateTimeMatch[1]) {
+            placentaDeliveryTime = dateTimeMatch[1];
+          }
+        }
+      }
+
+      // Find delivery time from 分娩中/分娩後 records
+      // First try to extract from vacuum note (priority)
+      if (vacuumNoteText) {
+        // First, replace newlines with spaces to create one continuous text
+        const normalizedText = vacuumNoteText.replace(/\n/g, ' ');
+        
+        // Look for time format in the normalized text
+        const timeMatch = normalizedText.match(/performed smoothly at (\d{1,2}:\d{2})/);
+        
+        if (timeMatch && timeMatch[1]) {
+          const timeOnly = timeMatch[1];
+          
+          // Extract date from vacuum note header or placenta delivery time
+          let dateStr = "";
+          const vacuumDateMatch = vacuumNoteText.match(/^(\d{4}\/\d{1,2}\/\d{1,2})/m);
+          
+          if (vacuumDateMatch && vacuumDateMatch[1]) {
+            dateStr = vacuumDateMatch[1];
+          } else if (placentaDeliveryTime) {
+            // Use date from placenta delivery time as reference
+            dateStr = placentaDeliveryTime.split(' ')[0];
+          }
+          
+          if (dateStr) {
+            deliveryTime = `${dateStr} ${timeOnly}`;
+          }
+        }
+      }
+
+      // Fallback: If no time found in vacuum note, use time from NSD evaluation
+      if (!deliveryTime && nsdEvaluationText.includes("分娩中") && nsdEvaluationText.includes("分娩後")) {
+        const deliveryLines = nsdEvaluationText.split('\n').filter(line => 
+          line.includes("分娩中") || line.includes("分娩後"));
+        
+        // Get the timestamp from 分娩後 line if it exists
+        const deliveryAfterLine = deliveryLines.find(line => line.includes("分娩後"));
+        if (deliveryAfterLine) {
+          // Extract date and time from the line (assumes format like "2025/04/02 16:12")
+          const dateTimeMatch = deliveryAfterLine.match(/\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}/);
+          if (dateTimeMatch) {
+            deliveryTime = dateTimeMatch[0];
+          }
+        }
+      }
+
+      // Process nursing notes to find onset of labor based on contraction intervals
+      const nursingNotes = nursingProcessText.split(/\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}/).filter(Boolean);
+      const nursingTimestamps = nursingProcessText.match(/\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}/g) || [];
+
+      // Create an array of nursing notes with their timestamps
+      const timestampedNotes = [];
+      for (let i = 0; i < nursingTimestamps.length && i < nursingNotes.length; i++) {
+        timestampedNotes.push({
+          timestamp: nursingTimestamps[i],
+          note: nursingNotes[i]
+        });
+      }
+
+      // Find onset of labor (first note where contraction interval is ≤4 min and remains ≤4 min afterward)
+      let foundConsistentPattern = false;
+
+      console.log("Starting to analyze nursing notes for onset of labor");
+      console.log(`Total number of timestamped notes: ${timestampedNotes.length}`);
+
+      // Helper function to extract the average interval time from a string containing "宮縮間隔時間：X-Y分" or "宮縮間隔時間：X分"
+      function extractAverageInterval(noteText) {
+        // Try to find pattern like "宮縮間隔時間：3-5分" (range)
+        const rangeMatch = noteText.match(/宮縮間隔時間：(\d+)-(\d+)分/);
+        if (rangeMatch) {
+          const min = parseInt(rangeMatch[1]);
+          const max = parseInt(rangeMatch[2]);
+          const avg = (min + max) / 2; // Return average
+          console.log(`Found range pattern: ${min}-${max}分, average: ${avg}`);
+          return avg;
+        }
+        
+        // Try to find pattern like "宮縮間隔時間：3分" (single value)
+        const singleMatch = noteText.match(/宮縮間隔時間：(\d+)分/);
+        if (singleMatch) {
+          const value = parseInt(singleMatch[1]);
+          console.log(`Found single value pattern: ${value}分`);
+          return value;
+        }
+        
+        console.log("No contraction interval pattern found in this note");
+        return null; // No match found
+      }
+
+      // Process all nursing notes to find consistent pattern
+      for (let i = 0; i < timestampedNotes.length; i++) {
+        const currentNote = timestampedNotes[i];
+        console.log(`\nAnalyzing note at timestamp: ${currentNote.timestamp}`);
+        console.log(`Note excerpt: ${currentNote.note.substring(0, 50)}...`);
+        
+        const interval = extractAverageInterval(currentNote.note);
+        
+        // Skip if we couldn't determine the interval for this note
+        if (interval === null) {
+          console.log("Skipping this note - couldn't extract interval");
+          continue;
+        }
+        
+        // Check if interval is ≤4 minutes
+        console.log(`Interval value: ${interval}, Is ≤4? ${interval <= 4}`);
+        if (interval <= 4) {
+          console.log("This note has interval ≤4, checking subsequent notes...");
+          // Now check if subsequent notes also have intervals ≤4 minutes
+          let allSubsequentAreConsistent = true;
+          let checkedCount = 0;
+          
+          // Check up to 3 subsequent notes (or as many as available)
+          for (let j = i + 1; j < timestampedNotes.length && j < i + 4; j++) {
+            console.log(`Checking subsequent note at index ${j}`);
+            const subsequentInterval = extractAverageInterval(timestampedNotes[j].note);
+            
+            // Skip notes where we can't extract the interval
+            if (subsequentInterval === null) {
+              console.log("Couldn't extract interval from this subsequent note, skipping");
+              continue;
+            }
+            
+            checkedCount++;
+            console.log(`Subsequent interval value: ${subsequentInterval}, Is ≤4? ${subsequentInterval <= 4}`);
+            
+            // If any subsequent note has interval > 4, pattern is broken
+            if (subsequentInterval > 4) {
+              console.log("Pattern broken - interval > 4");
+              allSubsequentAreConsistent = false;
+              break;
+            }
+          }
+          
+          console.log(`Checked ${checkedCount} subsequent notes, all consistent: ${allSubsequentAreConsistent}`);
+          // If we found at least 2 subsequent notes and all are consistent, we found our pattern
+          if (checkedCount >= 2 && allSubsequentAreConsistent) {
+            console.log(`FOUND ONSET OF LABOR at ${currentNote.timestamp}`);
+            onsetOfLabor = currentNote.timestamp;
+            foundConsistentPattern = true;
+            break;
+          } else {
+            console.log("Not enough consistent subsequent notes, continuing search");
+          }
+        }
+      }
+
+      // If we didn't find a consistent pattern, try a fallback approach
+      if (!foundConsistentPattern) {
+        console.log("\nNo consistent pattern found, trying fallback approach...");
+        // Find the first occurrence of interval ≤3 minutes as a fallback
+        for (const note of timestampedNotes) {
+          const interval = extractAverageInterval(note.note);
+          if (interval !== null && interval <= 3) {
+            console.log(`FALLBACK: Found note with interval ≤3 at ${note.timestamp}`);
+            onsetOfLabor = note.timestamp;
+            break;
+          }
+        }
+      }
+
+      console.log(`Final result - Onset of labor: ${onsetOfLabor || "Not determined"}`);
+
+      // Find full os time (first note where OS status is "full")
+      for (const note of timestampedNotes) {
+        if (note.note.includes("OS：full") || note.note.includes("OS：Full")) {
+          fullOsTime = note.timestamp;
+          break;
+        }
+      }
+
+      // Calculate durations in hours and minutes
+      function calculateDuration(startTime, endTime) {
+        if (!startTime || !endTime) return { hours: 0, minutes: 0 };
+        
+        const start = new Date(startTime);
+        const end = new Date(endTime);
+        const diffMillis = end - start;
+        
+        const hours = Math.floor(diffMillis / (1000 * 60 * 60));
+        const minutes = Math.floor((diffMillis % (1000 * 60 * 60)) / (1000 * 60));
+        
+        return { hours, minutes };
+      }
+
+      // Calculate the four durations
+      const firstStageDuration = calculateDuration(onsetOfLabor, fullOsTime);
+      const secondStageDuration = calculateDuration(fullOsTime, deliveryTime);
+      const thirdStageDuration = calculateDuration(deliveryTime, placentaDeliveryTime);
+
+      // Calculate total duration
+      const totalHours = firstStageDuration.hours + secondStageDuration.hours + thirdStageDuration.hours;
+      const totalMinutes = firstStageDuration.minutes + secondStageDuration.minutes + thirdStageDuration.minutes;
+      const adjustedTotalHours = totalHours + Math.floor(totalMinutes / 60);
+      const adjustedTotalMinutes = totalMinutes % 60;
+
+      // Format durations as strings with padded zeros
+      function formatDuration(duration) {
+        return `${String(duration.hours).padStart(2, '0')}hr ${String(duration.minutes).padStart(2, '0')}min`;
+      }
+
+      // Create the course of labor output as a table
+      const courseOfLaborTable = document.createElement('table');
+      courseOfLaborTable.className = 'labor-table';
+
+      // Row 1: Onset of Labor + First stage
+      const row1 = document.createElement('tr');
+      const cell1_1 = document.createElement('td');
+      cell1_1.className = 'label-cell';
+      cell1_1.textContent = 'Onset of Labor';
+      const cell1_2 = document.createElement('td');
+      cell1_2.textContent = onsetOfLabor;
+      const cell1_3 = document.createElement('td');
+      cell1_3.className = 'stage-cell';
+      cell1_3.textContent = 'First stage';
+      const cell1_4 = document.createElement('td');
+      cell1_4.textContent = formatDuration(firstStageDuration);
+      row1.appendChild(cell1_1);
+      row1.appendChild(cell1_2);
+      row1.appendChild(cell1_3);
+      row1.appendChild(cell1_4);
+      courseOfLaborTable.appendChild(row1);
+
+      // Row 2: Time of Full Os + Second stage
+      const row2 = document.createElement('tr');
+      const cell2_1 = document.createElement('td');
+      cell2_1.className = 'label-cell';
+      cell2_1.textContent = 'Time of Full Os';
+      const cell2_2 = document.createElement('td');
+      cell2_2.textContent = fullOsTime;
+      const cell2_3 = document.createElement('td');
+      cell2_3.className = 'stage-cell';
+      cell2_3.textContent = 'Second stage';
+      const cell2_4 = document.createElement('td');
+      cell2_4.textContent = formatDuration(secondStageDuration);
+      row2.appendChild(cell2_1);
+      row2.appendChild(cell2_2);
+      row2.appendChild(cell2_3);
+      row2.appendChild(cell2_4);
+      courseOfLaborTable.appendChild(row2);
+
+      // Row 3: Delivery time + Third stage
+      const row3 = document.createElement('tr');
+      const cell3_1 = document.createElement('td');
+      cell3_1.className = 'label-cell';
+      cell3_1.textContent = 'Delivery time';
+      const cell3_2 = document.createElement('td');
+      cell3_2.textContent = deliveryTime;
+      const cell3_3 = document.createElement('td');
+      cell3_3.className = 'stage-cell';
+      cell3_3.textContent = 'Third stage';
+      const cell3_4 = document.createElement('td');
+      cell3_4.textContent = formatDuration(thirdStageDuration);
+      row3.appendChild(cell3_1);
+      row3.appendChild(cell3_2);
+      row3.appendChild(cell3_3);
+      row3.appendChild(cell3_4);
+      courseOfLaborTable.appendChild(row3);
+
+      // Row 4: Placenta delivery time + Total duration of labor
+      const row4 = document.createElement('tr');
+      const cell4_1 = document.createElement('td');
+      cell4_1.className = 'label-cell';
+      cell4_1.textContent = 'Placenta delivery time';
+      const cell4_2 = document.createElement('td');
+      cell4_2.textContent = placentaDeliveryTime;
+      const cell4_3 = document.createElement('td');
+      cell4_3.className = 'total-cell';
+      cell4_3.textContent = 'Total duration of labor';
+      const cell4_4 = document.createElement('td');
+      cell4_4.textContent = `${String(adjustedTotalHours).padStart(2, '0')}hr ${String(adjustedTotalMinutes).padStart(2, '0')}min`;
+      row4.appendChild(cell4_1);
+      row4.appendChild(cell4_2);
+      row4.appendChild(cell4_3);
+      row4.appendChild(cell4_4);
+      courseOfLaborTable.appendChild(row4);
+
+
+      // ===== OUTPUT block 9: Labor course =====
+      // Parse the text into entries by date/time
+      const entries = parseNursingProcess(nursingProcessText);
+      
+      // Extract OS and Station data
+      const osStationData = extractOsStationData(entries);
+      
+      // Convert the data to standardized format
+      const convertedData = convertOsStationData(osStationData);
+      
+      // Create and display the table
+      displayLaborCourseTable(convertedData);
+
+      // Function to parse the nursing process text into entries
+      function parseNursingProcess(text) {
+        // Split by date pattern (YYYY/MM/DD HH:MM)
+        const datePattern = /\d{4}\/\d{2}\/\d{2}\s\d{2}:\d{2}/g;
+        const dates = text.match(datePattern) || [];
+        
+        const entries = [];
+        
+        // Extract each entry
+        for (let i = 0; i < dates.length; i++) {
+          const currentDate = dates[i];
+          const nextDate = dates[i + 1] || "";
+          
+          // Extract the content between current date and next date
+          let content = "";
+          if (nextDate) {
+            const currentIndex = text.indexOf(currentDate);
+            const nextIndex = text.indexOf(nextDate);
+            content = text.substring(currentIndex, nextIndex).trim();
+          } else {
+            const currentIndex = text.indexOf(currentDate);
+            content = text.substring(currentIndex).trim();
+          }
+          
+          entries.push({
+            datetime: currentDate,
+            content: content
+          });
+        }
+        
+        return entries;
+      }
+
+      // Function to extract OS and Station data from entries
+      function extractOsStationData(entries) {
+        const osStationData = [];
+        
+        for (const entry of entries) {
+          // Check if entry contains OS or os with expanded pattern to match period delimiter too
+          const osMatch = entry.content.match(/(?:os|OS)[:：]([^,，。、/\.]+)/i);
+          
+          if (osMatch) {
+            const osValue = osMatch[1].trim();
+            let stationValue = "";
+            
+            // Look for station specifically with expanded pattern
+            const stationMatch = entry.content.match(/station[:：]([^,，。、/\.]+)/i);
+            
+            if (stationMatch) {
+              stationValue = stationMatch[1].trim();
+            } else {
+              // If no station explicitly found, try to find it by position after OS
+              const osPosition = entry.content.indexOf(osMatch[0]) + osMatch[0].length;
+              
+              // Extract text after OS value until next delimiter (now including period)
+              const afterOsText = entry.content.substring(osPosition);
+              
+              // Check if there are delimiter characters after OS value (now including period)
+              const nextDelimiterMatch = afterOsText.match(/[,，。、/\.]/);
+              
+              if (nextDelimiterMatch) {
+                const restOfText = afterOsText.substring(nextDelimiterMatch.index + 1).trim();
+                
+                // Try to find station keyword explicitly in the rest of text
+                const stationKeywordMatch = restOfText.match(/station[:：]([^,，。、/\.]+)/i);
+                
+                if (stationKeywordMatch) {
+                  stationValue = stationKeywordMatch[1].trim();
+                } else {
+                  // Additional pattern to look for high/brim/etc after a period
+                  const highStationMatch = restOfText.match(/^station[:：]\s*(high|brim|[+-]?\d+(?:[~\-\/][+-]?\d+)?)/i);
+                  
+                  if (highStationMatch) {
+                    stationValue = highStationMatch[1].trim();
+                  } else {
+                    // Try to extract station value after first delimiter
+                    const possibleStationMatch = restOfText.match(/^([^,，。、/\.]+)/);
+                    
+                    if (possibleStationMatch && (
+                        possibleStationMatch[1].includes('-') || 
+                        possibleStationMatch[1].includes('+') || 
+                        possibleStationMatch[1].includes('~') ||
+                        possibleStationMatch[1].match(/^\d/) ||
+                        possibleStationMatch[1].includes('high')
+                    )) {
+                      stationValue = possibleStationMatch[1].trim();
+                    }
+                  }
+                }
+              }
+            }
+
+            // Handle special cases like "Brim" and "high" in OS and station
+            if (osValue.toLowerCase().includes('brim')) {
+              osStationData.push({
+                datetime: entry.datetime,
+                os: 'Brim',
+                station: stationValue || (entry.content.toLowerCase().includes('high') ? 'high' : '')
+              });
+            } else {
+              osStationData.push({
+                datetime: entry.datetime,
+                os: osValue,
+                station: stationValue
+              });
+            }
+          }
+        }
+        
+        return osStationData;
+      }
+
+      // Function to convert OS and Station data according to rules
+      function convertOsStationData(osStationData) {
+        const convertedData = [];
+        
+        for (const data of osStationData) {
+          const convertedOs = convertOs(data.os);
+          const convertedStation = convertStation(data.station);
+          
+          convertedData.push({
+            datetime: data.datetime,
+            originalOs: data.os,
+            originalStation: data.station,
+            os: convertedOs,
+            station: convertedStation
+          });
+        }
+        
+        return convertedData;
+      }
+
+      // Function to convert OS values
+      function convertOs(osValue) {
+        // Normalize OS value: lowercase and remove Fb or other suffix
+        const normalized = osValue.toLowerCase().trim();
+        
+        // Extract the numeric part if it exists
+        const numericMatch = normalized.match(/^(\d+)(\+|-)?/);
+        const numericPart = numericMatch ? numericMatch[1] : null;
+        const modifier = numericMatch && numericMatch[2] ? numericMatch[2] : "";
+        
+        // Check for numeric values first (with modifiers)
+        if (numericPart) {
+          if (modifier === "+") {
+            if (numericPart === "1") return "3";
+            if (numericPart === "2") return "5";
+            if (numericPart === "3") return "7";
+            if (numericPart === "4") return "9";
+          } else if (modifier === "-") {
+            if (numericPart === "1") return "1";
+            if (numericPart === "2") return "3";
+            if (numericPart === "3") return "5";
+            if (numericPart === "4") return "7";
+          } else {
+            // No modifier, just the number
+            if (numericPart === "1") return "2";
+            if (numericPart === "2") return "4";
+            if (numericPart === "3") return "6";
+            if (numericPart === "4") return "8";
+            if (numericPart === "5") return "10";
+          }
+        }
+        
+        // Continue with other checks for non-numeric values
+        if (normalized.includes("ft")) return "1";
+        if (normalized.includes("close")) return "0";
+        if (normalized.includes("緊")) return "0";
+        if (normalized.includes("full")) return "10";
+        if (normalized.includes("brim")) return "9.5";
+        if (normalized.includes("全開")) return "10";
+        if (normalized.includes("一指")) return normalized.includes("半") ? "3" : "2";
+        if (normalized.includes("二指")) return normalized.includes("半") ? "5" : "4";
+        if (normalized.includes("三指")) return normalized.includes("半") ? "7" : "6";
+        if (normalized.includes("四指")) return normalized.includes("半") ? "9" : "8";
+        if (normalized.includes("五指")) return "10";
+        
+        // Default return the original
+        return osValue;
+      }
+
+      // Function to convert Station values
+      function convertStation(stationValue) {
+        if (!stationValue) return "";
+        
+        // Normalize station value
+        const normalized = stationValue.toLowerCase().trim();
+        
+        // Basic station values
+        if (normalized === "-3") return "-3";
+        if (normalized === "-2") return "-2";
+        if (normalized === "-1") return "-1";
+        if (normalized === "0") return "0";
+        if (normalized === "1") return "1";
+        if (normalized === "2") return "2";
+        if (normalized === "3") return "3";
+        if (normalized === "high") return "-3";
+        if (normalized === "高") return "-3";
+        
+        // Handle ranges with different separators
+        const rangePatterns = [
+          { pattern: /(-?\d+)-(-?\d+)/, value: (m) => (parseFloat(m[1]) + parseFloat(m[2])) / 2 },
+          { pattern: /(-?\d+)~(-?\d+)/, value: (m) => (parseFloat(m[1]) + parseFloat(m[2])) / 2 },
+          { pattern: /(-?\d+)\/(-?\d+)/, value: (m) => (parseFloat(m[1]) + parseFloat(m[2])) / 2 },
+          { pattern: /\+(\d+)-\+(\d+)/, value: (m) => (parseFloat(m[1]) + parseFloat(m[2])) / 2 },
+          { pattern: /\+(\d+)~\+(\d+)/, value: (m) => (parseFloat(m[1]) + parseFloat(m[2])) / 2 },
+          { pattern: /\+(\d+)\/+(\d+)/, value: (m) => (parseFloat(m[1]) + parseFloat(m[2])) / 2 },
+          { pattern: /(-?\d+)~\+(\d+)/, value: (m) => (parseFloat(m[1]) + parseFloat(m[2])) / 2 },
+          { pattern: /(-?\d+)-\+(\d+)/, value: (m) => (parseFloat(m[1]) + parseFloat(m[2])) / 2 },
+          { pattern: /(-?\d+)\/\+(\d+)/, value: (m) => (parseFloat(m[1]) + parseFloat(m[2])) / 2 }
+        ];
+        
+        for (const { pattern, value } of rangePatterns) {
+          const match = normalized.match(pattern);
+          if (match) {
+            return value(match).toString();
+          }
+        }
+        
+        // Special cases for +number
+        if (normalized.match(/\+\d+/)) {
+          return normalized.replace('+', '');
+        }
+        
+        // Default return the original
+        return stationValue;
+      }
+
+      // Extend the displayLaborCourseTable function to include partogram visualization
+      function displayLaborCourseTable(data) {
+        const outputDiv = document.getElementById('laborCourse');
+        
+        if (data.length === 0) {
+          outputDiv.innerHTML = "No OS or Station data found in the nursing process.";
+          return;
+        }
+        
+        // If we have a delivery time, append it to the data
+        if (deliveryTime) {
+          // Add a delivery data point
+          data.push({
+            datetime: deliveryTime,
+            originalOs: "full",
+            originalStation: "+3",
+            os: "10",
+            station: "3"
+          });
+          
+          // Sort the data by datetime to ensure it appears in chronological order
+          data.sort((a, b) => {
+            return new Date(a.datetime) - new Date(b.datetime);
+          });
+        }
+        
+        // Create table HTML
+        let tableHTML = `
+        <table class="conversion-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>OS (cm)</th>
+              <th>Station (cm)</th>
+              <th>*OS</th>
+              <th>*Station</th>
+            </tr>
+          </thead>
+          <tbody>
+        `;
+        
+        // Add rows for each data point
+        for (const item of data) {
+          tableHTML += `
+            <tr>
+              <td>${item.datetime}</td>
+              <td>${item.os}</td>
+              <td>${item.station}</td>
+              <td>${item.originalOs}</td>
+              <td>${item.originalStation}</td>
+            </tr>
+          `;
+        }
+        
+        tableHTML += `
+          </tbody>
+        </table>
+        `;
+        
+        // Add table styles
+        const tableStyle = `
+        <style>
+          .conversion-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+          }
+          
+          .conversion-table th, .conversion-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+          }
+          
+          .conversion-table th {
+            background-color: #0066cc;
+            color: white;
+            font-weight: bold;
+          }
+          
+          .conversion-table tr:nth-child(even) {
+            background-color: #f2f6fc;
+          }
+          
+          .conversion-table tr:hover {
+            background-color: #e6f0ff;
+          }
+          
+          .conversion-table tr:last-child td {
+            border-bottom: 2px solid #0066cc;
+          }
+          
+          .partogram-container {
+            margin-top: 40px;
+            margin-bottom: 20px;
+          }
+          
+          .partogram-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #0066cc;
+          }
+          
+          .partogram-canvas {
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background-color: white;
+            margin-bottom: 30px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+          }
+        </style>
+        `;
+        
+        // Partogram section
+        const partogramHTML = `
+        <div class="partogram-container">
+          <div class="partogram-title">Partogram</div>
+          <div id="partogramCharts"></div>
+        </div>
+        `;
+        
+        // Set the HTML content
+        outputDiv.innerHTML = tableStyle + tableHTML + partogramHTML;
+        
+        // Process data for partogram
+        if (onsetOfLabor) {
+          createPartogram(data, onsetOfLabor);
+        } else {
+          document.getElementById('partogramCharts').innerHTML = "Onset of labor time not provided. Partogram cannot be generated.";
+        }
+        
+        // Make sure the output section is visible
+        document.querySelector('.output-section').style.display = 'block';
+      }
+
+      // Function to create partogram
+      function createPartogram(data, onsetOfLabor) {
+        if (!data || data.length === 0) return;
+        
+        // Convert all times to hours after onset of labor
+        const onsetTime = new Date(onsetOfLabor);
+        
+        // Add an invisible point for onset of labor using the value of the data point right before onset
+        // Find the data point closest to and before onset of labor
+        let initialOs = data[0].os;
+        let initialStation = data[0].station;
+        
+        // Find the data point immediately before onset of labor, if any
+        for (let i = data.length - 1; i >= 0; i--) {
+          const dataTime = new Date(data[i].datetime);
+          if (dataTime <= onsetTime) {
+            initialOs = data[i].os;
+            initialStation = data[i].station;
+            break;
+          }
+        }
+        
+        // Add the onset point to the beginning of processed data
+        const processedData = [{
+          datetime: onsetOfLabor,
+          hours: 0,
+          os: initialOs,
+          station: initialStation,
+          isOnset: true
+        }];
+        
+        // Process existing data points
+        for (const item of data) {
+          const dataTime = new Date(item.datetime);
+          const hoursDiff = (dataTime - onsetTime) / (1000 * 60 * 60); // Convert to hours
+          
+          processedData.push({
+            datetime: item.datetime,
+            hours: hoursDiff,
+            os: item.os,
+            station: item.station,
+            isOnset: false
+          });
+        }
+        
+        // Sort by hours
+        processedData.sort((a, b) => a.hours - b.hours);
+        
+        // Calculate how many days we need for partograms
+        const maxHours = processedData[processedData.length - 1].hours;
+        const daysNeeded = Math.ceil(maxHours / 24);
+        
+        // Create partograms for each day
+        const partogramContainer = document.getElementById('partogramCharts');
+        partogramContainer.innerHTML = ''; // Clear container
+        
+        for (let day = 0; day < daysNeeded; day++) {
+          // Create canvas for this day
+          const dayStartHour = day * 24;
+          const dayEndHour = (day + 1) * 24;
+          
+          // Filter data for this day
+          const dayData = processedData.filter(item => 
+            item.hours >= dayStartHour && item.hours <= dayEndHour
+          );
+          
+          // Add interpolated points at day boundaries if needed
+          if (day > 0) {
+            // Find points across the day boundary
+            for (let i = 0; i < processedData.length - 1; i++) {
+              const current = processedData[i];
+              const next = processedData[i + 1];
+              
+              if (current.hours < dayStartHour && next.hours > dayStartHour) {
+                // Interpolate a point at the day boundary
+                const ratio = (dayStartHour - current.hours) / (next.hours - current.hours);
+                const interpolatedOs = parseFloat(current.os) + ratio * (parseFloat(next.os) - parseFloat(current.os));
+                const interpolatedStation = parseFloat(current.station) + ratio * (parseFloat(next.station) - parseFloat(current.station));
+                
+                dayData.unshift({
+                  datetime: `Day ${day} boundary`,
+                  hours: dayStartHour,
+                  os: interpolatedOs.toFixed(1),
+                  station: interpolatedStation.toFixed(1),
+                  isInterpolated: true
+                });
+                
+                break;
+              }
+            }
+          }
+          
+          if (day < daysNeeded - 1) {
+            // Find points across the next day boundary
+            for (let i = 0; i < processedData.length - 1; i++) {
+              const current = processedData[i];
+              const next = processedData[i + 1];
+              
+              if (current.hours < dayEndHour && next.hours > dayEndHour) {
+                // Interpolate a point at the day boundary
+                const ratio = (dayEndHour - current.hours) / (next.hours - current.hours);
+                const interpolatedOs = parseFloat(current.os) + ratio * (parseFloat(next.os) - parseFloat(current.os));
+                const interpolatedStation = parseFloat(current.station) + ratio * (parseFloat(next.station) - parseFloat(current.station));
+                
+                dayData.push({
+                  datetime: `Day ${day + 1} boundary`,
+                  hours: dayEndHour,
+                  os: interpolatedOs.toFixed(1),
+                  station: interpolatedStation.toFixed(1),
+                  isInterpolated: true
+                });
+                
+                break;
+              }
+            }
+          }
+          
+          // Sort again after adding interpolated points
+          dayData.sort((a, b) => a.hours - b.hours);
+          
+          // Only create canvas if we have data for this day
+          if (dayData.length > 0) {
+            const canvasElement = document.createElement('canvas');
+            canvasElement.id = `partogram-day-${day + 1}`;
+            canvasElement.className = 'partogram-canvas';
+            canvasElement.width = 800;
+            canvasElement.height = 500;
+            
+            partogramContainer.appendChild(canvasElement);
+            
+            // Draw the partogram for this day
+            drawPartogram(canvasElement, dayData, dayStartHour, dayEndHour, `Day ${day + 1}`);
+          }
+        }
+      }
+
+      // Function to draw partogram on canvas
+      function drawPartogram(canvas, data, startHour, endHour, title) {
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width;
+        const height = canvas.height;
+        
+        // Clear canvas
+        ctx.clearRect(0, 0, width, height);
+        
+        // Set background
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, width, height);
+        
+        // Constants for chart layout
+        const padding = 50;
+        const chartWidth = width - (2 * padding);
+        const chartHeight = height - (2 * padding) - 30; // Reduced height to make space for legend
+        const xStart = padding;
+        const yStart = height - padding;
+        
+        // Draw chart title
+        ctx.font = 'bold 16px Arial';
+        ctx.fillStyle = '#0066cc';
+        ctx.textAlign = 'center';
+        ctx.fillText(`Partogram - ${title}`, width / 2, padding / 2);
+        
+        // Add legends below the title
+        const legendY = padding / 2 + 25; // Position below the title
+        
+        // OS legend
+        ctx.beginPath();
+        ctx.arc(width / 2 - 80, legendY, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = 'red';
+        ctx.fill();
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        
+        ctx.font = '12px Arial';
+        ctx.textAlign = 'left';
+        ctx.fillText('OS (cm)', width / 2 - 70, legendY + 4);
+        
+        // Station legend
+        ctx.beginPath();
+        ctx.arc(width / 2 + 20, legendY, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = 'blue';
+        ctx.fill();
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        
+        ctx.fillText('Station (cm)', width / 2 + 30, legendY + 4);
+        
+        // Draw x-axis (time)
+        ctx.beginPath();
+        ctx.moveTo(xStart, yStart);
+        ctx.lineTo(xStart + chartWidth, yStart);
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Draw x-axis labels (hours)
+        ctx.font = '12px Arial';
+        ctx.fillStyle = 'black';
+        ctx.textAlign = 'center';
+        
+        const hoursRange = endHour - startHour;
+        const hourStep = 2; // Label every 2 hours
+        
+        for (let h = 0; h <= hoursRange; h += hourStep) {
+          const x = xStart + (h / hoursRange) * chartWidth;
+          ctx.beginPath();
+          ctx.moveTo(x, yStart);
+          ctx.lineTo(x, yStart + 5);
+          ctx.stroke();
+          ctx.fillText(`${startHour + h}`, x, yStart + 20);
+        }
+        
+        // Draw x-axis title
+        ctx.font = 'bold 14px Arial';
+        ctx.fillStyle = 'black';
+        ctx.textAlign = 'center';
+        ctx.fillText('Time (hours after onset of labor)', width / 2, height - 10);
+        
+        // Draw left y-axis (OS)
+        ctx.beginPath();
+        ctx.moveTo(xStart, yStart);
+        ctx.lineTo(xStart, yStart - chartHeight);
+        ctx.stroke();
+        
+        // Draw right y-axis (Station)
+        ctx.beginPath();
+        ctx.moveTo(xStart + chartWidth, yStart);
+        ctx.lineTo(xStart + chartWidth, yStart - chartHeight);
+        ctx.stroke();
+        
+        // Draw left y-axis labels (OS)
+        ctx.font = '12px Arial';
+        ctx.textAlign = 'right';
+        ctx.fillStyle = 'black';
+        
+        const osMax = 10; // Only show up to 10 on the scale
+        const osStep = 1;
+        
+        for (let os = 0; os <= osMax; os += osStep) {
+          const y = yStart - (os / osMax) * chartHeight;
+          ctx.beginPath();
+          ctx.moveTo(xStart, y);
+          ctx.lineTo(xStart - 5, y);
+          ctx.stroke();
+          ctx.fillText(os.toString(), xStart - 10, y + 5);
+        }
+        
+        // Draw left y-axis title (OS) with added padding
+        ctx.save();
+        ctx.translate(20, height / 2); // Increased padding from 10 to 20
+        ctx.rotate(-Math.PI / 2);
+        ctx.font = 'bold 14px Arial';
+        ctx.fillStyle = 'red';
+        ctx.textAlign = 'center';
+        ctx.fillText('OS (cm)', 0, 0);
+        ctx.restore();
+        
+        // Draw right y-axis labels (Station)
+        ctx.textAlign = 'left';
+        ctx.fillStyle = 'black';
+        
+        const stationMin = -3;
+        const stationMax = 3;
+        const stationRange = stationMax - stationMin;
+        const stationStep = 1;
+        
+        for (let station = stationMin; station <= stationMax; station += stationStep) {
+          // Reverse the scale with -3 at the top and +3 at the bottom
+          const normalizedStation = station - stationMin; // 0 to 6
+          const y = yStart - ((stationRange - normalizedStation) / stationRange) * chartHeight;
+          
+          ctx.beginPath();
+          ctx.moveTo(xStart + chartWidth, y);
+          ctx.lineTo(xStart + chartWidth + 5, y);
+          ctx.stroke();
+          ctx.fillText(station.toString(), xStart + chartWidth + 10, y + 5);
+        }
+        
+        // Draw right y-axis title (Station) with added padding
+        ctx.save();
+        ctx.translate(width - 20, height / 2); // Increased padding from 10 to 20
+        ctx.rotate(Math.PI / 2);
+        ctx.font = 'bold 14px Arial';
+        ctx.fillStyle = 'blue';
+        ctx.textAlign = 'center';
+        ctx.fillText('Station (cm)', 0, 0);
+        ctx.restore();
+        
+        // Draw grid lines
+        ctx.strokeStyle = '#eee';
+        ctx.lineWidth = 1;
+        
+        // Horizontal grid lines (OS)
+        for (let os = 0; os <= osMax; os += osStep) {
+          const y = yStart - (os / osMax) * chartHeight;
+          ctx.beginPath();
+          ctx.moveTo(xStart, y);
+          ctx.lineTo(xStart + chartWidth, y);
+          ctx.stroke();
+        }
+        
+        // Vertical grid lines (hours)
+        for (let h = 0; h <= hoursRange; h += hourStep) {
+          const x = xStart + (h / hoursRange) * chartWidth;
+          ctx.beginPath();
+          ctx.moveTo(x, yStart);
+          ctx.lineTo(x, yStart - chartHeight);
+          ctx.stroke();
+        }
+        
+        // Plot OS data (red line)
+        let isFirstPoint = true;
+        ctx.beginPath();
+        ctx.strokeStyle = 'red';
+        ctx.lineWidth = 2;
+        
+        for (const point of data) {
+          if (point.isOnset && parseFloat(point.os) === 0) continue; // Skip onset point if it's 0
+          
+          const x = xStart + ((point.hours - startHour) / hoursRange) * chartWidth;
+          const y = yStart - (parseFloat(point.os) / osMax) * chartHeight;
+          
+          if (isFirstPoint) {
+            ctx.moveTo(x, y);
+            isFirstPoint = false;
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        
+        ctx.stroke();
+        
+        // Plot OS data points
+        for (const point of data) {
+          if (point.isInterpolated) continue; // Don't draw interpolated points
+          if (point.isOnset && parseFloat(point.os) === 0) continue; // Skip onset point if it's 0
+          
+          const x = xStart + ((point.hours - startHour) / hoursRange) * chartWidth;
+          const y = yStart - (parseFloat(point.os) / osMax) * chartHeight;
+          
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, 2 * Math.PI);
+          ctx.fillStyle = 'red';
+          ctx.fill();
+          ctx.strokeStyle = 'white';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+        
+        // Plot Station data (blue line)
+        isFirstPoint = true;
+        ctx.beginPath();
+        ctx.strokeStyle = 'blue';
+        ctx.lineWidth = 2;
+        
+        for (const point of data) {
+          const x = xStart + ((point.hours - startHour) / hoursRange) * chartWidth;
+          
+          // Convert station value to y position (reversed scale)
+          const station = parseFloat(point.station);
+          const normalizedStation = station - stationMin; // 0 to 6
+          const y = yStart - ((stationRange - normalizedStation) / stationRange) * chartHeight;
+          
+          if (isFirstPoint) {
+            ctx.moveTo(x, y);
+            isFirstPoint = false;
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        
+        ctx.stroke();
+        
+        // Plot Station data points
+        for (const point of data) {
+          if (point.isInterpolated) continue; // Don't draw interpolated points
+          
+          const x = xStart + ((point.hours - startHour) / hoursRange) * chartWidth;
+          
+          // Convert station value to y position (reversed scale)
+          const station = parseFloat(point.station);
+          const normalizedStation = station - stationMin; // 0 to 6
+          const y = yStart - ((stationRange - normalizedStation) / stationRange) * chartHeight;
+          
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, 2 * Math.PI);
+          ctx.fillStyle = 'blue';
+          ctx.fill();
+          ctx.strokeStyle = 'white';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+
+      // ===== OUTPUT block 11: Type of delivery =====
+      let typeOfDelivery = "";
+
+      // Extract first part - description after <Vacuum Note> and before Vaccum Condition
+      if (vacuumNoteText) {
+        let startIndex = 0;
+        if (vacuumNoteText.includes("<Vacuum Note>")) {
+          startIndex = vacuumNoteText.indexOf("<Vacuum Note>") + "<Vacuum Note>".length;
+        }
+        
+        const endIndex = vacuumNoteText.indexOf("Vaccum Condition");
+        if (endIndex !== -1) {
+          const firstPart = vacuumNoteText.substring(startIndex, endIndex).trim();
+          typeOfDelivery += firstPart + "\n\n";
+        }
+        
+        // Extract second part - Epsiotomy wound information
+        if (vacuumNoteText.includes("Epsiotomy wound") && vacuumNoteText.includes("Estimated blood loss")) {
+          const startEpisiotomy = vacuumNoteText.indexOf("Epsiotomy wound");
+          const endEpisiotomy = vacuumNoteText.indexOf("Estimated blood loss");
+          
+          const secondPart = vacuumNoteText.substring(startEpisiotomy, endEpisiotomy).trim();
+          typeOfDelivery += secondPart + "\n\n";
+        }
+        
+        // Extract third part - Complication information
+        if (vacuumNoteText.includes("Complication") && vacuumNoteText.includes("delayed cord clamping")) {
+          const startComplication = vacuumNoteText.indexOf("Complication");
+          const endComplication = vacuumNoteText.indexOf("delayed cord clamping");
+          
+          const thirdPart = vacuumNoteText.substring(startComplication, endComplication).trim();
+          typeOfDelivery += thirdPart;
+        }
+      }
+
+      // ===== OUTPUT block 12: Findings of placenta, cord and membrane =====
+      let placentaFindings = "";
+
+      // Extract from "Meconium stain" to before "Maternal condition"
+      if (vacuumNoteText.includes("Meconium stain") && vacuumNoteText.includes("Maternal condition")) {
+        const startMeconium = vacuumNoteText.indexOf("Meconium stain");
+        const endMeconium = vacuumNoteText.indexOf("Maternal condition");
+        
+        if (startMeconium !== -1 && endMeconium !== -1) {
+          placentaFindings = vacuumNoteText.substring(startMeconium, endMeconium).trim();
+        }
+      }
+
+      // ===== OUTPUT block 13: Findings of newborn =====
+      let newbornFindings = "";
+
+      // (Same as for Type of delivery)
+      if (vacuumNoteText) {
+        let startIndex = 0;
+        if (vacuumNoteText.includes("<Vacuum Note>")) {
+          startIndex = vacuumNoteText.indexOf("<Vacuum Note>") + "<Vacuum Note>".length;
+        }
+        
+        const endIndex = vacuumNoteText.indexOf("Vaccum Condition");
+        if (endIndex !== -1) {
+          const firstPart = vacuumNoteText.substring(startIndex, endIndex).trim();
+          newbornFindings += firstPart + "\n\n";
+        }
+        
+        // Extract second part - Birth body weight through Fetal anomaly
+        if (vacuumNoteText.includes("Birth body weight") && vacuumNoteText.includes("Meconium stain")) {
+          const startWeight = vacuumNoteText.indexOf("Birth body weight");
+          const endWeight = vacuumNoteText.indexOf("Meconium stain");
+          
+          const secondPart = vacuumNoteText.substring(startWeight, endWeight).trim();
+          newbornFindings += secondPart;
+        }
+      }
+
+      // ===== OUTPUT block 14: Other finding =====
+      let otherFindings = "";
+
+      if (vacuumNoteText.includes("Estimated blood loss") && vacuumNoteText.includes("Attended by")) {
+        const startOtherFindings = vacuumNoteText.indexOf("Estimated blood loss");
+        const endOtherFindings = vacuumNoteText.indexOf("Attended by");
+        
+        if (startOtherFindings !== -1 && endOtherFindings !== -1) {
+          otherFindings = vacuumNoteText.substring(startOtherFindings, endOtherFindings).trim();
+        }
+      }
+
+      // Set the extracted data to the output fields
+      document.getElementById('obsGynHistory').textContent = finalObsGynHistory;
+      document.getElementById('specialConditionsAndSystemicDisease').textContent = systemicAndSpecialConditions;
+      document.getElementById('pastOperation').textContent = pastOperation;
+      document.getElementById('physicalLabData').textContent = physicalExamData;
+      document.getElementById('pelvicExam').textContent = pelvicExamData;
+      document.getElementById('sonarFinding').textContent = sonarFindings;
+      // Clear any existing content and append the table
+      const courseOfLaborElement = document.getElementById('courseOfLabor');
+      courseOfLaborElement.innerHTML = '';
+      courseOfLaborElement.appendChild(courseOfLaborTable);
+
+      document.getElementById('typeOfDelivery').textContent = typeOfDelivery;
+      document.getElementById('placentaFindings').textContent = placentaFindings;
+      document.getElementById('newbornFindings').textContent = newbornFindings;
+      document.getElementById('otherFindings').textContent = otherFindings;
+
+      // Show and scroll to the output section
+      document.getElementById('outputSection').style.display = 'block';
+      document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
