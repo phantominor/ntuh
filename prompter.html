@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Workflow Management</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #1abc9c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --danger-color: #e74c3c;
+            --success-color: #2ecc71;
+            --text-color: #333;
+            --border-radius: 8px;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9fafb;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            margin-bottom: 0;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            background-color: var(--dark-color);
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .tab-btn {
+            padding: 1rem 1.5rem;
+            background-color: transparent;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            flex: 1;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .tab-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .tab-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .workflow-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .section-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--light-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        h2 i {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            transition: border 0.3s;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .assessment-group {
+            margin-bottom: 1rem;
+        }
+
+        .assessment-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .assessment-group textarea {
+            min-height: 80px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-generate {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-copy {
+            background-color: var(--accent-color);
+        }
+
+        .btn-clear {
+            background-color: var(--danger-color);
+        }
+
+        .btn i {
+            font-size: 1.1rem;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem;
+            background-color: var(--success-color);
+            color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notification i {
+            margin-right: 0.5rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            color: var(--dark-color);
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .workflow-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Loading spinner */
+        .loading {
+            display: none;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--secondary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Status indicator */
+        .status {
+            text-align: center;
+            padding: 0.5rem;
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+            font-weight: 500;
+            display: none;
+        }
+
+        .status.success {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: var(--success-color);
+            display: block;
+        }
+
+        .status.error {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--danger-color);
+            display: block;
+        }
+
+        /* Admission note specific styles */
+        .admission-section {
+            margin-bottom: 2rem;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Hospital Workflow Management</h1>
+            <p class="subtitle">AI-Enhanced Medical Documentation</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="progress-note">
+                <i class="fas fa-file-medical"></i> Progress Note
+            </button>
+            <button class="tab-btn" data-tab="admission-note">
+                <i class="fas fa-hospital-user"></i> Admission Note
+            </button>
+        </div>
+
+        <!-- Progress Note Tab -->
+        <div id="progress-note" class="tab-content active">
+            <div class="workflow-container">
+                <!-- Subjective Section -->
+                <div class="section-card">
+                    <h2><i class="fas fa-comment-medical"></i> [S] Subjective</h2>
+                    <textarea id="subjective-input" placeholder="Enter subjectives here..."></textarea>
+                </div>
+                
+                <!-- Objective Section -->
+                <div class="section-card">
+                    <h2><i class="fas fa-heartbeat"></i> [O] Objective</h2>
+                    <textarea id="objective-input" placeholder="Paste vital signs here..."></textarea>
+                </div>
+                
+                <!-- Assessment Section -->
+                <div class="section-card">
+                    <h2><i class="fas fa-stethoscope"></i> [A] Assessment</h2>
+                    <div class="assessment-group">
+                        <label><i class="fas fa-list"></i> Underlyings:</label>
+                        <textarea id="underlyings-input" placeholder="Enter underlyings here..."></textarea>
+                    </div>
+                    <div class="assessment-group">
+                        <label><i class="fas fa-clock"></i> Timeline:</label>
+                        <textarea id="timeline-input" placeholder="Enter timeline here..."></textarea>
+                    </div>
+                    <div class="assessment-group">
+                        <label><i class="fas fa-flask"></i> Examinations:</label>
+                        <textarea id="examinations-input" placeholder="Paste examinations data here..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- Plan Section -->
+                <div class="section-card">
+                    <h2><i class="fas fa-clipboard-list"></i> [P] Plan</h2>
+                    <textarea id="plan-input" placeholder="Enter plan here..."></textarea>
+                </div>
+            </div>
+
+            <div class="loading" id="progress-loading">
+                <div class="spinner"></div>
+            </div>
+            
+            <div id="progress-status" class="status"></div>
+
+            <div class="btn-container">
+                <button class="btn btn-clear" onclick="clearProgressInputs()">
+                    <i class="fas fa-trash"></i> Clear All
+                </button>
+                <button class="btn btn-generate" onclick="generateProgressPrompt()">
+                    <i class="fas fa-wand-magic-sparkles"></i> Generate Prompt
+                </button>
+                <button class="btn btn-copy" onclick="copyProgressPrompt()">
+                    <i class="fas fa-copy"></i> Copy Prompt
+                </button>
+            </div>
+        </div>
+
+        <!-- Admission Note Tab -->
+        <div id="admission-note" class="tab-content">
+            <div class="workflow-container">
+                <!-- Chief Complaint Section -->
+                <div class="section-card">
+                    <h2><i class="fas fa-exclamation-circle"></i> Chief Complaint</h2>
+                    <textarea id="chief-complaint-input" placeholder="Enter chief complaint here..."></textarea>
+                </div>
+                
+                <!-- History Taken Section -->
+                <div class="section-card">
+                    <h2><i class="fas fa-history"></i> History Taken</h2>
+                    <textarea id="history-taken-input" placeholder="Enter detailed history here..."></textarea>
+                </div>
+            </div>
+
+            <div class="loading" id="admission-loading">
+                <div class="spinner"></div>
+            </div>
+            
+            <div id="admission-status" class="status"></div>
+
+            <div class="btn-container">
+                <button class="btn btn-clear" onclick="clearAdmissionInputs()">
+                    <i class="fas fa-trash"></i> Clear All
+                </button>
+                <button class="btn btn-generate" onclick="generateAdmissionPrompt()">
+                    <i class="fas fa-wand-magic-sparkles"></i> Generate Prompt
+                </button>
+                <button class="btn btn-copy" onclick="copyAdmissionPrompt()">
+                    <i class="fas fa-copy"></i> Copy Prompt
+                </button>
+            </div>
+        </div>
+
+        <div id="progress-output" class="hidden"></div>
+        <div id="admission-output" class="hidden"></div>
+
+        <div class="notification" id="notification">
+            <i class="fas fa-check-circle"></i> Prompt copied to clipboard!
+        </div>
+
+        <footer>
+            <p>© 2025 Hospital Workflow Management System</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            
+            // fetch the tab parameter from url
+            const urlParams = new URLSearchParams(window.location.search);
+            const tabParam = urlParams.get('tab');
+            
+            // 如果URL中有tab參數，則切換到指定標籤
+            if (tabParam) {
+                // 移除所有標籤和內容的active類
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // 找到匹配的標籤按鈕並激活它
+                const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabParam}"]`);
+                if (targetBtn) {
+                    targetBtn.classList.add('active');
+                    document.getElementById(tabParam).classList.add('active');
+                }
+            }
+            
+            // 現有的點擊事件處理
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 移除所有標籤和內容的active類
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // 添加active類到被點擊的按鈕和對應的內容
+                    this.classList.add('active');
+                    document.getElementById(this.dataset.tab).classList.add('active');
+                });
+            });
+        });
+
+        // Progress Note functionality
+        let progressPrompt = "";
+        
+        function generateProgressPrompt() {
+            const subjectiveInput = document.getElementById('subjective-input').value.trim();
+            const objectiveInput = document.getElementById('objective-input').value.trim();
+            const underlyingsInput = document.getElementById('underlyings-input').value.trim();
+            const timelineInput = document.getElementById('timeline-input').value.trim();
+            const examinationsInput = document.getElementById('examinations-input').value.trim();
+            const planInput = document.getElementById('plan-input').value.trim();
+            
+            // Show loading
+            document.getElementById('progress-loading').style.display = 'flex';
+            document.getElementById('progress-status').className = 'status';
+            document.getElementById('progress-status').textContent = '';
+
+            // Simulate processing time (can be removed in production)
+            setTimeout(() => {
+                progressPrompt = `Please help me convert the following notes into contexts of progress note strictly in the required format, in order of [S], [O], [A] and [P]. Please generate all contents in plain text placed in code box for me to copy it easily.
+
+[S]
+(please transform the subjective part into listed subjective expressions in professional medical terms and notes.)
+${subjectiveInput}
+
+[O]
+(please trim off the time in front, and only keep the important data and trim off all symbols that are not needed, as the following.
+example output:
+T: 36.7, P: 94, R: 20
+BP: 137/93
+SpO2: 95%
+Pain score: 0)
+original data:
+${objectiveInput}
+
+[A]
+${underlyingsInput}
+\`\`\`<Timeline>\`\`\`
+${timelineInput}
+(Please help me convert the lab data into a specified format, and an example is shown below. The change preserves only important data, adds increase or decrease after abnormal data, puts the data in same date together, and seperates data into classification. For all data that is not in reference range, place the reference range behind that line for comparation. As for the other examination data, please put all topics of examination in "<>" brackets and place the date after it, and then put each data or findings under them.
+
+Example given data:
+2025/04/23
+WBC:2.49k/μL
+RBC:3.48M/μL
+HB:8.5g/dL
+HCT:27.4%
+MCV:78.7fL
+MCH:24.4pg
+MCHC:31.0g/dL
+PLT:147k/μL
+RDW-CV:14.6%
+2025/04/23
+Blast:0.0%
+Promyl.:0.0%
+Myelo.:0.0%
+Meta:0.0%
+Band:0.0%
+Seg:57.9%
+Eos.:1.2%
+Baso.:1.2%
+Mono.:7.6%
+Lym.:32.1%
+Aty.Lym.:0.0%
+PlasmaCell:0.0%
+Normobl.:0
+PS:Auto DC
+2025/04/23
+PT:10.6sec
+PT INR:0.98
+2025/04/23
+aPTT:24.5sec
+2025/04/23
+T-BIL:0.37mg/dL
+ALT:16U/L
+AST:28U/L
+GGT:66U/L
+ALP:74U/L
+UN:18.9mg/dL
+eGFR:56.3mL/min/1.73 m^2
+CRE:1.02mg/dL
+Alb:4.7g/dL
+Na:140mmol/L
+K:4.6mmol/L
+2025/04/23
+Alpha-Fetoprotein:1751.29ng/mL
+2025/04/23
+Sugar(One touch):199mg/dL
+2025/04/24
+Sugar(One touch):105mg/dL
+
+Example converted data:
+2025/04/23
+= CBC/DC
+  - WBC: 2.49k/μL ↓(reference range)
+  - RBC: 3.48M/μL ↓(reference range)
+  - HB: 8.5g/dL ↓(reference range)
+  - HCT: 27.4% ↓(reference range)
+  - MCV: 78.7fL ↓(reference range)
+  - MCH: 24.4pg ↓(reference range)
+  - MCHC: 31.0g/dL ↓(reference range)
+  - PLT: 147k/μL ↓(reference range)
+  - RDW-CV: 14.6% ↑(reference range)
+  - Segmented neutrophil: 57.9%
+  - Lymphocyte: 32.1%
+  - Monocyte: 7.6%
+  - Basophil: 1.2% ↑(reference range)
+
+= Coagulation
+  - PT: 10.6sec
+  - INR: 0.98
+  - aPTT: 24.5sec ↓(reference range)
+
+= Liver
+  - T-BIL: 0.37mg/dL
+  - ALT: 16U/L
+  - AST: 28U/L
+  - GGT: 66U/L ↑(reference range)
+  - ALP: 74U/L
+  - Albumin: 4.7g/dL
+
+= Kidney
+  - BUN: 18.9mg/dL
+  - Creatinine: 1.02mg/dL
+  - eGFR: 56.3mL/min/1.73 m² ↓(reference range)
+  - Na: 140mmol/L
+  - K: 4.6mmol/L
+
+= Tumor Marker
+  - AFP: 1751.29ng/mL ↑(reference range)
+
+= Glucose
+  - Sugar (One touch): 199mg/dL ↑(reference range)
+
+2025/04/24
+= Glucose
+  - Sugar (One touch): 105mg/dL
+
+And here's a new data for converting. Please help me with that)
+${examinationsInput}
+
+[P]
+(Please help me convert the following free note of plan part into formal medical writings in progress note.)
+${planInput}`;
+                
+                document.getElementById('progress-output').textContent = progressPrompt;
+                
+                // Hide loading
+                document.getElementById('progress-loading').style.display = 'none';
+                
+                // Show success message
+                document.getElementById('progress-status').className = 'status success';
+                document.getElementById('progress-status').innerHTML = '<i class="fas fa-check-circle"></i> Prompt generated successfully! Click "Copy Prompt" to copy to clipboard.';
+            }, 800);
+        }
+        
+        function copyProgressPrompt() {
+            if (progressPrompt) {
+                navigator.clipboard.writeText(progressPrompt).then(() => {
+                    showNotification();
+                }).catch(err => {
+                    document.getElementById('progress-status').className = 'status error';
+                    document.getElementById('progress-status').innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed to copy: ' + err;
+                });
+            } else {
+                document.getElementById('progress-status').className = 'status error';
+                document.getElementById('progress-status').innerHTML = '<i class="fas fa-exclamation-circle"></i> Please generate a prompt first!';
+            }
+        }
+        
+        function clearProgressInputs() {
+            document.getElementById('subjective-input').value = '';
+            document.getElementById('objective-input').value = '';
+            document.getElementById('underlyings-input').value = '';
+            document.getElementById('timeline-input').value = '';
+            document.getElementById('examinations-input').value = '';
+            document.getElementById('plan-input').value = '';
+            
+            progressPrompt = '';
+            document.getElementById('progress-output').textContent = '';
+            document.getElementById('progress-status').className = 'status';
+            document.getElementById('progress-status').textContent = '';
+        }
+
+        // Admission Note functionality
+        let admissionPrompt = "";
+        
+        function generateAdmissionPrompt() {
+            const chiefComplaintInput = document.getElementById('chief-complaint-input').value.trim();
+            const historyTakenInput = document.getElementById('history-taken-input').value.trim();
+            
+            // Show loading
+            document.getElementById('admission-loading').style.display = 'flex';
+            document.getElementById('admission-status').className = 'status';
+            document.getElementById('admission-status').textContent = '';
+
+            // Simulate processing time (can be removed in production)
+            setTimeout(() => {
+                admissionPrompt = `Please polish the following content of my note into paragraphs of chief complaint (in a sentence), present illness, and past history. Please write in fluent and professional medical English and make sure that it follows the timeline and with medical logic. Make sure all first names of people or doctors, and all name of hospitals mentioned preserved in Chinese, and make sure all time are formatted in yyyy/mm/dd or yyyy/mm if no date is presented.
+Please organize all the things into the following format, and generate things in a plain text code box for convenient copying:
+[Chief complaint]
+Informant: patient and EMR
+CC: (symptom, for how long.)
+[Present illness] (ensure that every disease is started with "#. " and the s/p procedure followed by "  - ")
+This is a ?-year-old male/female with underlying diseases of:
+#. Disease A. (Preserve all s/p procedures) (make all procedures in smooth timeline)
+#. Disease B, etc. (preserve all underlying diseases as the start of the present illness)
+(Paragraph starts.)
+[Past history]
+(Paragraphs starts, while if there's no important history unrelated to current event, then output "as the above")
+[Other trivial details]
+(Things that don't actually matters but are recorded in my note can be put here)
+And below is my note of this patient's history.
+=== Chief complaint === (brief out the patient's major complaint in a sentence)
+${chiefComplaintInput}
+=== History taken === (all the things that are related with the chief complaint should be put in present illness, and other important history that are unrelated with current events should be put in past history, while yet the other trivial things placed in extra section.)
+${historyTakenInput}`;
+                
+                document.getElementById('admission-output').textContent = admissionPrompt;
+                
+                // Hide loading
+                document.getElementById('admission-loading').style.display = 'none';
+                
+                // Show success message
+                document.getElementById('admission-status').className = 'status success';
+                document.getElementById('admission-status').innerHTML = '<i class="fas fa-check-circle"></i> Admission note prompt generated! Click "Copy Prompt" to copy to clipboard.';
+            }, 800);
+        }
+        
+        function copyAdmissionPrompt() {
+            if (admissionPrompt) {
+                navigator.clipboard.writeText(admissionPrompt).then(() => {
+                    showNotification();
+                }).catch(err => {
+                    document.getElementById('admission-status').className = 'status error';
+                    document.getElementById('admission-status').innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed to copy: ' + err;
+                });
+            } else {
+                document.getElementById('admission-status').className = 'status error';
+                document.getElementById('admission-status').innerHTML = '<i class="fas fa-exclamation-circle"></i> Please generate a prompt first!';
+            }
+        }
+        
+        function clearAdmissionInputs() {
+            document.getElementById('chief-complaint-input').value = '';
+            document.getElementById('history-taken-input').value = '';
+            
+            admissionPrompt = '';
+            document.getElementById('admission-output').textContent = '';
+            document.getElementById('admission-status').className = 'status';
+            document.getElementById('admission-status').textContent = '';
+        }
+
+        // Show notification
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

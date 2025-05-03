@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Workflow Management Tools</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #1abc9c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --danger-color: #e74c3c;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --info-color: #9b59b6;
+            --text-color: #333;
+            --border-radius: 8px;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9fafb;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.2) 0%, rgba(26, 188, 156, 0.2) 100%);
+        }
+
+        header .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .header-description {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .tools-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tool-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .tool-header {
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+        }
+
+        .tool-soap .tool-header {
+            background-color: var(--secondary-color);
+        }
+
+        .tool-discharge .tool-header {
+            background-color: var(--accent-color);
+        }
+
+        .tool-radiology .tool-header {
+            background-color: var(--info-color);
+        }
+
+        .tool-lab .tool-header {
+            background-color: var(--warning-color);
+        }
+
+        .tool-prescription .tool-header {
+            background-color: var(--success-color);
+        }
+
+        .tool-consultation .tool-header {
+            background-color: var(--danger-color);
+        }
+
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .tool-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tool-description {
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            text-align: center;
+            font-weight: 500;
+            transition: var(--transition);
+            margin-top: auto;
+        }
+
+        .tool-soap .tool-link {
+            background-color: var(--secondary-color);
+        }
+
+        .tool-discharge .tool-link {
+            background-color: var(--accent-color);
+        }
+
+        .tool-radiology .tool-link {
+            background-color: var(--info-color);
+        }
+
+        .tool-lab .tool-link {
+            background-color: var(--warning-color);
+        }
+
+        .tool-prescription .tool-link {
+            background-color: var(--success-color);
+        }
+
+        .tool-consultation .tool-link {
+            background-color: var(--danger-color);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .section-title {
+            color: var(--dark-color);
+            font-size: 1.8rem;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-color);
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .features {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-color) 100%);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            color: white;
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at top right, rgba(52, 152, 219, 0.3) 0%, transparent 70%);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .cta-btn:hover {
+            background-color: #16a085;
+            transform: translateY(-3px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            color: var(--dark-color);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--light-color);
+        }
+
+        @media (max-width: 768px) {
+            .tools-container {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .cta-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="content">
+                <h1>Hospital Workflow Management Suite</h1>
+                <p class="subtitle">Streamline and format your clinical documentation</p>
+                <p class="header-description">
+                    A collection of specialized tools designed to help healthcare professionals create structured, 
+                    AI-ready documentation for pure clinical efficiency.
+                </p>
+            </div>
+        </header>
+
+        <div class="features">
+            <h2>Why Use Our Tools?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div>
+                        <div class="feature-title">Enhanced Efficiency</div>
+                        <p class="feature-desc">Reduce documentation time by up to 30% with structured templates</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <div class="feature-title">AI Prompt Optimized</div>
+                        <p class="feature-desc">All outputs are formatted for optimal AI processing and enhancement</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div>
+                        <div class="feature-title">Privacy Focused</div>
+                        <p class="feature-desc">All processing happens locally in your browser for data security</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <div class="feature-title">Compliance Ready</div>
+                        <p class="feature-desc">Structured outputs follow clinical documentation practices in NTUH</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Available Tools</h2>
+        <div class="tools-container">
+            <div class="tool-card tool-soap">
+                <div class="tool-header">
+                    <div class="tool-icon">
+                        <i class="fas fa-notes-medical"></i>
+                    </div>
+                    <div class="tool-title">SOAP Prompt Generator</div>
+                </div>
+                <div class="tool-content">
+                    <p class="tool-description">
+                        Generate prompt for conversion of free-text daily notes into structured SOAP format with proper medical terminology via AI tools.
+                        Perfect for progress notes and daily patient assessments.
+                    </p>
+                    <a href="prompter.html?tab=progress-note" class="tool-link">Open Tool</a>
+                </div>
+            </div>
+
+            <div class="tool-card tool-discharge">
+                <div class="tool-header">
+                    <div class="tool-icon">
+                        <i class="fas fa-hospital-user"></i>
+                    </div>
+                    <div class="tool-title">Admission Prompt Generator</div>
+                </div>
+                <div class="tool-content">
+                    <p class="tool-description">
+                        Generate prompt for conversion of free-text clinical notes into logically-structured admission note via AI tools.
+                    </p>
+                    <a href="prompter.html?tab=admission-note" class="tool-link">Open tool</a>
+                </div>
+            </div>
+
+            <div class="tool-card tool-radiology">
+                <div class="tool-header">
+                    <div class="tool-icon">
+                        <i class="fas fa-x-ray"></i>
+                    </div>
+                    <div class="tool-title">Radiology Report</div>
+                </div>
+                <div class="tool-content">
+                    <p class="tool-description">
+                        Structure radiology findings into professionally formatted reports with appropriate
+                        terminology and standardized assessment sections.
+                    </p>
+                    <a href="#" class="tool-link">Coming Soon</a>
+                </div>
+            </div>
+
+            <div class="tool-card tool-lab">
+                <div class="tool-header">
+                    <div class="tool-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div class="tool-title">Lab Results Formatter</div>
+                </div>
+                <div class="tool-content">
+                    <p class="tool-description">
+                        Transform raw laboratory data into organized, categorized results with highlighted
+                        abnormal values and reference ranges for easy interpretation.
+                    </p>
+                    <a href="#" class="tool-link">Coming Soon</a>
+                </div>
+            </div>
+
+            <div class="tool-card tool-prescription">
+                <div class="tool-header">
+                    <div class="tool-icon">
+                        <i class="fas fa-prescription"></i>
+                    </div>
+                    <div class="tool-title">Prescription Writer</div>
+                </div>
+                <div class="tool-content">
+                    <p class="tool-description">
+                        Create properly formatted medication orders with dose calculations, administration
+                        instructions, and precautions for common medications.
+                    </p>
+                    <a href="#" class="tool-link">Coming Soon</a>
+                </div>
+            </div>
+
+            <div class="tool-card tool-consultation">
+                <div class="tool-header">
+                    <div class="tool-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <div class="tool-title">Consultation Request</div>
+                </div>
+                <div class="tool-content">
+                    <p class="tool-description">
+                        Generate clear consultation requests with relevant clinical information, specific questions,
+                        and urgency indicators for specialist referrals.
+                    </p>
+                    <a href="#" class="tool-link">Coming Soon</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Streamline Your Documentation?</h2>
+                <p class="cta-description">
+                    Start with our SOAP Note Generator and experience how our workflow tools can
+                    transform your clinical documentation process while maintaining the highest standards of care.
+                </p>
+                <a href="prompter.html" class="cta-btn">Get Started Now</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 Hospital Workflow Management Suite | Designed for Healthcare Professionals</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">All tools use local processing - no patient data is transmitted or stored.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add animations for page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('header');
+            const toolCards = document.querySelectorAll('.tool-card');
+            
+            setTimeout(() => {
+                header.style.opacity = '1';
+            }, 300);
+            
+            toolCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 300 + (index * 100));
+            });
+        });
+    </script>
+</body>
+</html>
