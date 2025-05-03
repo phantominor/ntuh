@@ -3,530 +3,1406 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hospital Workflow Management</title>
+    <title>Neurological Examination Converter</title>
     <style>
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
-            --accent-color: #1abc9c;
-            --light-color: #ecf0f1;
-            --dark-color: #34495e;
-            --danger-color: #e74c3c;
-            --success-color: #2ecc71;
+            --tertiary-color: #e74c3c;
+            --background-color: #f9f9f9;
+            --section-bg: #ffffff;
+            --border-color: #ddd;
             --text-color: #333;
-            --border-radius: 8px;
-            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --light-text: #666;
+            --highlight: #ecf0f1;
         }
 
         body {
-            background-color: #f9fafb;
-            color: var(--text-color);
+            font-family: 'Arial', sans-serif;
             line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow);
         }
 
         h1 {
-            font-size: 1.8rem;
-            font-weight: 600;
-        }
-
-        .subtitle {
-            font-size: 1rem;
-            opacity: 0.8;
-            margin-top: 0.5rem;
-        }
-
-        .workflow-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        .section-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-            transition: transform 0.2s;
-        }
-
-        .section-card:hover {
-            transform: translateY(-5px);
-        }
-
-        h2 {
             color: var(--primary-color);
-            border-bottom: 2px solid var(--light-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+
+        .main-section {
+            background-color: var(--section-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header:after {
+            content: "▼";
+            font-size: 0.8rem;
+        }
+
+        .section-header.collapsed:after {
+            content: "▶";
+        }
+
+        .section-content {
+            padding: 10px;
+        }
+
+        .subsection {
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background-color: white;
+        }
+
+        .subsection-header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 8px 15px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .subsection-content {
+            padding: 10px 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-row {
+            display: flex;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .form-row label {
+            margin-right: 10px;
+            min-width: 200px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .radio-option {
             display: flex;
             align-items: center;
         }
 
-        h2 i {
-            margin-right: 0.5rem;
-            color: var(--secondary-color);
+        .radio-option input {
+            margin-right: 5px;
         }
 
-        textarea {
-            width: 100%;
-            min-height: 120px;
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius);
-            padding: 0.8rem;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            transition: border 0.3s;
-            resize: vertical;
-        }
-
-        textarea:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
-
-        .assessment-group {
-            margin-bottom: 1rem;
-        }
-
-        .assessment-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--dark-color);
-        }
-
-        .assessment-group textarea {
-            min-height: 80px;
-        }
-
-        .btn-container {
+        .buttons {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 15px;
+            margin-top: 30px;
+            margin-bottom: 20px;
         }
 
         .btn {
-            padding: 0.8rem 1.5rem;
-            background-color: var(--primary-color);
-            color: white;
+            padding: 10px 20px;
             border: none;
-            border-radius: var(--border-radius);
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: var(--tertiary-color);
+            color: white;
+        }
+
+        .btn-success {
+            background-color: #27ae60;
+            color: white;
         }
 
         .btn:hover {
-            background-color: var(--dark-color);
-            transform: translateY(-2px);
+            opacity: 0.9;
         }
 
-        .btn-generate {
-            background-color: var(--secondary-color);
+        .output-container {
+            margin-top: 30px;
         }
 
-        .btn-copy {
-            background-color: var(--accent-color);
-        }
-
-        .btn-clear {
-            background-color: var(--danger-color);
-        }
-
-        .btn i {
-            font-size: 1.1rem;
-        }
-
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 1rem;
-            background-color: var(--success-color);
+        .output-header {
+            background-color: var(--primary-color);
             color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.3s;
+            padding: 10px 15px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
         }
 
-        .notification.show {
-            transform: translateY(0);
-            opacity: 1;
+        #output-text {
+            width: 100%;
+            min-height: 300px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            background-color: white;
         }
 
-        .notification i {
-            margin-right: 0.5rem;
+        .nihss-grid {
+            display: grid;
+            grid-template-columns: repeat(15, 1fr);
+            gap: 5px;
+            margin-bottom: 20px;
         }
 
-        .hidden {
+        .nihss-item {
+            text-align: center;
+        }
+
+        .nihss-item select {
+            width: 100%;
+            padding: 5px;
+        }
+
+        .gcs-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .gcs-section {
+            flex: 1;
+        }
+
+        .eom-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .eom-center {
+            grid-column: 3;
+            grid-row: 2;
+            font-weight: bold;
+        }
+
+        .strength-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .dropdown-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .dropdown-group label {
+            min-width: 250px;
+        }
+
+        .dropdown-input {
+            padding: 5px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .text-note {
+            margin-left: 10px;
+            width: 50%;
+        }
+
+        .note-field {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
             display: none;
         }
 
-        footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding: 1.5rem;
-            color: var(--dark-color);
-            font-size: 0.9rem;
+        .reflexes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
         }
 
-        @media (min-width: 768px) {
-            .workflow-container {
-                grid-template-columns: repeat(2, 1fr);
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .form-row label {
+                margin-bottom: 5px;
+            }
+
+            .dropdown-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .strength-grid, .reflexes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .text-note {
+                width: 100%;
+                margin-left: 0;
+                margin-top: 5px;
+            }
+
+            .nihss-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .gcs-container {
+                flex-direction: column;
             }
         }
-
-        /* Loading spinner */
-        .loading {
-            display: none;
-            justify-content: center;
-            margin: 1rem 0;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            border-top-color: var(--secondary-color);
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Status indicator */
-        .status {
-            text-align: center;
-            padding: 0.5rem;
-            border-radius: var(--border-radius);
-            margin: 1rem 0;
-            font-weight: 500;
-            display: none;
-        }
-
-        .status.success {
-            background-color: rgba(46, 204, 113, 0.2);
-            color: var(--success-color);
-            display: block;
-        }
-
-        .status.error {
-            background-color: rgba(231, 76, 60, 0.2);
-            color: var(--danger-color);
-            display: block;
-        }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Hospital Workflow Management</h1>
-            <p class="subtitle">SOAP Note Generator for AI Enhancement</p>
-        </header>
+        <h1>Neurological Examination Converter</h1>
 
-        <div class="workflow-container">
-            <!-- Subjective Section -->
-            <div class="section-card">
-                <h2><i class="fas fa-comment-medical"></i> [S] Subjective</h2>
-                <textarea id="subjective-input" placeholder="Enter subjectives here..."></textarea>
-            </div>
-            
-            <!-- Objective Section -->
-            <div class="section-card">
-                <h2><i class="fas fa-heartbeat"></i> [O] Objective</h2>
-                <textarea id="objective-input" placeholder="Paste vital signs here..."></textarea>
-            </div>
-            
-            <!-- Assessment Section -->
-            <div class="section-card">
-                <h2><i class="fas fa-stethoscope"></i> [A] Assessment</h2>
-                <div class="assessment-group">
-                    <label><i class="fas fa-list"></i> Underlyings:</label>
-                    <textarea id="underlyings-input" placeholder="Enter underlyings here..."></textarea>
+        <div class="buttons">
+            <button id="convert-btn" class="btn btn-primary">Generate Report</button>
+            <button id="copy-btn" class="btn btn-success">Copy Report</button>
+            <button id="clear-btn" class="btn btn-danger">Clear All</button>
+        </div>
+
+        <!-- Basic Information Section -->
+        <div class="main-section">
+            <div class="section-header">Basic Information</div>
+            <div class="section-content">
+                <!-- GCS Score -->
+                <div class="subsection">
+                    <div class="subsection-header">Glasgow Coma Scale</div>
+                    <div class="subsection-content">
+                        <div class="gcs-container">
+                            <div class="gcs-section">
+                                <label>Eye Opening (E)</label>
+                                <div class="radio-group">
+                                    <div class="radio-option">
+                                        <input type="radio" name="eye" id="e1" value="1">
+                                        <label for="e1">1 - None</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="eye" id="e2" value="2">
+                                        <label for="e2">2 - To pain</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="eye" id="e3" value="3">
+                                        <label for="e3">3 - To voice</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="eye" id="e4" value="4" checked>
+                                        <label for="e4">4 - Spontaneous</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="gcs-section">
+                                <label>Verbal Response (V)</label>
+                                <div class="radio-group">
+                                    <div class="radio-option">
+                                        <input type="radio" name="verbal" id="v1" value="1">
+                                        <label for="v1">1 - None</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="verbal" id="v2" value="2">
+                                        <label for="v2">2 - Incomprehensible</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="verbal" id="v3" value="3">
+                                        <label for="v3">3 - Inappropriate</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="verbal" id="v4" value="4">
+                                        <label for="v4">4 - Confused</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="verbal" id="v5" value="5" checked>
+                                        <label for="v5">5 - Oriented</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="gcs-section">
+                                <label>Motor Response (M)</label>
+                                <div class="radio-group">
+                                    <div class="radio-option">
+                                        <input type="radio" name="motor" id="m1" value="1">
+                                        <label for="m1">1 - None</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="motor" id="m2" value="2">
+                                        <label for="m2">2 - Extension</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="motor" id="m3" value="3">
+                                        <label for="m3">3 - Flexion</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="motor" id="m4" value="4">
+                                        <label for="m4">4 - Withdrawal</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="motor" id="m5" value="5">
+                                        <label for="m5">5 - Localized</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="motor" id="m6" value="6" checked>
+                                        <label for="m6">6 - Obeys commands</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="assessment-group">
-                    <label><i class="fas fa-clock"></i> Timeline:</label>
-                    <textarea id="timeline-input" placeholder="Enter timeline here..."></textarea>
-                </div>
-                <div class="assessment-group">
-                    <label><i class="fas fa-flask"></i> Examinations:</label>
-                    <textarea id="examinations-input" placeholder="Paste examinations data here..."></textarea>
+
+                <!-- NIHSS Score -->
+                <div class="subsection">
+                    <div class="subsection-header">NIHSS Score</div>
+                    <div class="subsection-content">
+                        <div class="nihss-grid">
+                            <div class="nihss-item">
+                                <label>1a</label>
+                                <select id="nihss-1a">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                            <div class="nihss-item">
+                                <label>1b</label>
+                                <select id="nihss-1b">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                            <div class="nihss-item">
+                                <label>1c</label>
+                                <select id="nihss-1c">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                            <div class="nihss-item">
+                                <label>2</label>
+                                <select id="nihss-2">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                            <div class="nihss-item">
+                                <label>3</label>
+                                <select id="nihss-3">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                            <div class="nihss-item">
+                                <label>4</label>
+                                <select id="nihss-4">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                            <div class="nihss-item">
+                                <label>5a</label>
+                                <select id="nihss-5a">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                            <div class="nihss-item">
+                                <label>5b</label>
+                                <select id="nihss-5b">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                            <div class="nihss-item">
+                                <label>6a</label>
+                                <select id="nihss-6a">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                            <div class="nihss-item">
+                                <label>6b</label>
+                                <select id="nihss-6b">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                            <div class="nihss-item">
+                                <label>7</label>
+                                <select id="nihss-7">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                            <div class="nihss-item">
+                                <label>8</label>
+                                <select id="nihss-8">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                            <div class="nihss-item">
+                                <label>9</label>
+                                <select id="nihss-9">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                            <div class="nihss-item">
+                                <label>10</label>
+                                <select id="nihss-10">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                            <div class="nihss-item">
+                                <label>11</label>
+                                <select id="nihss-11">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <!-- Plan Section -->
-            <div class="section-card">
-                <h2><i class="fas fa-clipboard-list"></i> [P] Plan</h2>
-                <textarea id="plan-input" placeholder="Enter plan here..."></textarea>
+        </div>
+
+        <!-- Cognition Section -->
+        <div class="main-section">
+            <div class="section-header">Cognition</div>
+            <div class="section-content">
+                <!-- High Cortical Function -->
+                <div class="subsection">
+                    <div class="subsection-header">High Cortical Function</div>
+                    <div class="subsection-content">
+                        <div class="dropdown-group">
+                            <label>Category Naming:</label>
+                            <select class="dropdown-input" id="category-naming">
+                                <option value="fair" selected>fair</option>
+                                <option value="poor">poor</option>
+                                <option value="good">good</option>
+                                <option value="abnormal">abnormal</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="category-naming-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="dropdown-group">
+                            <label>Luria Test:</label>
+                            <select class="dropdown-input" id="luria-test">
+                                <option value="fair" selected>fair</option>
+                                <option value="poor">poor</option>
+                                <option value="good">good</option>
+                                <option value="abnormal">abnormal</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="luria-test-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="dropdown-group">
+                            <label>Letter Number Sequencing:</label>
+                            <select class="dropdown-input" id="letter-number">
+                                <option value="fair" selected>fair</option>
+                                <option value="poor">poor</option>
+                                <option value="good">good</option>
+                                <option value="abnormal">abnormal</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="letter-number-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Primitive Reflexes:</label>
+                            <div class="form-row">
+                                <label>Glabellar:</label>
+                                <div class="radio-group">
+                                    <div class="radio-option">
+                                        <input type="radio" name="glabellar" id="glabellar-positive" value="positive">
+                                        <label for="glabellar-positive">Positive</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="glabellar" id="glabellar-negative" value="negative" checked>
+                                        <label for="glabellar-negative">Negative</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <label>Rooting:</label>
+                                <div class="radio-group">
+                                    <div class="radio-option">
+                                        <input type="radio" name="rooting" id="rooting-positive" value="positive">
+                                        <label for="rooting-positive">Positive</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="rooting" id="rooting-negative" value="negative" checked>
+                                        <label for="rooting-negative">Negative</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <label>Sucking:</label>
+                                <div class="radio-group">
+                                    <div class="radio-option">
+                                        <input type="radio" name="sucking" id="sucking-positive" value="positive">
+                                        <label for="sucking-positive">Positive</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="sucking" id="sucking-negative" value="negative" checked>
+                                        <label for="sucking-negative">Negative</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <label>Snouting:</label>
+                                <div class="radio-group">
+                                    <div class="radio-option">
+                                        <input type="radio" name="snouting" id="snouting-positive" value="positive">
+                                        <label for="snouting-positive">Positive</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="snouting" id="snouting-negative" value="negative" checked>
+                                        <label for="snouting-negative">Negative</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <label>Grasping:</label>
+                                <div class="radio-group">
+                                    <div class="radio-option">
+                                        <input type="radio" name="grasping" id="grasping-positive" value="positive">
+                                        <label for="grasping-positive">Positive</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="grasping" id="grasping-negative" value="negative" checked>
+                                        <label for="grasping-negative">Negative</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <label>Palmomental:</label>
+                                <div class="radio-group">
+                                    <div class="radio-option">
+                                        <input type="radio" name="palmomental" id="palmomental-positive" value="positive">
+                                        <label for="palmomental-positive">Positive</label>
+                                    </div>
+                                    <div class="radio-option">
+                                        <input type="radio" name="palmomental" id="palmomental-negative" value="negative" checked>
+                                        <label for="palmomental-negative">Negative</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Language -->
+                <div class="subsection">
+                    <div class="subsection-header">Language</div>
+                    <div class="subsection-content">
+                        <div class="dropdown-group">
+                            <label>Fluency:</label>
+                            <select class="dropdown-input" id="fluency">
+                                <option value="fair, without dysarthria" selected>fair, without dysarthria</option>
+                                <option value="fair, with dysarthria">fair, with dysarthria</option>
+                                <option value="poor">poor</option>
+                                <option value="good">good</option>
+                                <option value="abnormal">abnormal</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="fluency-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="dropdown-group">
+                            <label>Comprehension:</label>
+                            <select class="dropdown-input" id="comprehension">
+                                <option value="could obey 3-step orders by oral command" selected>could obey 3-step orders by oral command</option>
+                                <option value="could obey 2-step orders by oral command">could obey 2-step orders by oral command</option>
+                                <option value="could obey 1-step orders by oral command">could obey 1-step orders by oral command</option>
+                                <option value="unable to obey orders by oral command">unable to obey orders by oral command</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="comprehension-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label>Reading:</label>
+                            <input type="text" class="form-control" id="reading" value="&quot;台大醫院神經科&quot; correctly read aloud">
+                        </div>
+
+                        <div class="dropdown-group">
+                            <label>Naming:</label>
+                            <select class="dropdown-input" id="naming">
+                                <option value="fine with pen, phone, watch" selected>fine with pen, phone, watch</option>
+                                <option value="difficulty with object recognition">difficulty with object recognition</option>
+                                <option value="abnormal">abnormal</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="naming-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label>Repeating:</label>
+                            <input type="text" class="form-control" id="repeating" value="fine with &quot;黑紙真正寫白字&quot;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Neglect -->
+                <div class="subsection">
+                    <div class="subsection-header">Neglect</div>
+                    <div class="subsection-content">
+                        <div class="dropdown-group">
+                            <label>Visual/Tactile/Auditory Stimuli:</label>
+                            <select class="dropdown-input" id="neglect">
+                                <option value="no neglect to visual, tactile, auditory stimuli" selected>no neglect to visual, tactile, auditory stimuli</option>
+                                <option value="neglect to visual stimuli">neglect to visual stimuli</option>
+                                <option value="neglect to tactile stimuli">neglect to tactile stimuli</option>
+                                <option value="neglect to auditory stimuli">neglect to auditory stimuli</option>
+                                <option value="neglect to multiple stimuli">neglect to multiple stimuli</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="neglect-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="loading">
-            <div class="spinner"></div>
+        <!-- Cranial Nerves Section -->
+        <div class="main-section">
+            <div class="section-header">Cranial Nerves</div>
+            <div class="section-content">
+                <!-- CN I -->
+                <div class="subsection">
+                    <div class="subsection-header">CN I: Olfactory</div>
+                    <div class="subsection-content">
+                        <div class="form-row">
+                            <label>Smell:</label>
+                            <select class="dropdown-input" id="cn1-smell">
+                                <option value="unchecked" selected>unchecked</option>
+                                <option value="intact">intact</option>
+                                <option value="impaired">impaired</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="cn1-smell-note" placeholder="Additional notes...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CN II -->
+                <div class="subsection">
+                    <div class="subsection-header">CN II: Optic</div>
+                    <div class="subsection-content">
+                        <div class="dropdown-group">
+                            <label>Visual Field:</label>
+                            <select class="dropdown-input" id="visual-field">
+                                <option value="intact by confrontation test" selected>intact by confrontation test</option>
+                                <option value="impaired">impaired</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="visual-field-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label>Pupil Size:</label>
+                            <input type="text" class="form-control" id="pupil-size" value="isocoric, size 3mm/3mm">
+                        </div>
+
+                        <div class="form-row">
+                            <label>Light Reflex (L/R):</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" name="light-reflex" id="light-reflex-pos" value="(+/+)" checked>
+                                    <label for="light-reflex-pos">(+/+)</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="light-reflex" id="light-reflex-l-neg" value="(-/+)">
+                                    <label for="light-reflex-l-neg">(-/+)</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="light-reflex" id="light-reflex-r-neg" value="(+/-)">
+                                    <label for="light-reflex-r-neg">(+/-)</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="light-reflex" id="light-reflex-neg" value="(-/-)">
+                                    <label for="light-reflex-neg">(-/-)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CN III, IV, VI -->
+                <div class="subsection">
+                    <div class="subsection-header">CN III, IV, VI: Oculomotor, Trochlear, Abducens</div>
+                    <div class="subsection-content">
+                        <div class="dropdown-group">
+                            <label>EOM:</label>
+                            <select class="dropdown-input" id="eom">
+                                <option value="intact, no gaze limitation" selected>intact, no gaze limitation</option>
+                                <option value="limited">limited</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="eom-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label>Nystagmus:</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" name="nystagmus" id="nystagmus-pos" value="present">
+                                    <label for="nystagmus-pos">Present</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="nystagmus" id="nystagmus-neg" value="(-)" checked>
+                                    <label for="nystagmus-neg">(-)</label>
+                                </div>
+                            </div>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="nystagmus-note" placeholder="Direction, type...">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label>Ptosis:</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" name="ptosis" id="ptosis-pos" value="present">
+                                    <label for="ptosis-pos">Present</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="ptosis" id="ptosis-neg" value="(-)" checked>
+                                    <label for="ptosis-neg">(-)</label>
+                                </div>
+                            </div>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="ptosis-note" placeholder="Side, severity...">
+                            </div>
+                        </div>
+
+                        <div class="dropdown-group">
+                            <label>Saccade:</label>
+                            <select class="dropdown-input" id="saccade">
+                                <option value="intact" selected>intact</option>
+                                <option value="abnormal">abnormal</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="saccade-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="dropdown-group">
+                            <label>Pursuit:</label>
+                            <select class="dropdown-input" id="pursuit">
+                                <option value="smooth" selected>smooth</option>
+                                <option value="saccadic">saccadic</option>
+                                <option value="restricted">restricted</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="pursuit-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="dropdown-group">
+                            <label>Convergence:</label>
+                            <select class="dropdown-input" id="convergence">
+                                <option value="intact" selected>intact</option>
+                                <option value="impaired">impaired</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="convergence-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>EOM Diagram:</label>
+                            <div class="eom-grid">
+                                <div></div>
+                                <div>
+                                    <select class="dropdown-input" id="eom-up-left">
+                                        <option value="0" selected>0</option>
+                                        <option value="-">-</option>
+                                        <option value="+">+</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <select class="dropdown-input" id="eom-up">
+                                        <option value="0" selected>0</option>
+                                        <option value="-">-</option>
+                                        <option value="+">+</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <select class="dropdown-input" id="eom-up-right">
+                                        <option value="0" selected>0</option>
+                                        <option value="-">-</option>
+                                        <option value="+">+</option>
+                                    </select>
+                                </div>
+                                <div></div>
+                                
+                                <div>
+                                    <select class="dropdown-input" id="eom-left">
+                                        <option value="0" selected>0</option>
+                                        <option value="-">-</option>
+                                        <option value="+">+</option>
+                                    </select>
+                                </div>
+                                <div class="eom-center">0</div>
+                                <div>
+                                    <select class="dropdown-input" id="eom-right">
+                                        <option value="0" selected>0</option>
+                                        <option value="-">-</option>
+                                        <option value="+">+</option>
+                                    </select>
+                                </div>
+                                
+                                <div></div>
+                                <div>
+                                    <select class="dropdown-input" id="eom-down-left">
+                                        <option value="0" selected>0</option>
+                                        <option value="-">-</option>
+                                        <option value="+">+</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <select class="dropdown-input" id="eom-down">
+                                        <option value="0" selected>0</option>
+                                        <option value="-">-</option>
+                                        <option value="+">+</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <select class="dropdown-input" id="eom-down-right">
+                                        <option value="0" selected>0</option>
+                                        <option value="-">-</option>
+                                        <option value="+">+</option>
+                                    </select>
+                                </div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CN V -->
+                <div class="subsection">
+                    <div class="subsection-header">CN V: Trigeminal</div>
+                    <div class="subsection-content">
+                        <div class="form-row">
+                            <label>Corneal Reflex (L/R):</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" name="corneal-reflex" id="corneal-reflex-pos" value="(+/+)" checked>
+                                    <label for="corneal-reflex-pos">(+/+)</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="corneal-reflex" id="corneal-reflex-l-neg" value="(-/+)">
+                                    <label for="corneal-reflex-l-neg">(-/+)</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="corneal-reflex" id="corneal-reflex-r-neg" value="(+/-)">
+                                    <label for="corneal-reflex-r-neg">(+/-)</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="corneal-reflex" id="corneal-reflex-neg" value="(-/-)">
+                                    <label for="corneal-reflex-neg">(-/-)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dropdown-group">
+                            <label>Facial Sensation:</label>
+                            <select class="dropdown-input" id="facial-sensation">
+                                <option value="symmetrical, intact bilaterally" selected>symmetrical, intact bilaterally</option>
+                                <option value="asymmetrical">asymmetrical</option>
+                                <option value="decreased">decreased</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="facial-sensation-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="dropdown-group">
+                            <label>Masseter:</label>
+                            <select class="dropdown-input" id="masseter">
+                                <option value="symmetrical, palpable contraction" selected>symmetrical, palpable contraction</option>
+                                <option value="asymmetrical">asymmetrical</option>
+                                <option value="weak">weak</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="masseter-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="dropdown-group">
+                            <label>Temporalis:</label>
+                            <select class="dropdown-input" id="temporalis">
+                                <option value="symmetrical, palpable contraction" selected>symmetrical, palpable contraction</option>
+                                <option value="asymmetrical">asymmetrical</option>
+                                <option value="weak">weak</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="temporalis-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CN VII -->
+                <div class="subsection">
+                    <div class="subsection-header">CN VII: Facial</div>
+                    <div class="subsection-content">
+                        <div class="dropdown-group">
+                            <label>Facial Movement:</label>
+                            <select class="dropdown-input" id="facial-movement">
+                                <option value="symmetrical, no facial palsy" selected>symmetrical, no facial palsy</option>
+                                <option value="asymmetrical">asymmetrical</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="facial-movement-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="dropdown-group">
+                            <label>Eye Closure:</label>
+                            <select class="dropdown-input" id="eye-closure">
+                                <option value="symmetrical" selected>symmetrical</option>
+                                <option value="asymmetrical">asymmetrical</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="eye-closure-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="dropdown-group">
+                            <label>Nasolabial Fold:</label>
+                            <select class="dropdown-input" id="nasolabial-fold">
+                                <option value="symmetrical, no shallowing" selected>symmetrical, no shallowing</option>
+                                <option value="asymmetrical">asymmetrical</option>
+                                <option value="shallowing">shallowing</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="nasolabial-fold-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CN VIII -->
+                <div class="subsection">
+                    <div class="subsection-header">CN VIII: Vestibulocochlear</div>
+                    <div class="subsection-content">
+                        <div class="dropdown-group">
+                            <label>Hearing:</label>
+                            <select class="dropdown-input" id="hearing">
+                                <option value="bilaterally intact" selected>bilaterally intact</option>
+                                <option value="decreased">decreased</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="hearing-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="dropdown-group">
+                            <label>Finger Rubbing Test:</label>
+                            <select class="dropdown-input" id="finger-rubbing">
+                                <option value="symmetrical, no neglect" selected>symmetrical, no neglect</option>
+                                <option value="asymmetrical">asymmetrical</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="finger-rubbing-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="dropdown-group">
+                            <label>Weber Test:</label>
+                            <select class="dropdown-input" id="weber-test">
+                                <option value="midline" selected>midline</option>
+                                <option value="lateralized to left">lateralized to left</option>
+                                <option value="lateralized to right">lateralized to right</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="weber-test-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="dropdown-group">
+                            <label>Rinne Test:</label>
+                            <select class="dropdown-input" id="rinne-test">
+                                <option value="AC > BC bilaterally" selected>AC > BC bilaterally</option>
+                                <option value="BC > AC on left">BC > AC on left</option>
+                                <option value="BC > AC on right">BC > AC on right</option>
+                                <option value="BC > AC bilaterally">BC > AC bilaterally</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="rinne-test-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CN IX, X -->
+                <div class="subsection">
+                    <div class="subsection-header">CN IX, X: Glossopharyngeal, Vagus</div>
+                    <div class="subsection-content">
+                        <div class="form-row">
+                            <label>Gag Reflex (L/R):</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" name="gag-reflex" id="gag-reflex-pos" value="(+/+)" checked>
+                                    <label for="gag-reflex-pos">(+/+)</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="gag-reflex" id="gag-reflex-l-neg" value="(-/+)">
+                                    <label for="gag-reflex-l-neg">(-/+)</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="gag-reflex" id="gag-reflex-r-neg" value="(+/-)">
+                                    <label for="gag-reflex-r-neg">(+/-)</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="gag-reflex" id="gag-reflex-neg" value="(-/-)">
+                                    <label for="gag-reflex-neg">(-/-)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label>Uvula Deviation:</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" name="uvula-deviation" id="uvula-deviation-pos" value="present">
+                                    <label for="uvula-deviation-pos">Present</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="uvula-deviation" id="uvula-deviation-neg" value="(-)" checked>
+                                    <label for="uvula-deviation-neg">(-)</label>
+                                </div>
+                            </div>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="uvula-deviation-note" placeholder="Direction...">
+                            </div>
+                        </div>
+
+                        <div class="dropdown-group">
+                            <label>Palate Elevation:</label>
+                            <select class="dropdown-input" id="palate-elevation">
+                                <option value="symmetrical" selected>symmetrical</option>
+                                <option value="asymmetrical">asymmetrical</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="palate-elevation-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label>Dysarthria:</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" name="dysarthria" id="dysarthria-pos" value="present">
+                                    <label for="dysarthria-pos">Present</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="dysarthria" id="dysarthria-neg" value="(-)" checked>
+                                    <label for="dysarthria-neg">(-)</label>
+                                </div>
+                            </div>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="dysarthria-note" placeholder="Type, severity...">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label>Dysphagia:</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" name="dysphagia" id="dysphagia-pos" value="present">
+                                    <label for="dysphagia-pos">Present</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="dysphagia" id="dysphagia-neg" value="(-)" checked>
+                                    <label for="dysphagia-neg">(-)</label>
+                                </div>
+                            </div>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="dysphagia-note" placeholder="Type, severity...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CN XI -->
+                <div class="subsection">
+                    <div class="subsection-header">CN XI: Accessory</div>
+                    <div class="subsection-content">
+                        <div class="dropdown-group">
+                            <label>Trapezius & SCM Strength:</label>
+                            <select class="dropdown-input" id="trapezius-scm">
+                                <option value="symmetrical, 5/5" selected>symmetrical, 5/5</option>
+                                <option value="asymmetrical">asymmetrical</option>
+                                <option value="weak">weak</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="trapezius-scm-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CN XII -->
+                <div class="subsection">
+                    <div class="subsection-header">CN XII: Hypoglossal</div>
+                    <div class="subsection-content">
+                        <div class="dropdown-group">
+                            <label>Tongue Protrusion:</label>
+                            <select class="dropdown-input" id="tongue-protrusion">
+                                <option value="midline, no deviation" selected>midline, no deviation</option>
+                                <option value="deviates to left">deviates to left</option>
+                                <option value="deviates to right">deviates to right</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="tongue-protrusion-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div id="status" class="status"></div>
 
-        <div class="btn-container">
-            <button class="btn btn-clear" onclick="clearInputs()">
-                <i class="fas fa-trash"></i> Clear All
-            </button>
-            <button class="btn btn-generate" onclick="generatePrompt()">
-                <i class="fas fa-wand-magic-sparkles"></i> Generate Prompt
-            </button>
-            <button class="btn btn-copy" onclick="copyPrompt()">
-                <i class="fas fa-copy"></i> Copy Prompt
-            </button>
-        </div>
+        <!-- Motor Section -->
+        <div class="main-section">
+            <div class="section-header">Motor</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <div class="subsection-header">Motor Inspection</div>
+                    <div class="subsection-content">
+                        <div class="form-row">
+                            <label>Muscle Wasting:</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" name="muscle-wasting" id="muscle-wasting-pos" value="present">
+                                    <label for="muscle-wasting-pos">Present</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="muscle-wasting" id="muscle-wasting-neg" value="(-)" checked>
+                                    <label for="muscle-wasting-neg">(-)</label>
+                                </div>
+                            </div>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="muscle-wasting-note" placeholder="Location, pattern...">
+                            </div>
+                        </div>
 
-        <div id="output" class="hidden"></div>
+                        <div class="form-row">
+                            <label>Fasciculation:</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" name="fasciculation" id="fasciculation-pos" value="present">
+                                    <label for="fasciculation-pos">Present</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="fasciculation" id="fasciculation-neg" value="(-)" checked>
+                                    <label for="fasciculation-neg">(-)</label>
+                                </div>
+                            </div>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="fasciculation-note" placeholder="Location, pattern...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="notification" id="notification">
-            <i class="fas fa-check-circle"></i> Prompt copied to clipboard!
-        </div>
+                <div class="subsection">
+                    <div class="subsection-header">Muscle Tone</div>
+                    <div class="subsection-content">
+                        <div class="dropdown-group">
+                            <label>Muscle Tone:</label>
+                            <select class="dropdown-input" id="muscle-tone">
+                                <option value="normal, spasticity (-), rigidity (-)" selected>normal, spasticity (-), rigidity (-)</option>
+                                <option value="increased, spasticity (+)">increased, spasticity (+)</option>
+                                <option value="increased, rigidity (+)">increased, rigidity (+)</option>
+                                <option value="decreased">decreased</option>
+                            </select>
+                            <div class="text-note">
+                                <input type="text" class="note-field" id="muscle-tone-note" placeholder="Additional notes...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <footer>
-            <p>© 2025 Hospital Workflow Management System</p>
-        </footer>
-    </div>
+                <div class="subsection">
+                    <div class="subsection-header">Muscle Strength</div>
+                    <div class="subsection-content">
+                        <div class="strength-grid">
+                            <div>
+                                <h4>Upper Extremities</h4>
+                                <div class="dropdown-group">
+                                    <label>Shoulder Abduction (C5):</label>
+                                    <select class="dropdown-input" id="shoulder-abduction">
+                                        <option value="5/5" selected>5/5</option>
+                                        <option value="4/5">4/5</option>
+                                        <option value="3/5">3/5</option>
+                                        <option value="2/5">2/5</option>
+                                        <option value="1/5">1/5</option>
+                                        <option value="0/5">0/5</option>
+                                    </select>
+                                </div>
 
-    <script>
-        let generatedPrompt = "";
+                                <div class="dropdown-group">
+                                    <label>Elbow Flexion (C6):</label>
+                                    <select class="dropdown-input" id="elbow-flexion">
+                                        <option value="5/5" selected>5/5</option>
+                                        <option value="4/5">4/5</option>
+                                        <option value="3/5">3/5</option>
+                                        <option value="2/5">2/5</option>
+                                        <option value="1/5">1/5</option>
+                                        <option value="0/5">0/5</option>
+                                    </select>
+                                </div>
 
-        function generatePrompt() {
-            const subjectiveInput = document.getElementById('subjective-input').value.trim();
-            const objectiveInput = document.getElementById('objective-input').value.trim();
-            const underlyingsInput = document.getElementById('underlyings-input').value.trim();
-            const timelineInput = document.getElementById('timeline-input').value.trim();
-            const examinationsInput = document.getElementById('examinations-input').value.trim();
-            const planInput = document.getElementById('plan-input').value.trim();
-            
-            // Show loading
-            document.querySelector('.loading').style.display = 'flex';
-            document.getElementById('status').className = 'status';
-            document.getElementById('status').textContent = '';
+                                <div class="dropdown-group">
+                                    <label>Elbow Extension (C7):</label>
+                                    <select class="dropdown-input" id="elbow-extension">
+                                        <option value="5/5" selected>5/5</option>
+                                        <option value="4/5">4/5</option>
+                                        <option value="3/5">3/5</option>
+                                        <option value="2/5">2/5</option>
+                                        <option value="1/5">1/5</option>
+                                        <option value="0/5">0/5</option>
+                                    </select>
+                                </div>
 
-            // Simulate processing time (can be removed in production)
-            setTimeout(() => {
-                generatedPrompt = `Please help me convert the following notes into contexts of progress note strictly in the required format, in order of [S], [O], [A] and [P]. Please generate all contents in plain text placed in code box for me to copy it easily.
+                                <div class="dropdown-group">
+                                    <label>Wrist Flexion (C7):</label>
+                                    <select class="dropdown-input" id="wrist-flexion">
+                                        <option value="5/5" selected>5/5</option>
+                                        <option value="4/5">4/5</option>
+                                        <option value="3/5">3/5</option>
+                                        <option value="2/5">2/5</option>
+                                        <option value="1/5">1/5</option>
+                                        <option value="0/5">0/5</option>
+                                    </select>
+                                </div>
 
-[S]
-(please transform the subjective part into listed subjective expressions in professional medical terms and notes.)
-${subjectiveInput}
+                                <div class="dropdown-group">
+                                    <label>Wrist Extension (C6):</label>
+                                    <select class="dropdown-input" id="wrist-extension">
+                                        <option value="5/5" selected>5/5</option>
+                                        <option value="4/5">4/5</option>
+                                        <option value="3/5">3/5</option>
+                                        <option value="2/5">2/5</option>
+                                        <option value="1/5">1/5</option>
+                                        <option value="0/5">0/5</option>
+                                    </select>
+                                </div>
 
-[O]
-(please trim off the time in front, and only keep the important data and trim off all symbols that are not needed, as the following.
-example output:
-T: 36.7, P: 94, R: 20
-BP: 137/93
-SpO2: 95%
-Pain score: 0)
-original data:
-${objectiveInput}
-
-[A]
-${underlyingsInput}
-\`\`\`<Timeline>\`\`\`
-${timelineInput}
-(Please help me convert the lab data into a specified format, and an example is shown below. The change preserves only important data, adds increase or decrease after abnormal data, puts the data in same date together, and seperates data into classification. For all data that is not in reference range, place the reference range behind that line for comparation. As for the other examination data, please put all topics of examination in "<>" brackets and place the date after it, and then put each data or findings under them.
-
-Example given data:
-2025/04/23
-WBC:2.49k/μL
-RBC:3.48M/μL
-HB:8.5g/dL
-HCT:27.4%
-MCV:78.7fL
-MCH:24.4pg
-MCHC:31.0g/dL
-PLT:147k/μL
-RDW-CV:14.6%
-2025/04/23
-Blast:0.0%
-Promyl.:0.0%
-Myelo.:0.0%
-Meta:0.0%
-Band:0.0%
-Seg:57.9%
-Eos.:1.2%
-Baso.:1.2%
-Mono.:7.6%
-Lym.:32.1%
-Aty.Lym.:0.0%
-PlasmaCell:0.0%
-Normobl.:0
-PS:Auto DC
-2025/04/23
-PT:10.6sec
-PT INR:0.98
-2025/04/23
-aPTT:24.5sec
-2025/04/23
-T-BIL:0.37mg/dL
-ALT:16U/L
-AST:28U/L
-GGT:66U/L
-ALP:74U/L
-UN:18.9mg/dL
-eGFR:56.3mL/min/1.73 m^2
-CRE:1.02mg/dL
-Alb:4.7g/dL
-Na:140mmol/L
-K:4.6mmol/L
-2025/04/23
-Alpha-Fetoprotein:1751.29ng/mL
-2025/04/23
-Sugar(One touch):199mg/dL
-2025/04/24
-Sugar(One touch):105mg/dL
-
-Example converted data:
-2025/04/23
-= CBC/DC
-  - WBC: 2.49k/μL ↓(reference range)
-  - RBC: 3.48M/μL ↓(reference range)
-  - HB: 8.5g/dL ↓(reference range)
-  - HCT: 27.4% ↓(reference range)
-  - MCV: 78.7fL ↓(reference range)
-  - MCH: 24.4pg ↓(reference range)
-  - MCHC: 31.0g/dL ↓(reference range)
-  - PLT: 147k/μL ↓(reference range)
-  - RDW-CV: 14.6% ↑(reference range)
-  - Segmented neutrophil: 57.9%
-  - Lymphocyte: 32.1%
-  - Monocyte: 7.6%
-  - Basophil: 1.2% ↑(reference range)
-
-= Coagulation
-  - PT: 10.6sec
-  - INR: 0.98
-  - aPTT: 24.5sec ↓(reference range)
-
-= Liver
-  - T-BIL: 0.37mg/dL
-  - ALT: 16U/L
-  - AST: 28U/L
-  - GGT: 66U/L ↑(reference range)
-  - ALP: 74U/L
-  - Albumin: 4.7g/dL
-
-= Kidney
-  - BUN: 18.9mg/dL
-  - Creatinine: 1.02mg/dL
-  - eGFR: 56.3mL/min/1.73 m² ↓(reference range)
-  - Na: 140mmol/L
-  - K: 4.6mmol/L
-
-= Tumor Marker
-  - AFP: 1751.29ng/mL ↑(reference range)
-
-= Glucose
-  - Sugar (One touch): 199mg/dL ↑(reference range)
-
-2025/04/24
-= Glucose
-  - Sugar (One touch): 105mg/dL
-
-And here's a new data for converting. Please help me with that)
-${examinationsInput}
-
-[P]
-(Please help me convert the following free note of plan part into formal medical writings in progress note.)
-${planInput}`;
-                
-                document.getElementById('output').textContent = generatedPrompt;
-                
-                // Hide loading
-                document.querySelector('.loading').style.display = 'none';
-                
-                // Show success message
-                document.getElementById('status').className = 'status success';
-                document.getElementById('status').innerHTML = '<i class="fas fa-check-circle"></i> Prompt generated successfully! Click "Copy Prompt" to copy to clipboard.';
-            }, 800);
-        }
-        
-        function copyPrompt() {
-            if (generatedPrompt) {
-                navigator.clipboard.writeText(generatedPrompt).then(() => {
-                    const notification = document.getElementById('notification');
-                    notification.classList.add('show');
-                    
-                    setTimeout(() => {
-                        notification.classList.remove('show');
-                    }, 3000);
-                }).catch(err => {
-                    document.getElementById('status').className = 'status error';
-                    document.getElementById('status').innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed to copy: ' + err;
-                });
-            } else {
-                document.getElementById('status').className = 'status error';
-                document.getElementById('status').innerHTML = '<i class="fas fa-exclamation-circle"></i> Please generate a prompt first!';
-            }
-        }
-        
-        function clearInputs() {
-            document.getElementById('subjective-input').value = '';
-            document.getElementById('objective-input').value = '';
-            document.getElementById('underlyings-input').value = '';
-            document.getElementById('timeline-input').value = '';
-            document.getElementById('examinations-input').value = '';
-            document.getElementById('plan-input').value = '';
-            
-            generatedPrompt = '';
-            document.getElementById('output').textContent = '';
-            document.getElementById('status').className = 'status';
-            document.getElementById('status').textContent = '';
-        }
-        
-        // Add sample data for demo purposes (can be removed in production)
-        function loadSampleData() {
-            document.getElementById('subjective-input').value = 'Patient reports persistent headache for 3 days, worsening with movement. No nausea or vomiting. Had similar episode 2 months ago.';
-            document.getElementById('objective-input').value = '08:15 T: 36.7°C, P: 94 bpm, R: 20, BP: 137/93 mmHg\nSpO2: 95% on RA\nPain score: 0/10';
-            document.getElementById('underlyings-input').value = 'Hypertension (diagnosed 2023)\nType 2 Diabetes Mellitus (diagnosed 2021)\nDyslipidemia';
-            document.getElementById('timeline-input').value = 'Initial presentation: 2025/04/27\nAdmitted for uncontrolled hypertension\nStarted on amlodipine 5mg daily';
-            document.getElementById('examinations-input').value = '2025/04/30\nWBC:6.2k/μL\nRBC:4.1M/μL\nHB:12.3g/dL\nHCT:38.4%\nMCV:89.7fL\nMCH:29.4pg\nPLT:240k/μL\n2025/04/30\nBUN:22.5mg/dL\nCRE:1.1mg/dL\nNa:139mmol/L\nK:4.2mmol/L\n2025/04/30\nHbA1c:7.2%';
-            document.getElementById('plan-input').value = '1. Continue current anti-hypertensive meds\n2. Adjust insulin dosage: increase Lantus to 15 units at night\n3. Order CT head without contrast\n4. Neurology consult\n5. Follow up in 2 weeks';
-        }
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            // Uncomment to load sample data automatically
-            // loadSampleData();
-        });
-    </script>
-</body>
-</html>
+                                <div class="dropdown-group">
+                                    <label>Pinky Abduction (C8-T1):</label>
+                                    <select class="dropdown-input" id="pinky-abduction">
+                                        <option value="5/5" selected>5/5</option>
+                                        <option value="4

@@ -117,26 +117,26 @@
         }
 
         .tool-soap .tool-header {
-            background-color: var(--secondary-color);
-        }
-
-        .tool-discharge .tool-header {
-            background-color: var(--accent-color);
-        }
-
-        .tool-radiology .tool-header {
             background-color: var(--info-color);
         }
 
-        .tool-lab .tool-header {
+        .tool-admission .tool-header {
+            background-color: var(--accent-color);
+        }
+
+        .tool-partogram .tool-header {
+            background-color: var(--secondary-color);
+        }
+
+        .tool-ros .tool-header {
             background-color: var(--warning-color);
         }
 
-        .tool-prescription .tool-header {
+        .tool-pe .tool-header {
             background-color: var(--success-color);
         }
 
-        .tool-consultation .tool-header {
+        .tool-ne .tool-header {
             background-color: var(--danger-color);
         }
 
@@ -176,26 +176,26 @@
         }
 
         .tool-soap .tool-link {
-            background-color: var(--secondary-color);
-        }
-
-        .tool-discharge .tool-link {
-            background-color: var(--accent-color);
-        }
-
-        .tool-radiology .tool-link {
             background-color: var(--info-color);
         }
 
-        .tool-lab .tool-link {
+        .tool-admission .tool-link {
+            background-color: var(--accent-color);
+        }
+
+        .tool-partogram .tool-link {
+            background-color: var(--secondary-color);
+        }
+
+        .tool-ros .tool-link {
             background-color: var(--warning-color);
         }
 
-        .tool-prescription .tool-link {
+        .tool-pe .tool-link {
             background-color: var(--success-color);
         }
 
-        .tool-consultation .tool-link {
+        .tool-ne .tool-link {
             background-color: var(--danger-color);
         }
 
@@ -347,11 +347,11 @@
         <header>
             <div class="content">
                 <h1>Hospital Workflow Management Suite</h1>
-                <p class="subtitle">Streamline and format your clinical documentation</p>
-                <p class="header-description">
+                <p class="subtitle">Streamline and format your clinical documentation in NTUH</p>
+                <!-- <p class="header-description">
                     A collection of specialized tools designed to help healthcare professionals create structured, 
                     AI-ready documentation for pure clinical efficiency.
-                </p>
+                </p> -->
             </div>
         </header>
 
@@ -415,7 +415,7 @@
                 </div>
             </div>
 
-            <div class="tool-card tool-discharge">
+            <div class="tool-card tool-admission">
                 <div class="tool-header">
                     <div class="tool-icon">
                         <i class="fas fa-hospital-user"></i>
@@ -430,65 +430,64 @@
                 </div>
             </div>
 
-            <div class="tool-card tool-radiology">
+            <div class="tool-card tool-partogram">
                 <div class="tool-header">
                     <div class="tool-icon">
                         <i class="fas fa-x-ray"></i>
                     </div>
-                    <div class="tool-title">Radiology Report</div>
+                    <div class="tool-title">Partogram Helper</div>
                 </div>
                 <div class="tool-content">
                     <p class="tool-description">
-                        Structure radiology findings into professionally formatted reports with appropriate
-                        terminology and standardized assessment sections.
+                        Direct conversion from messy notes of admission, laboring and nursing process to blue sheet format.
+                    </p>
+                    <a href="#" class="tool-link">Open tool</a>
+                </div>
+            </div>
+
+            <div class="tool-card tool-ros">
+                <div class="tool-header">
+                    <div class="tool-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="tool-title">Review of Systems (ROS)</div>
+                </div>
+                <div class="tool-content">
+                    <p class="tool-description">
+                        Structure patient-reported symptoms by body system, creating comprehensive 
+                        documentation that captures all relevant positive and negative findings.
                     </p>
                     <a href="#" class="tool-link">Coming Soon</a>
                 </div>
             </div>
 
-            <div class="tool-card tool-lab">
+            <div class="tool-card tool-pe">
                 <div class="tool-header">
                     <div class="tool-icon">
-                        <i class="fas fa-flask"></i>
+                        <i class="fas fa-user-md"></i>
                     </div>
-                    <div class="tool-title">Lab Results Formatter</div>
+                    <div class="tool-title">Physical Examination (PE)</div>
                 </div>
                 <div class="tool-content">
                     <p class="tool-description">
-                        Transform raw laboratory data into organized, categorized results with highlighted
-                        abnormal values and reference ranges for easy interpretation.
+                        Convert examination notes into properly formatted, systematic documentation
+                        organized by body systems with appropriate medical terminology.
                     </p>
                     <a href="#" class="tool-link">Coming Soon</a>
                 </div>
             </div>
 
-            <div class="tool-card tool-prescription">
+            <div class="tool-card tool-ne">
                 <div class="tool-header">
                     <div class="tool-icon">
-                        <i class="fas fa-prescription"></i>
+                        <i class="fas fa-brain"></i>
                     </div>
-                    <div class="tool-title">Prescription Writer</div>
+                    <div class="tool-title">Neurological Examination (NE)</div>
                 </div>
                 <div class="tool-content">
                     <p class="tool-description">
-                        Create properly formatted medication orders with dose calculations, administration
-                        instructions, and precautions for common medications.
-                    </p>
-                    <a href="#" class="tool-link">Coming Soon</a>
-                </div>
-            </div>
-
-            <div class="tool-card tool-consultation">
-                <div class="tool-header">
-                    <div class="tool-icon">
-                        <i class="fas fa-stethoscope"></i>
-                    </div>
-                    <div class="tool-title">Consultation Request</div>
-                </div>
-                <div class="tool-content">
-                    <p class="tool-description">
-                        Generate clear consultation requests with relevant clinical information, specific questions,
-                        and urgency indicators for specialist referrals.
+                        Structure detailed neurological findings into comprehensive, systematic reports
+                        covering mental status, cranial nerves, motor, sensory, and reflex examinations.
                     </p>
                     <a href="#" class="tool-link">Coming Soon</a>
                 </div>
