@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSCE Practice Prompt Generator</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --success-color: #2ecc71;
+        }
+        
+        body {
+            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--primary-color);
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-color);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin: 0 0 0.5rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: var(--dark-color);
+            font-size: 1rem;
+            margin: 0;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+            margin-left: 1rem;
+            display: none;
+        }
+        
+        .btn-success:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-success:active {
+            transform: translateY(0);
+        }
+        
+        .prompt-container {
+            margin-top: 2rem;
+            display: none;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 300px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .status {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+        
+        .status-success {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #27ae60;
+        }
+        
+        .status-error {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #c0392b;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            font-size: 0.8rem;
+            color: var(--dark-color);
+            opacity: 0.7;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 4px solid rgba(52, 152, 219, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--secondary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 1rem;
+                margin: 1rem auto;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-success {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>OSCE Practice Prompt Generator</h1>
+            <p class="subtitle">Generate random OSCE case prompts for ChatGPT practice</p>
+        </header>
+        
+        <div class="button-container">
+            <button id="generateBtn" class="btn btn-primary">Generate Random Case</button>
+            <button id="copyBtn" class="btn btn-success">Copy Prompt</button>
+        </div>
+        
+        <div id="loading" class="loading">
+            <div class="loading-spinner"></div>
+            <p>Loading cases from file...</p>
+        </div>
+        
+        <div id="promptContainer" class="prompt-container">
+            <textarea id="promptText" readonly></textarea>
+        </div>
+        
+        <div id="status" class="status"></div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const generateBtn = document.getElementById('generateBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const promptContainer = document.getElementById('promptContainer');
+            const promptText = document.getElementById('promptText');
+            const statusEl = document.getElementById('status');
+            const loadingEl = document.getElementById('loading');
+            
+            let allCases = [];
+            
+            // Load OSCE cases from file
+            async function loadCases() {
+                try {
+                    loadingEl.style.display = 'block';
+                    generateBtn.disabled = true;
+                    
+                    const response = await window.fs.readFile('/osce.md', { encoding: 'utf8' });
+                    
+                    // Split cases by separator
+                    allCases = response.split('===').map(c => c.trim()).filter(c => c);
+                    
+                    if (allCases.length === 0) {
+                        showStatus('No cases found in file. Please check your osce.md format.', 'error');
+                    } else {
+                        showStatus(`Successfully loaded ${allCases.length} OSCE cases.`, 'success');
+                        setTimeout(() => {
+                            statusEl.style.display = 'none';
+                        }, 3000);
+                    }
+                } catch (error) {
+                    showStatus('Failed to load cases file. Please check if osce.md exists in the correct path.', 'error');
+                    console.error('Error loading cases:', error);
+                } finally {
+                    loadingEl.style.display = 'none';
+                    generateBtn.disabled = false;
+                }
+            }
+            
+            // Generate prompt from a random case
+            function generatePrompt() {
+                if (allCases.length === 0) {
+                    showStatus('No cases available. Please check your osce.md file.', 'error');
+                    return;
+                }
+                
+                // Select random case
+                const randomIndex = Math.floor(Math.random() * allCases.length);
+                const selectedCase = allCases[randomIndex];
+                
+                // Format into prompt template
+                const prompt = `You are an OSCE (Objective Structured Clinical Examination) simulator for medical students. You will act as a patient with the following case details:
+
+${selectedCase}
+
+Guidelines for this simulation:
+1. Act as a realistic patient based on the given case. Respond naturally to my questions as if you were this patient.
+2. Don't reveal all information at once - only share what I specifically ask about.
+3. Respond to physical examination requests with appropriate findings.
+4. Don't give clues or guide me toward the correct diagnosis.
+5. Stay in character throughout our entire interaction.
+
+When I type "教案結束" or "the end", exit the simulation and provide:
+- A detailed assessment of my performance (history taking, physical examination, differential diagnosis)
+- A score out of 100
+- My strengths in the interaction
+- Areas for improvement
+- The correct diagnosis and management plan
+
+Please begin the simulation by introducing yourself as the patient waiting for my initial greeting and questions.`;
+
+                // Display the prompt
+                promptText.value = prompt;
+                promptContainer.style.display = 'block';
+                copyBtn.style.display = 'inline-block';
+            }
+            
+            // Copy prompt to clipboard
+            function copyPrompt() {
+                promptText.select();
+                document.execCommand('copy');
+                
+                // Visual feedback
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copied!';
+                
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                }, 2000);
+                
+                showStatus('Prompt copied to clipboard!', 'success');
+                setTimeout(() => {
+                    statusEl.style.display = 'none';
+                }, 3000);
+            }
+            
+            function showStatus(message, type) {
+                statusEl.textContent = message;
+                statusEl.className = 'status';
+                statusEl.classList.add(`status-${type}`);
+                statusEl.style.display = 'block';
+            }
+            
+            // Event listeners
+            generateBtn.addEventListener('click', generatePrompt);
+            copyBtn.addEventListener('click', copyPrompt);
+            
+            // Load cases on page load
+            loadCases();
+        });
+    </script>
+</body>
+</html>

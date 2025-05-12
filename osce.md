@@ -1,0 +1,839 @@
+# OSCE 練習個案：慢性阻塞性肺病（Chronic Obstructive Pulmonary Disease, COPD）
+
+## 一、主訴 (Chief Complaint)
+慢性咳嗽 8 個月
+
+## 二、基本資料
+- 年齡：50 歲
+- 性別：男性
+- 職業：建築工人（長期粉塵暴露，TOCC 陽性）
+- 吸菸史：每日 1 包，吸菸超過 30 年（30 pack-years）
+
+## 三、現病史 (History of Present Illness)
+50 歲男性，自述過去約 8 個月來出現持續性咳嗽，為乾咳合併白色痰液，每日清晨為主，無明顯血絲痰。近 3 個月來合併逐漸加劇的活動性呼吸困難，例如上下樓梯或搬重物時會喘，需停下來休息。
+
+否認胸痛、發燒、夜間盜汗、體重明顯減輕。無近期感染史或接觸結核病人。無氣喘病史。自述以往感冒後容易咳嗽久不癒，且咳嗽時間長。
+
+## 四、理學檢查 (Physical Examination)
+- T 36.6°C, HR 88 bpm, BP 13080 mmHg, RR 20min, SpO₂ 95% (RA)
+- 意識清楚，無急性呼吸窘迫
+- 胸廓擴張度稍差，呈現桶狀胸（barrel chest）外觀
+- 呼吸音減弱，雙側可聽及延長呼氣音，偶有乾囉音（wheezing），無濕囉音
+- 無下肢水腫或杵狀指，無頸靜脈怒張
+
+## 五、實驗室與影像檢查 (Investigations)
+
+1. 胸部 X 光（CXR）
+   - 雙肺過度充氣（hyperinflation）、橫膈下降、肺紋理減少
+   - 無明顯肺浸潤或腫塊
+   - 無明顯心臟擴大或肺水腫徵象
+
+2. 肺功能檢查（Lung Function Test, Spirometry）
+   - FEV₁FVC：70%
+   - FEV₁：約預測值的 65%
+   - 支氣管擴張試驗後改善 12% 或 200mL → 不具可逆性
+
+→ 符合慢性阻塞性肺病診斷標準（根據 GOLD 指引）
+
+---
+
+## 六、鑑別診斷邏輯（Differential Diagnosis）
+
+ 疾病                                支持依據                                                排除依據或不符處 
+------------------------------------------------------------------------------------------------------------
+ 慢性阻塞性肺病（COPD）               長期吸菸史、慢性咳痰、活動性呼吸困難、LFT 非可逆性阻塞型變化      各項檢查符合，最有可能 
+ 支氣管氣喘（Asthma）                間歇性喘鳴、夜間咳嗽、可逆性氣流阻塞                        年齡偏大、無明顯變異性症狀、支氣管擴張試驗陰性 
+ 肺結核（TB）                       慢性咳嗽、TOCC（建築工人）                                無夜間盜汗、無體重下降、CXR 無上肺病灶 
+ 慢性支氣管炎（chronic bronchitis）  咳嗽 3 個月，連續 2 年，屬 COPD phenotype 之一           與 COPD 可重疊定義，不需分開診斷 
+ 肺癌（lung cancer）                咳嗽、不明喘、吸菸者、建築暴露                             無血痰、無腫塊或壓迫現象、CXR 無異常 
+
+---
+
+## 七、診斷（Assessment）
+Chronic Obstructive Pulmonary Disease (COPD), GOLD stage 2 (moderate), non-reversible airflow obstruction confirmed by spirometry
+
+合併因子：
+- 吸菸（30 pack-years）
+- 慢性咳痰症狀
+- 職業暴露（粉塵）
+- 無明顯感染徵象或惡性腫瘤病徵
+
+---
+
+## 八、處置計畫（Plan）
+
+1. 戒菸：
+   - 強調戒菸是最有效的疾病進展延緩措施
+   - 可考慮尼古丁替代療法或轉介戒菸門診
+
+2. 藥物治療：
+   - 根據 GOLD 分類，建議使用長效支氣管擴張劑（LABA 或 LAMA）
+   - 若症狀明顯或有急性惡化史，可考慮 LABA + LAMA 或 LABA + ICS
+
+3. 接種疫苗：
+   - 建議接種肺炎鏈球菌疫苗與流感疫苗
+   - 評估是否適合接種 RSV 與 COVID-19 疫苗
+
+4. 教育與復健：
+   - 教育病人使用吸入器正確技巧
+   - 鼓勵呼吸復健與規律運動以改善體能
+
+5. 監測與追蹤：
+   - 定期追蹤肺功能變化
+   - 若有咳痰改變、發燒或惡化呼吸困難，須警覺急性惡化
+
+---
+
+## 九、OSCE 醫學生考站建議技巧
+
+- 病史詢問：
+  - 吸菸習慣、症狀變化（特別是活動性呼吸困難）、晨咳痰量
+  - 排除其他病因（如肺結核、心臟病、肺癌）
+
+- 理學檢查：
+  - 胸部聽診（延長呼氣音、囉音）
+  - 桶狀胸與胸廓擴張度
+  - 檢查周邊徵象如杵狀指、頸靜脈怒張
+
+- 解釋肺功能圖與 GOLD 分類
+- 應具備對戒菸介入與吸入藥物治療策略之基本知識
+
+---
+
+## 十、最終診斷（Final Diagnosis）
+Chronic Obstructive Pulmonary Disease (COPD), GOLD Group B, Stage 2 (moderate airflow limitation)
+
+===
+
+# OSCE 練習個案：胃癌腹膜轉移導致腎後性急性腎損傷 (AKI)
+
+## 一、主訴 (Chief Complaint)
+雙側側腹疼痛持續兩個月
+
+## 二、基本資料
+- 年齡：66 歲
+- 性別：男性
+- 社會史：每日飲用高粱酒約 100–200 cc，長期飲酒史
+
+## 三、現病史 (History of Present Illness)
+患者為 66 歲男性，近兩個月來持續抱怨雙側側腹疼痛（flank pain），為隱隱作痛，無特定誘因或姿勢改善，夜間痛感加劇影響睡眠。否認排尿疼痛、血尿或頻尿。近期無發燒或寒顫。自述食慾減退，體重減輕約 4 公斤，並有間歇性噁心與食後腹脹。
+
+既往病史包括高尿酸血症，持續服用 Febuxostat 控制中，偶爾服用 acetaminophen 緩解不適。無已知糖尿病、高血壓或腎臟病史。
+
+否認 NSAIDs 使用史。無接受近期造影檢查或使用顯影劑。
+
+## 四、過去病史與用藥 (Past History & Medication)
+- 高尿酸血症（服用 Febuxostat）
+- 偶爾服用 acetaminophen
+- 否認慢性腎病、腎結石、BPH 或泌尿道腫瘤病史
+
+## 五、理學檢查 (Physical Examination)
+- T 36.7°C, HR 88 bpm, BP 12575 mmHg, RR 18min
+- 清醒，無明顯脫水徵象
+- 腰部叩擊痛（CV knocking pain）雙側陽性
+- 腹部平坦但輕度壓痛，無明顯腫塊
+- 無下肢水腫或心音異常
+- 直腸指診（DRE）：無攝護腺腫大，無壓痛或可疑腫塊
+
+## 六、實驗室與影像檢查 (Investigations)
+
+### 1. 血液常規檢查 (CBC)
+- Hb 11 gdL（輕度貧血）
+- MCV 90 fl（正球性）
+- WBC 5,000 µL（正常）
+- Platelet 200,000 µL（正常）
+
+→ 提示為慢性疾病相關正球性貧血（anemia of chronic disease）
+
+### 2. 腎功能
+- Creatinine 14 mgdL
+- BUN 80 mgdL
+→ 明顯腎功能惡化（AKI）
+
+### 3. 肝膽指數
+- Total bilirubin 0.6 mgdL（正常）
+- AST, ALT within normal limits
+
+### 4. 腎臟超音波
+- 雙側腎臟皆見中度腎盂擴張（hydronephrosis），未見明顯腎結石陰影
+- 腎臟實質厚度正常
+
+### 5. 腹部電腦斷層（Abdominal CT）
+- 發現胃體部腫瘤
+- 明顯腹膜與腹主動脈旁淋巴結腫大
+- 雙側輸尿管被腫瘤性結節壓迫 → post-renal obstruction
+
+→ 診斷為胃癌併腹膜轉移，導致輸尿管壓迫與雙側腎積水，進而引起腎後性 AKI
+
+---
+
+## 七、鑑別診斷邏輯（Differential Diagnosis）
+
+ 疾病                          鑑別依據與理由                                             排除依據或不符處                                  
+----------------------------------------------------------------------------------------------------------------------------------------
+ 雙側腎結石                      CVA knocking pain、hydronephrosis                         超音波未見結石陰影，症狀非急性發作，無血尿            
+ 良性攝護腺肥大（BPH）          常見導致男性腎後性 AKI，需 DRE 檢查                        DRE 無肥大，無排尿困難、頻尿或滴尿等症狀             
+ 藥物性腎病變（如 NSAID）      有 acetaminophen 使用史                                  使用劑量不高，非 NSAID 類藥，且非典型腎損型態         
+ 腎前性 AKI（如脫水、出血）    易見於虛弱病人、貧血                                      vital signs 穩定、無脫水、無明顯出血來源              
+ 腎實質性 AKI（如急性腎小管壞死）  可由感染、缺血或藥物引起                                   無感染跡象、無低血壓、無高風險藥物使用                
+ 惡性腫瘤壓迫造成腎後阻塞         腹部 CT 顯示胃癌腹膜轉移與淋巴結腫大壓迫輸尿管                明確影像學證實，符合 post-renal AKI 臨床表現與實驗室數據 
+
+---
+
+## 八、最終診斷（Final Diagnosis）
+Gastric adenocarcinoma with peritoneal metastasis leading to bilateral ureteral obstruction and post-renal acute kidney injury (AKI)
+
+---
+
+## 九、處置與後續建議（Management & Plan）
+
+1. 緊急處理：
+   - 插置雙側輸尿管支架（ureteral stent）或施行經皮腎造廔（PCN）減壓
+   - 嚴密監測腎功能與尿量
+
+2. 癌症評估與處理：
+   - 腸胃內視鏡切片確認胃癌病理型態
+   - 評估是否可進行化療（palliative intent）
+   - 多專科會診（腫瘤科、腎臟科、泌尿科）
+
+3. 支持性療法：
+   - 調整高尿酸與 acetaminophen 用藥
+   - 嚴格限制 nephrotoxic agents
+   - 落實營養與 hydration 管理
+
+---
+
+## 十、OSCE 醫學生技巧提示
+
+- 清楚詢問 flank pain 性質、病程與排尿症狀
+- 腎臟叩擊痛、直腸指診與超音波判讀應熟練
+- 正確區分 AKI 分類（腎前、腎實質、腎後）
+- 具備惡性腫瘤轉移壓迫腎臟結構引發腎後性 AKI 的臨床判斷能力
+- 能解釋影像學及腎功能惡化的臨床意義給患者與家屬
+
+===
+
+# OSCE 練習個案：脊椎結核 (Tuberculous Osteomyelitis)
+
+## 一、主訴 (Chief Complaint)
+下背痛 14 天
+
+## 二、基本資料
+- 年齡：70 歲
+- 性別：男性
+- 職業：退休礦工（有粉塵暴露史，TOCC 陽性）
+- 家族史：兒子有僵直性脊椎炎（Ankylosing Spondylitis）
+
+## 三、現病史 (History of Present Illness)
+70 歲男性，過去兩週來出現逐漸加劇的下背疼痛，疼痛呈持續性鈍痛，活動時加重，休息時無明顯緩解。疼痛範圍侷限在腰椎正中線下段，無放射性疼痛至下肢。否認近期外傷或跌倒史。合併主訴體重減輕（近 1 個月約減少 3 公斤）、輕微乾咳、倦怠與食慾不振。
+
+過去有長期礦坑工作經驗，曾暴露於塵土環境多年，無吸菸史。否認夜間背痛加劇或晨間僵硬明顯改善現象。無小便失禁或下肢無力現象。
+
+## 四、理學檢查 (Physical Examination)
+- Vital signs：T 38°C, HR 92 bpm, BP 12580 mmHg, RR 20min, SpO₂ 97%
+- 頸部：雙側淋巴結腫大，活動良好、無壓痛
+- 胸部聽診：右下肺呼吸音減弱，無濕囉音或喘鳴
+- 背部壓痛：下背部中央明顯壓痛，無肌肉痙攣或畸形
+- Schober test：明顯受限（5cm 增長），但無骨盆帶疼痛
+- 神經學檢查：下肢感覺正常，無肌力下降或病理反射
+
+## 五、實驗室與影像檢查 (Investigations)
+
+### 血液檢查
+- Hemoglobin：11 gdL（輕度貧血）
+- WBC：13,000 μL（↑）
+  - Neutrophils 40%、Lymphocytes 50%（淋巴球偏高）
+- Total bilirubin：0.4 mgdL（正常）
+- CRP：4.2 mgdL（↑）
+
+→ 淋巴球比例上升，符合慢性感染可能；CRP 升高顯示持續性炎症反應
+
+### 胸部 X 光 (CXR)
+- 右上肺有模糊浸潤陰影（RUL opacity）
+- 右側胸腔積液（pleural effusion）
+
+→ 高度懷疑肺結核，需進一步評估是否為活性肺結核或陳舊性病灶
+
+---
+
+## 六、鑑別診斷邏輯（Differential Diagnoses）
+
+ 疾病                              支持依據                                                   排除依據或不足依據 
+-----------------------------------------------------------------------------------------------------------------
+ 脊椎結核（TB Osteomyelitis）       長期下背痛、體重減輕、胸部 X 光懷疑肺結核、淋巴球上升、礦工 TOCC 陽性     無法僅以症狀診斷，需影像與組織學確認 
+ 脊椎轉移性腫瘤（如肺癌骨轉移）      年長男性、肺部陰影、下背痛、體重減輕                              無吸菸史，X 光陰影不典型，無神經壓迫症狀 
+ 僵直性脊椎炎（AS）                有家族史、Schober test 限制                                 發病年齡過高，無晨僵、HLA-B27 未知     
+ 細菌性椎體骨髓炎（pyogenic osteomyelitis）  急性發燒、WBC 上升、背痛                                      淋巴球上升多於嗜中性球，無菌血症徵象   
+ 腰椎椎間盤突出                     局部下背痛，可有神經壓迫症狀                                   無放射痛、無肌力感覺異常                
+
+---
+
+## 七、診斷與評估（Assessment）
+
+- 右上肺陰影 + 發燒 + 淋巴球上升 + TOCC（礦工） → 懷疑肺結核
+- 持續下背痛，伴局部壓痛與發燒 → 懷疑脊椎骨髓炎
+- 胸部影像與淋巴球比例支持結核可能性 → 考慮結核性脊椎炎（Pott’s disease）
+
+—
+
+## 八、進一步檢查與處置建議（Plan）
+
+1. 感染確診：
+   - Tuberculin skin test (TST) or IGRA
+   - 痰液檢查：AFB smear, culture, TB PCR
+   - 若有胸水：進行胸水分析（ADA, AFB smear, cytology）
+   - 針對背部病灶進行 MRI 腰椎檢查，評估骨質破壞與膿瘍形成
+   - 骨病灶穿刺取樣（若可能）以進行 TB PCR 或病理學確認
+
+2. 初步處置：
+   - 疑似結核性骨髓炎者：儘早啟動抗結核藥物（RIPE therapy）先經感染科討論
+   - 避免使用 NSAIDs 或類固醇以免影響感染控制
+   - 疼痛控制可使用 acetaminophen
+
+3. 合併症與併發症觀察：
+   - 定期監測是否出現脊髓壓迫徵象
+   - 如有神經學症狀惡化，需緊急神外評估是否需減壓手術
+
+---
+
+## 九、最終診斷（Final Diagnosis）
+Suspected tuberculous osteomyelitis (Pott’s disease) with coexisting pulmonary tuberculosis
+
+—
+
+## 十、OSCE 考站技巧提示
+
+- 主動詢問：
+  - 背痛特性（持續性、有無夜間痛、活動是否改善）
+  - 結核危險因子（暴露史、體重下降、咳嗽）
+  - 家族脊椎病史與免疫疾病
+
+- 理學檢查技巧：
+  - Schober test 操作與解釋
+  - 淋巴結觸診（頸部、腋下、鎖骨上）
+  - 背部壓痛與神經學評估（肌力、感覺、反射）
+
+- 說明影像與檢查：
+  - 解釋 CXR 中結核疑點
+  - MRI 與骨病灶針吸在診斷上的角色
+
+- 醫病溝通：
+  - 說明需進一步檢查確認是否為結核
+  - 說明結核傳染性與家人檢查必要性
+
+===
+
+# OSCE 練習個案：彌漫大 B 細胞淋巴瘤（Diffuse Large B Cell Lymphoma, DLBCL）
+
+## 一、主訴（Chief Complaint）
+發燒不明原因（FUO）
+
+## 二、基本資料（Demographics）
+- 年齡：57 歲
+- 性別：男性
+- 職業與旅遊史：曾赴日本短期旅遊（TOCC +）
+- 免疫狀況：慢性 HBV 帶原者，無抗病毒治療
+- 時間病程：持續發燒約 3 週，波動於 38–39°C，白天出現居多，夜間盜汗明顯
+
+## 三、現病史（History of Present Illness）
+57 歲男性，過去 3 週出現每日發燒，常於午後起熱伴倦怠與食慾下降，夜間盜汗需更換衣物，被家屬發現近兩個月體重減輕超過 4 公斤。否認咳嗽、喀痰、咽痛或排尿異常。無胸痛、無呼吸困難。
+
+近期赴日本旅遊，否認與禽類、牛羊、TB 接觸史。無近期手術或牙科處置。
+
+無 HIV、糖尿病或免疫抑制藥物使用史。為 HBV 帶原者，定期追蹤，未曾接受抗病毒治療。家族無惡性腫瘤史。
+
+## 四、系統回顧（Systemic Review）
+- 消化道：無嘔吐或腹瀉，食慾差但無黃疸
+- 呼吸系統：無咳嗽、無痰
+- 泌尿道：無頻尿、血尿或排尿痛
+- 骨骼肌肉：間歇性關節痠痛
+- 神經系統：無頭痛、視力模糊、癲癇或神智改變
+
+## 五、理學檢查（Physical Examination）
+
+- Vital signs：T 38.6°C, HR 96 bpm, BP 12075 mmHg
+- 頭頸部：
+  - 舌面見白色膜狀病灶（疑似鵝口瘡）
+  - 牙齒齲齒明顯，牙齦紅腫
+  - 無眼底出血或黃斑病灶
+- 淋巴系統：
+  - 頸部、腋下與鼠蹊部皆可觸及多顆淋巴結，約 1–2 公分，質硬不易移動
+- 心肺系統：S1S2 正常，無心雜音；雙肺清晰無羅音
+- 腹部：
+  - 肝脾腫大可觸及，肝下緣延伸約 3 cm，脾臟中等度腫大
+  - 無明顯腹膜刺激徵象
+- 皮膚與關節：
+  - 無出疹或異常色素變化
+  - 輕度腕關節腫脹與壓痛（滑膜炎）
+
+## 六、實驗室與影像檢查（Investigations）
+
+### 血液檢查
+- WBC：9,500 μL（正常或稍升）
+- Hb：11.2 gdL（貧血）
+- PLT：170,000 μL
+- CRP：5.6 mgdL（↑）
+- ESR：85 mmhr（↑）
+- LFT：ASTALT 正常，T-bil 0.5 mgdL
+- HIV Ab：陰性
+- HBsAg：陽性，HBV DNA 陽性
+
+### 其他檢查
+- 血液培養 ×2：陰性
+- 胸部 X 光：未見明顯浸潤或結核鈣化灶
+- 腹部超音波：肝脾腫大，腹主動脈旁可疑腫大淋巴結
+- Lymph node biopsy（頸部）：病理報告顯示 Diffuse Large B-Cell Lymphoma (DLBCL)，CD20+, Ki-67 ≈ 90%
+
+---
+
+## 七、鑑別診斷邏輯（Differential Diagnosis）
+
+ 疾病                          支持依據                                                         排除依據或不足之處                  
+-----------------------------------------------------------------------------------------------------------------------------------
+ DLBCL                         發燒 + 體重減輕 + 夜間盜汗（B symptoms） + 淋巴結腫大 + 肝脾腫大 + biopsy 診斷      NA（已由切片確診）                
+ 結核感染（TB）               發燒 + 消瘦 + 肝脾腫大，曾旅遊亞洲地區                                 無咳嗽、胸部 X 光未見典型結核灶，AFB 待檢 
+ Endocarditis（亞急性感染性心內膜炎）  發燒 + 口腔衛生差 + 心雜音（未明顯）                                  血培陰性，無瓣膜病史、無塞子現象           
+ HIVAIDS 合併淋巴瘤            發燒 + thrush + LAN                                              HIV 陰性                          
+ 自體免疫性疾病（如 SLE）        發燒 + LAN + ESR 上升                                            無典型皮膚症狀或自體免疫血清學               
+
+---
+
+## 八、診斷與評估（Assessment）
+
+57 歲男性，主訴發燒合併 B symptoms（體重減輕、盜汗），理學檢查見廣泛性淋巴結腫大與肝脾腫大，實驗室與影像學顯示高度懷疑惡性淋巴瘤，經淋巴結切片確診為 Diffuse Large B Cell Lymphoma (DLBCL)，符合典型病程。合併 HBV 帶原，進一步治療需同步評估抗病毒策略以防 reactivation。
+
+---
+
+## 九、處置與後續計畫（Plan）
+
+1. 初步處置與評估
+   - 分期檢查：全身 PET-CT  CT, Bone marrow biopsy
+   - 分類評估：使用 IPI（International Prognostic Index）
+
+2. 治療建議
+   - 化療方案：R-CHOP 為標準第一線療法（Rituximab + CHOP）
+   - 預防性抗病毒治療：因 HBV 帶原，開始 Entecavir 或 Tenofovir
+
+3. 感染排除與併發症管理
+   - 持續監測 CRP、CBC 變化，排除潛在感染
+   - 若發燒持續不退，進一步做 sputum culture、AFB smear、IGRA
+
+4. 支持性療法
+   - 症狀控制：退燒藥、營養支持
+   - 口腔照護改善以減少二次感染風險
+
+---
+
+## 十、OSCE 考站技巧提示
+
+- 醫學生需主動詢問：
+  - 發燒病程與時間點、是否為每日定時發燒
+  - 是否有體重減輕、盜汗等 B symptoms
+  - 是否有旅遊或傳染病接觸史（TOCC）
+  - 是否為免疫不全（如 HIV, HBV, 藥物）
+
+- 理學檢查需涵蓋：
+  - 淋巴結完整評估（頸部、腋下、鎖骨上、鼠蹊）
+  - 肝脾大小觸診
+  - 心肺與口腔檢查（針對 infection immunosuppression）
+  - 輕微關節病變的鑑別（rule out autoimmune）
+
+- 討論 biopsy 與 staging 在 lymphoma 的關鍵角色
+- 指出免疫抑制與病毒 reactivation 的重要性（如 HBV）
+
+===
+
+# OSCE 練習個案：甲狀腺毒症 (Thyrotoxicosis) 合併心律不整
+
+## 一、主訴 (Chief Complaint)
+心悸、呼吸困難 1 天
+
+## 二、基本資料
+- 年齡：43 歲
+- 性別：女性
+- 體型偏瘦，無重大慢性病史
+
+## 三、現病史 (History of Present Illness)
+患者是一位 43 歲女性，自述於前一日開始出現明顯心悸與呼吸困難，無明顯誘發因子。症狀在靜息狀態下亦可出現，伴有胸悶與輕微腹痛。否認咳嗽、發燒或胸痛，但表示近幾週來常覺得怕熱、容易流汗，並出現月經不規則、情緒焦躁、體重下降（約 3 公斤1 個月）。近期也注意到頭髮變得稀疏，皮膚乾燥。
+
+無高血壓、糖尿病或心臟病病史。無服用荷爾蒙藥物。無吸菸、飲酒習慣。無類固醇或生酮飲食使用。
+
+家族史中，母親與姨母皆曾罹患甲狀腺機能亢進症。
+
+## 四、理學檢查 (Physical Examination)
+- Vital signs：T 37.2°C, HR 138 bpm (irregular), BP 13280 mmHg, RR 22min, SpO₂ 97% RA
+- 皮膚溫熱、出汗
+- 頸部觸診：輕度甲狀腺腫大，無壓痛、無結節
+- 心音：心跳快速且不規律，無明顯雜音
+- 肺部：雙側底部可聽見輕微濕囉音
+- 下肢輕度水腫
+- 無突眼或眼瞼水腫
+
+→ 符合甲狀腺毒症與心衰竭早期表現
+
+## 五、實驗室與影像檢查 (Investigations)
+
+### 血液與電解質
+- T-bilirubin：1.26 mgdL（輕度上升）
+- Na：140 mmolL（正常）
+- K：3.0 mmolL（低鉀）
+- Mg：0.78 mmolL（偏低）
+- NT-proBNP：1000 pgmL（↑，提示心臟壓力負擔）
+
+→ 輕微肝功能異常、低鉀低鎂與心衰徵象
+
+### ECG 心電圖
+- 心跳 138 bpm，不規則節律
+- Atrial flutter with variable block (或 atrial tachycardia)
+- LVH 表現（高 QRS 電壓、左軸偏移）
+
+→ 甲狀腺毒症相關心律不整
+
+### 胸部 X 光 (CXR)
+- 心影擴大（cardiomegaly）
+- 肺門與基部水腫（pulmonary edema）
+
+→ 提示急性高輸出性心衰竭
+
+---
+
+## 六、鑑別診斷邏輯（Differential Diagnoses）
+
+ 疾病                              支持依據                                                   排除依據或不足依據                     
+-----------------------------------------------------------------------------------------------------------------------------------
+ 甲狀腺毒症（Thyrotoxicosis）      心悸、怕熱、體重減輕、月經異常、家族史、甲狀腺腫            無突眼、TSI 未檢，待實驗室佐證         
+ 甲狀腺風暴（Thyroid Storm）      心律不整、呼吸困難、心衰徵象                                無高燒、無意識改變，符合輕至中度毒症    
+ 心房撲動  心房顫動              ECG 支持、不規則心律、甲亢相關                                ECG 未顯示明顯 fibrillatory baseline（待心電圖評估） 
+ 肺栓塞（PE）                      呼吸困難、心跳快                                             無胸痛、無下肢靜脈症狀，CXR 有肺水腫     
+ 心肌病變（高輸出性心衰）         NT-proBNP ↑、CXR、甲亢引起代償不全                              無既往心病史，因果為甲狀腺毒症          
+
+---
+
+## 七、診斷與評估（Assessment）
+
+43 歲女性，表現出典型甲狀腺毒症症狀（怕熱、心悸、體重下降、家族史），合併心律不整與心衰徵象（肺水腫、NT-proBNP 升高）。ECG 顯示 atrial flutter，CXR 有肺積水與心擴大，支持為甲狀腺毒症相關心律不整及高輸出性心衰。
+
+→ 初步診斷：
+Thyrotoxicosis with atrial flutter and high-output heart failure
+
+---
+
+## 八、處置與後續建議（Plan）
+
+1. 抗甲狀腺治療：
+   - Methimazole 10–20 mg QD（首選）
+   - 或 PTU（特別在懷孕初期或甲狀腺風暴時使用）
+   - 待 TSH, fT4, T3 檢查確認
+
+2. 心律控制：
+   - Beta-blocker（如 propranolol 20–40 mg Q6h，亦可抑制 T4→T3 轉換）
+   - 若 flutter 為主，可考慮電氣轉律或 CCB（如 diltiazem）視 hemodynamic 穩定與否
+
+3. 心衰處理：
+   - 若肺水腫顯著，可短期利尿劑如 furosemide
+   - 嚴密監控血壓與尿量
+
+4. 進一步檢查：
+   - TFT（TSH, fT4, total T3）
+   - TSI  TRAb（Graves 疾病診斷）
+   - Thyroid ultrasound（結節、有無結節性毒腺）
+   - 心臟超音波（評估心室功能）
+
+5. 教育與後續：
+   - 病人教育甲狀腺疾病症狀、併發症與藥物副作用
+   - 與心臟科、內分泌科合作追蹤治療
+   - 評估是否適合放射碘治療或手術切除（如 Graves’ disease）
+
+---
+
+## 九、最終診斷（Final Diagnosis）
+
+Thyrotoxicosis presenting with atrial flutter and decompensated high-output heart failure
+
+---
+
+## 十、OSCE 考站技巧提示
+
+- 醫學生需問出：
+  - 典型甲亢症狀（怕熱、心悸、月經改變、體重減輕）
+  - 心律不整及心衰的症狀（喘、浮腫、夜間呼吸困難）
+  - 家族史與藥物史（是否服用減肥藥或荷爾蒙藥物）
+
+- 理學檢查技巧：
+  - 正確測量 HR 與脈搏是否不規律
+  - 頸部觸診甲狀腺（大小、結節、壓痛）
+  - 聽診心律與肺部水聲，辨識是否肺水腫
+
+- 優先思考與處置：
+  - 排除心肌梗塞、肺栓塞等急性致命原因
+  - 初步穩定病人心跳與呼吸狀況
+  - 啟動甲狀腺毒症治療流程，並安排抽血與心超
+
+===
+
+# ESRD related AHF
+
+# OSCE 練習個案：末期腎病 (ESRD) 引發之急性心衰竭與高血鉀性完全房室傳導阻斷
+
+## 一、主訴 (Chief Complaint)
+頭暈持續 3 小時
+
+## 二、基本資料
+- 年齡：80 歲
+- 性別：女性
+- 過去病史：
+  - 末期腎病（End-Stage Renal Disease, ESRD），接受規則透析
+  - 高血壓、糖尿病病史
+  - 貧血（常見於慢性腎病）
+  - 無精神病史，無跌倒、失神紀錄
+
+## 三、現病史 (History of Present Illness)
+80 歲女性於今日上午 3 小時前出現頭暈與全身無力，未曾昏倒，但感覺視線發黑與胸悶。否認胸痛、喘、咳嗽或發燒。家屬表示患者近兩日透析時間因人力問題延後，可能造成鉀離子堆積。患者同時抱怨下肢水腫加劇與呼吸稍急促。否認腹瀉、嘔吐、感染或進食異常。
+
+## 四、理學檢查 (Physical Examination)
+
+- Vital signs：
+  - T 36.8°C
+  - BP 9260 mmHg
+  - HR 32 bpm（bradycardia）
+  - RR 22min
+  - SpO₂ 95% on RA
+
+- General appearance：清醒但倦怠，無發燒
+- 頸部：無頸靜脈怒張
+- 心肺：
+  - 心音緩慢、有規律，無明顯雜音
+  - 肺底可聽見微弱濕囉音
+- 腹部：無壓痛或腸蠕動異常
+- 四肢：
+  - 下肢明顯 pitting edema (+2)
+  - 無紫斑或凍傷，末梢溫暖
+- 神經學評估：無局部神經缺損，Mini-Cog 無異常
+
+## 五、實驗室與影像檢查 (Investigations)
+
+### ECG 心電圖
+- 顯著緩慢心跳（30–35 bpm）
+- Tall peaked T waves（高鉀特徵）
+- PR interval 延長，進展為 complete AV block（第三度房室傳導阻斷）
+
+→ ECG 支持 hyperkalemia induced AV block
+
+### 血液檢查
+- NT-proBNP：顯著升高（提示急性心衰）
+- K+：6.9 mmolL（重度高血鉀）
+- Cr：12.5 mgdL（基礎值），BUN：78 mgdL
+- Hb：8.5 gdL（慢性貧血）
+- WBC、Plt：正常範圍
+- 高敏感性心肌酵素未升高
+
+→ ESRD, anemia, hyperkalemia 造成 conduction system suppression
+
+### 胸部 X 光 (CXR)
+- 明顯肺部水腫（perihilar batwing sign）
+- 西部徵象（Westermark sign）
+- 漢普頓駝峰（Hampton's hump）
+
+→ 支持肺部鬱血與小血管阻塞：可疑 AHF 合併小範圍 PE？
+
+---
+
+## 六、鑑別診斷邏輯（Differential Diagnoses）
+
+ 疾病                                 支持依據                                                    排除依據或不足依據                          
+--------------------------------------------------------------------------------------------------------------------------------------------
+ Hyperkalemia-induced AV block        ESRD, ECG 表現（peaked T, AV block）                         明確支持，為本案核心病機                    
+ Acute Heart Failure (AHF)            NT-proBNP ↑、肺部水腫、下肢水腫、腎衰背景                     明確支持，可由心律過慢與高血鉀誘發          
+ Pulmonary Embolism (PE)              胸部 X 光疑似 PE 特徵、呼吸急促                               無深部靜脈血栓、不典型表現，應屬次要鑑別      
+ Orthostatic hypotension              頭暈、HR 無代償上升                                          ECG 顯示 bradycardia，支持心因性為主         
+ Sick Sinus Syndrome                  高齡女性、心率緩慢                                           ECG 無典型 pause 或 SA block，非主因         
+
+---
+
+## 七、診斷與評估（Assessment）
+
+80 歲 ESRD 女性，出現急性頭暈與心律過慢，ECG 顯示 complete AV block 與 peaked T waves，血鉀升至 6.9，合併急性肺水腫與下肢水腫。臨床表現為典型高血鉀誘發之完全房室傳導阻斷，引發心輸出量降低與急性心衰竭表現，並可能引發小範圍 PE。
+
+→ 最終臨床診斷：
+ESRD-related hyperkalemia causing complete AV block and acute heart failure
+
+---
+
+## 八、處置與後續建議（Plan）
+
+1. 緊急穩定病人狀況：
+   - 立即監測心電圖與生命徵象
+   - 若 hemodynamically unstable → 插管與輸液管理
+
+2. Hyperkalemia 急救：
+   - IV calcium gluconate（穩定心肌膜）
+   - IV regular insulin + D50（將鉀內移）
+   - Nebulized salbutamol（beta agonist）
+   - Sodium bicarbonate（如有代謝性酸中毒）
+   - Loop diuretics（如尿量尚可）
+   - 緊急血液透析（definitive）
+
+3. BradycardiaAV Block 處置：
+   - 暫時性 pacing（若有 symptomatic hypotension）
+   - 監測是否需要永久性 pacemaker（若不可逆）
+
+4. Acute heart failure 處置：
+   - Diuretics（若無嚴重 hypotension）
+   - O2 支持
+   - 謹慎 fluid management（因 ESRD 患者對液體敏感）
+
+5. 評估 PE 的可能性：
+   - 若臨床上懷疑高者，可加做 D-dimer 或 chest CTA
+   - 評估抗凝風險（若需給予抗凝）
+
+6. 後續追蹤與轉介：
+   - 腎臟科安排規律透析與教育
+   - 心臟科評估 AV block 是否需長期 pacing
+   - 電解質管理與心電圖監控
+
+---
+
+## 九、最終診斷（Final Diagnosis）
+
+ESRD-related hyperkalemia with complete AV block and acute decompensated heart failure
+
+---
+
+## 十、OSCE 考站技巧提示
+
+- 詢問與解釋要點：
+  - 確實詢問病人是否延誤透析、尿量改變與體重增加
+  - 解釋高血鉀與心律異常、急性心衰之相關性
+
+- 理學與溝通技巧：
+  - 注意心音速度與節律
+  - 觸診下肢水腫
+  - 使用簡單方式向病人與家屬說明需緊急透析處置
+
+- 考官觀察重點：
+  - 是否能迅速辨識 ECG 表現並與 hyperkalemia 聯想
+  - 是否能在危急情況下迅速列出穩定步驟
+  - 是否能提出 definitive management：血液透析
+
+===
+
+# OSCE 練習個案：急性痛風性關節炎（Gouty Arthritis）
+
+## 一、主訴 (Chief Complaint)
+右膝劇痛持續 1 小時，於打籃球後發作
+
+## 二、基本資料
+- 年齡：23 歲
+- 性別：男性
+- 無重大過去病史
+- 飲食習慣：嗜吃海鮮、常飲含糖飲料，無酗酒
+- 無創傷病史，無家族性風濕性關節炎或紅斑性狼瘡病史
+
+## 三、現病史 (History of Present Illness)
+23 歲男性在下午打籃球期間突然感覺右膝內側劇烈疼痛，持續加劇，無法負重行走。否認明顯外傷、跌倒或扭轉受傷。疼痛範圍集中於右膝關節內側，關節腫脹、發熱，有紅但無傷口。病人表示過去一年曾有一次腳趾關節腫痛但未就醫。無發燒、無全身症狀。
+
+## 四、理學檢查 (Physical Examination)
+
+- Vital signs：
+  - T 37.2°C
+  - BP 12872 mmHg
+  - HR 82 bpm
+  - RR 16min
+
+- Right knee：
+  - 明顯紅腫熱痛
+  - 膝蓋活動範圍受限（被動彎曲引起劇痛）
+  - McMurray test：陰性
+  - Lachman test：陰性
+  - 無膝關節不穩、無明顯積液波動感
+  - 無傷口、無血腫
+
+→ 表現符合單一關節急性炎症，無創傷性不穩徵象，支持痛風性關節炎
+
+## 五、檢查 (Investigations)
+
+### 血液檢查
+- Uric Acid：9.2 mgdL（↑，正常上限約 7）
+- ESR：35 mmhr（↑）
+- CRP：3.8 mgdL（↑）
+
+→ 發炎性反應 + 高尿酸血症 → 支持痛風可能
+
+### 關節超音波
+- 膝關節內關節腔積液（約 5–8 mL）
+- 關節滑膜增厚，無明顯骨折或半月板撕裂
+
+### MRI（若懷疑半月板或滑膜病變）
+- 膝關節滑膜增厚，無明顯軟骨損傷
+- 沒有韌帶破裂或骨挫傷
+
+→ 排除結構性創傷，支持急性關節炎
+
+### Synovial Fluid Analysis
+- 外觀：混濁、黃色
+- 白血球：25,000 mm³（以中性球為主）
+- 無細菌生長
+- 極化顯微鏡下可見 needle-shaped monosodium urate crystals，呈強負雙折光（negatively birefringent）
+
+→ 診斷依據：急性單關節炎 + 尿酸結晶 → 明確為痛風
+
+---
+
+## 六、鑑別診斷（Differential Diagnosis）
+
+ 疾病                          支持依據                                               排除依據或不足依據                            
+----------------------------------------------------------------------------------------------------------------------------------
+ Gouty arthritis               單關節急性紅腫痛，嗜海鮮，UA ↑，結晶陽性                 明確支持，為本案主要診斷                      
+ Septic arthritis              關節急性紅腫痛，WBC ↑                                   無發燒、關節液無細菌生長，病程過快           
+ ACLMCLLigament tear         籃球活動史，年輕男性                                   無 LachmanMcMurray 陽性、MRI 未見破裂        
+ Meniscal injury               運動中受傷、膝痛                                       MRI 排除半月板撕裂                            
+ Reactive arthritis            年輕男性，急性單關節痛                                 無尿道炎、腸炎病史，無結膜炎                  
+ Pseudogout (CPPD)             關節液白血球高、急性痛                                 結晶形狀與性質不符，年齡不符                  
+
+---
+
+## 七、臨床評估與結論（Assessment）
+
+23 歲健康男性，運動後出現右膝單關節劇痛，合併關節腫脹與紅熱。臨床檢查與影像未見外傷跡象，關節液分析顯示尿酸結晶。血中尿酸偏高，過去曾有關節炎發作經驗，且有高風險飲食習慣。臨床符合痛風性關節炎診斷。
+
+→ 最終診斷：急性痛風性膝關節炎（Gouty arthritis of right knee）
+
+---
+
+## 八、處置建議（Plan）
+
+1. 急性期止痛與抗發炎治療：
+   - Colchicine（例：0.5 mg Q6H, max 1.8 mgday）
+   - NSAIDs（例如 naproxen、indomethacin，如腎功能允許）
+   - 若禁用 NSAID，考慮 oral corticosteroid（如 prednisone）
+
+2. 關節腔引流與冷敷：
+   - 關節抽液可紓緩壓力
+   - 使用冷敷減輕腫脹與疼痛
+
+3. 避免下列錯誤處置：
+   - 急性期不建議使用降尿酸藥物（如 allopurinol 或 febuxostat），避免波動加劇症狀
+
+4. 飲食與生活型態調整：
+   - 限制高普林食物（如內臟、海鮮、含糖飲料）
+   - 減少酒精攝取
+   - 控制體重、增加水分攝取
+
+5. 復發預防（於急性期結束後）：
+   - 若復發頻繁或 UA 持續偏高，可考慮開始尿酸控制藥物（如 allopurinol）
+
+6. 後續追蹤：
+   - 評估 UA 水平與是否為 recurrent gout
+   - 評估是否合併腎功能異常或代謝症候群
+
+---
+
+## 九、考站提醒與提示
+
+- 步驟清晰：鑑別外傷與關節炎，優先安排關節液抽吸
+- 抽液說明：向病人解釋抽液用途、疼痛緩解與診斷價值
+- 飲食問診：確認高風險飲食習慣與社交飲酒習慣
+- 溝通技巧：年輕患者應說明病因、可逆性與復發預防策略
+
+---
+
