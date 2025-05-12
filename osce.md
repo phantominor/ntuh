@@ -103,9 +103,9 @@ Chronic Obstructive Pulmonary Disease (COPD), GOLD stage 2 (moderate), non-rever
 ## 十、最終診斷（Final Diagnosis）
 Chronic Obstructive Pulmonary Disease (COPD), GOLD Group B, Stage 2 (moderate airflow limitation)
 
-===
+`,
 
-# OSCE 練習個案：胃癌腹膜轉移導致腎後性急性腎損傷 (AKI)
+                `# OSCE 練習個案：胃癌腹膜轉移導致腎後性急性腎損傷 (AKI)
 
 ## 一、主訴 (Chief Complaint)
 雙側側腹疼痛持續兩個月
@@ -211,9 +211,9 @@ Gastric adenocarcinoma with peritoneal metastasis leading to bilateral ureteral 
 - 具備惡性腫瘤轉移壓迫腎臟結構引發腎後性 AKI 的臨床判斷能力
 - 能解釋影像學及腎功能惡化的臨床意義給患者與家屬
 
-===
+`,
 
-# OSCE 練習個案：脊椎結核 (Tuberculous Osteomyelitis)
+                `# OSCE 練習個案：脊椎結核 (Tuberculous Osteomyelitis)
 
 ## 一、主訴 (Chief Complaint)
 下背痛 14 天
@@ -321,9 +321,9 @@ Suspected tuberculous osteomyelitis (Pott’s disease) with coexisting pulmonary
   - 說明需進一步檢查確認是否為結核
   - 說明結核傳染性與家人檢查必要性
 
-===
+`,
 
-# OSCE 練習個案：彌漫大 B 細胞淋巴瘤（Diffuse Large B Cell Lymphoma, DLBCL）
+                `# OSCE 練習個案：彌漫大 B 細胞淋巴瘤（Diffuse Large B Cell Lymphoma, DLBCL）
 
 ## 一、主訴（Chief Complaint）
 發燒不明原因（FUO）
@@ -441,9 +441,9 @@ Suspected tuberculous osteomyelitis (Pott’s disease) with coexisting pulmonary
 - 討論 biopsy 與 staging 在 lymphoma 的關鍵角色
 - 指出免疫抑制與病毒 reactivation 的重要性（如 HBV）
 
-===
+`,
 
-# OSCE 練習個案：甲狀腺毒症 (Thyrotoxicosis) 合併心律不整
+                `# OSCE 練習個案：甲狀腺毒症 (Thyrotoxicosis) 合併心律不整
 
 ## 一、主訴 (Chief Complaint)
 心悸、呼吸困難 1 天
@@ -569,9 +569,9 @@ Thyrotoxicosis presenting with atrial flutter and decompensated high-output hear
   - 初步穩定病人心跳與呼吸狀況
   - 啟動甲狀腺毒症治療流程，並安排抽血與心超
 
-===
+`,
 
-# ESRD related AHF
+                `# ESRD related AHF
 
 # OSCE 練習個案：末期腎病 (ESRD) 引發之急性心衰竭與高血鉀性完全房室傳導阻斷
 
@@ -715,9 +715,9 @@ ESRD-related hyperkalemia with complete AV block and acute decompensated heart f
   - 是否能在危急情況下迅速列出穩定步驟
   - 是否能提出 definitive management：血液透析
 
-===
+`,
 
-# OSCE 練習個案：急性痛風性關節炎（Gouty Arthritis）
+                `# OSCE 練習個案：急性痛風性關節炎（Gouty Arthritis）
 
 ## 一、主訴 (Chief Complaint)
 右膝劇痛持續 1 小時，於打籃球後發作
