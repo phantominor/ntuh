@@ -126,9 +126,7 @@
         }
 
         .hidden {
-            position: absolute;
-            left: -9999px;
-            top: 0;
+            display: none !important;
         }
 
         .md-input {
@@ -240,7 +238,7 @@
             .btn-container {
                 flex-direction: column;
             }
-            
+
             .tab-buttons {
                 gap: 2px;
             }
@@ -367,8 +365,8 @@
         <p>Created for OSCE practice | Medical Student Tool</p>
     </footer>
 
-    <!-- Hidden textarea for the prompt (position absolute instead of display:none) -->
-    <textarea id="prompt-area" style="position:absolute; left:-9999px; top:0;"></textarea>
+    <!-- Hidden textarea for the prompt -->
+    <textarea id="prompt-area" class="hidden"></textarea>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -2642,32 +2640,8 @@ Please respond as the patient now, ready for me to begin the consultation.`;
             // Copy prompt to clipboard
             copyBtn.addEventListener('click', () => {
                 promptArea.select();
-                
-                try {
-                    // Try the modern clipboard API first
-                    if (navigator.clipboard && window.isSecureContext) {
-                        navigator.clipboard.writeText(promptArea.value).then(() => {
-                            statusMessage.textContent = 'Prompt copied to clipboard! Paste it into ChatGPT to begin your practice.';
-                        }).catch(err => {
-                            // Fallback to the older method
-                            document.execCommand('copy');
-                            statusMessage.textContent = 'Prompt copied to clipboard! Paste it into ChatGPT to begin your practice.';
-                        });
-                    } else {
-                        // For older browsers or non-secure contexts
-                        promptArea.focus();
-                        promptArea.select();
-                        const success = document.execCommand('copy');
-                        if (success) {
-                            statusMessage.textContent = 'Prompt copied to clipboard! Paste it into ChatGPT to begin your practice.';
-                        } else {
-                            statusMessage.textContent = 'Copy failed. Please try again or copy manually.';
-                        }
-                    }
-                } catch (err) {
-                    statusMessage.textContent = 'Copy failed. Please try again or copy manually.';
-                    console.error('Failed to copy: ', err);
-                }
+                document.execCommand('copy');
+                statusMessage.textContent = 'Prompt copied to clipboard! Paste it into ChatGPT to begin your practice.';
                 
                 // Reset after successful copy
                 setTimeout(() => {
