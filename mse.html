@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSE - Mental Status Examination</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .block {
+            margin-bottom: 40px;
+            border: 1px solid #e0e6ed;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .block-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .block-content {
+            padding: 25px;
+        }
+
+        .consultation-directions {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #667eea;
+        }
+
+        .consultation-directions h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .consultation-directions p {
+            color: #5a6c7d;
+            line-height: 1.6;
+        }
+
+        .symptoms-grid {
+            margin-bottom: 25px;
+        }
+
+        .symptom-row {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s;
+        }
+
+        .symptom-row:hover {
+            background-color: #f9f9f9;
+        }
+
+        .symptom-row:last-child {
+            border-bottom: none;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 15px;
+            margin-right: 20px;
+            min-width: 80px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .custom-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .custom-checkbox.positive {
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+        }
+
+        .custom-checkbox.negative {
+            background-color: #f44336;
+            border-color: #f44336;
+        }
+
+        .custom-checkbox::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .custom-checkbox.positive::after {
+            content: '+';
+        }
+
+        .custom-checkbox.negative::after {
+            content: '−';
+        }
+
+        .symptom-name {
+            flex: 1;
+            font-weight: 500;
+            color: #2c3e50;
+            margin-right: 15px;
+        }
+
+        .description-input {
+            flex: 2;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .description-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+
+        .add-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .add-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(132, 250, 176, 0.3);
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .control-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-reset {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: white;
+        }
+
+        .btn-generate {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #2c3e50;
+        }
+
+        .btn-copy {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #2c3e50;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .modal-header {
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: #667eea;
+            margin: 0;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .generated-content {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-line;
+            line-height: 1.6;
+            border-left: 4px solid #667eea;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: none;
+            z-index: 1001;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        @media (max-width: 768px) {
+            .symptom-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+            
+            .checkbox-group {
+                justify-content: center;
+                margin-right: 0;
+            }
+            
+            .control-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 MSE Assistant</h1>
+            <p>Mental Status Examination Record Builder</p>
+        </div>
+
+        <div class="content">
+            <!-- Consciousness Block -->
+            <div class="block">
+                <div class="block-header">1. Consciousness</div>
+                <div class="block-content">
+                    <div class="consultation-directions">
+                        <h4>Consultation Directions:</h4>
+                        <p>Assess the patient's level of consciousness across three key dimensions: <strong>alertness</strong> (ability to respond to stimuli), <strong>awareness</strong> (knowledge of surroundings and situation), and <strong>self-awareness</strong> (recognition of one's own mental state and condition).</p>
+                    </div>
+                    
+                    <div class="symptoms-grid" id="consciousness-symptoms"></div>
+                    <button class="add-button" onclick="addSymptom('consciousness-symptoms')">+ Add Custom Symptom</button>
+                </div>
+            </div>
+
+            <!-- Appearance Block -->
+            <div class="block">
+                <div class="block-header">2. Appearance</div>
+                <div class="block-content">
+                    <div class="consultation-directions">
+                        <h4>Physical Appearance Assessment:</h4>
+                        <p>Document the patient's overall physical presentation including <strong>grooming</strong> (personal hygiene and self-care), <strong>dress</strong> (appropriateness and condition of clothing), and <strong>physical characteristics</strong> (notable features, apparent age, build, and any obvious physical abnormalities).</p>
+                    </div>
+                    
+                    <div class="symptoms-grid" id="appearance-symptoms"></div>
+                    <button class="add-button" onclick="addSymptom('appearance-symptoms')">+ Add Custom Symptom</button>
+                </div>
+            </div>
+
+            <!-- Attention Block -->
+            <div class="block">
+                <div class="block-header">3. Attention</div>
+                <div class="block-content">
+                    <div class="consultation-directions">
+                        <h4>Aspects of Attention:</h4>
+                        <p>Evaluate the patient's attention across three key areas: <strong>focus</strong> (ability to concentrate on specific stimuli), <strong>sustain</strong> (maintaining attention over time), and <strong>shift</strong> (ability to redirect attention between different tasks or stimuli).</p>
+                    </div>
+                    
+                    <div class="symptoms-grid" id="attention-symptoms"></div>
+                    <button class="add-button" onclick="addSymptom('attention-symptoms')">+ Add Custom Symptom</button>
+                </div>
+            </div>
+
+            <!-- Attitude Block -->
+            <div class="block">
+                <div class="block-header">4. Attitude</div>
+                <div class="block-content">
+                    <div class="consultation-directions">
+                        <h4>Patient's Attitude During Examination:</h4>
+                        <p>Observe and document the patient's general demeanor, cooperation level, and interpersonal approach during the clinical interview. Consider their <strong>emotional tone</strong>, <strong>willingness to engage</strong>, and any notable behavioral patterns or defensive mechanisms.</p>
+                    </div>
+                    
+                    <div class="symptoms-grid" id="attitude-symptoms"></div>
+                    <button class="add-button" onclick="addSymptom('attitude-symptoms')">+ Add Custom Symptom</button>
+                </div>
+            </div>
+
+            <!-- Affect Block -->
+            <div class="block">
+                <div class="block-header">5. Affect</div>
+                <div class="block-content">
+                    <div class="consultation-directions">
+                        <h4>Emotional Expression Assessment:</h4>
+                        <p>Evaluate the patient's observable emotional state including <strong>mood congruence</strong> (alignment between stated mood and observed affect), <strong>range</strong> (breadth of emotional expression), <strong>intensity</strong> (degree of emotional expression), and <strong>appropriateness</strong> (contextual suitability of emotional responses).</p>
+                    </div>
+                    
+                    <div class="symptoms-grid" id="affect-symptoms"></div>
+                    <button class="add-button" onclick="addSymptom('affect-symptoms')">+ Add Custom Symptom</button>
+                </div>
+            </div>
+
+            <!-- Behavior Block -->
+            <div class="block">
+                <div class="block-header">6. Behavior</div>
+                <div class="block-content">
+                    <div class="consultation-directions">
+                        <h4>Behavioral Observations:</h4>
+                        <p>Document observable behaviors including <strong>psychomotor activity</strong> (movement patterns, agitation, or retardation), <strong>mannerisms</strong> (repetitive or unusual movements), <strong>social interactions</strong>, and any <strong>abnormal movements</strong> or compulsive behaviors.</p>
+                    </div>
+                    
+                    <div class="symptoms-grid" id="behavior-symptoms"></div>
+                    <button class="add-button" onclick="addSymptom('behavior-symptoms')">+ Add Custom Symptom</button>
+                </div>
+            </div>
+
+            <!-- Speech Block -->
+            <div class="block">
+                <div class="block-header">7. Speech</div>
+                <div class="block-content">
+                    <div class="consultation-directions">
+                        <h4>Speech Pattern Assessment:</h4>
+                        <p>Evaluate speech characteristics including <strong>rate</strong> (speed of speech), <strong>volume</strong> (loudness), <strong>tone</strong> (pitch and inflection), <strong>articulation</strong> (clarity of pronunciation), and <strong>fluency</strong> (smoothness and ease of speech production).</p>
+                    </div>
+                    
+                    <div class="symptoms-grid" id="speech-symptoms"></div>
+                    <button class="add-button" onclick="addSymptom('speech-symptoms')">+ Add Custom Symptom</button>
+                </div>
+            </div>
+
+            <!-- Thought Block -->
+            <div class="block">
+                <div class="block-header">8. Thought</div>
+                <div class="block-content">
+                    <div class="consultation-directions">
+                        <h4>Thought Process and Content:</h4>
+                        <p>Assess both <strong>thought process</strong> (organization, flow, and logical connections between ideas) and <strong>thought content</strong> (themes, preoccupations, delusions, obsessions). Evaluate for <strong>coherence</strong>, <strong>goal-directedness</strong>, and presence of any abnormal thought patterns.</p>
+                    </div>
+                    
+                    <div class="symptoms-grid" id="thought-symptoms"></div>
+                    <button class="add-button" onclick="addSymptom('thought-symptoms')">+ Add Custom Symptom</button>
+                </div>
+            </div>
+
+            <!-- Perception Block -->
+            <div class="block">
+                <div class="block-header">9. Perception</div>
+                <div class="block-content">
+                    <div class="consultation-directions">
+                        <h4>Perceptual Experiences:</h4>
+                        <p>Evaluate for abnormal perceptual experiences including <strong>hallucinations</strong> (false sensory perceptions), <strong>illusions</strong> (misinterpretations of real stimuli), <strong>depersonalization</strong> (feeling detached from self), and <strong>derealization</strong> (feeling that surroundings are unreal or dreamlike).</p>
+                    </div>
+                    
+                    <div class="symptoms-grid" id="perception-symptoms"></div>
+                    <button class="add-button" onclick="addSymptom('perception-symptoms')">+ Add Custom Symptom</button>
+                </div>
+            </div>
+
+            <!-- Cognitive Function Block -->
+            <div class="block">
+                <div class="block-header">10. Cognitive Function</div>
+                <div class="block-content">
+                    <div class="consultation-directions">
+                        <h4>Cognitive Assessment:</h4>
+                        <p>Evaluate key cognitive domains including <strong>orientation</strong> (person, place, time), <strong>memory</strong> (immediate, recent, remote), <strong>concentration</strong>, <strong>abstract thinking</strong>, <strong>judgment</strong>, and <strong>executive functioning</strong>. Consider using standardized cognitive screening tools when appropriate.</p>
+                    </div>
+                    
+                    <div class="symptoms-grid" id="cognitive-symptoms"></div>
+                    <button class="add-button" onclick="addSymptom('cognitive-symptoms')">+ Add Custom Symptom</button>
+                </div>
+            </div>
+
+            <!-- Somatic Complaints Block -->
+            <div class="block">
+                <div class="block-header">11. Somatic Complaints</div>
+                <div class="block-content">
+                    <div class="consultation-directions">
+                        <h4>Physical Symptom Assessment:</h4>
+                        <p>Document any physical symptoms or complaints reported by the patient, including <strong>pain</strong>, <strong>fatigue</strong>, <strong>sleep disturbances</strong>, <strong>appetite changes</strong>, and other <strong>somatic concerns</strong>. Assess the relationship between physical symptoms and psychological state.</p>
+                    </div>
+                    
+                    <div class="symptoms-grid" id="somatic-symptoms"></div>
+                    <button class="add-button" onclick="addSymptom('somatic-symptoms')">+ Add Custom Symptom</button>
+                </div>
+            </div>
+
+            <!-- Drive Block -->
+            <div class="block">
+                <div class="block-header">12. Drive</div>
+                <div class="block-content">
+                    <div class="consultation-directions">
+                        <h4>Motivational and Drive Assessment:</h4>
+                        <p>Evaluate the patient's <strong>energy level</strong>, <strong>motivation</strong>, <strong>goal-directed behavior</strong>, <strong>libido</strong>, <strong>appetite</strong>, and overall <strong>drive for activities</strong>. Assess changes from baseline functioning and impact on daily life activities.</p>
+                    </div>
+                    
+                    <div class="symptoms-grid" id="drive-symptoms"></div>
+                    <button class="add-button" onclick="addSymptom('drive-symptoms')">+ Add Custom Symptom</button>
+                </div>
+            </div>
+
+            <!-- Suicide/Homicide Risk Block -->
+            <div class="block">
+                <div class="block-header">13. Suicide/Homicide Risk</div>
+                <div class="block-content">
+                    <div class="consultation-directions">
+                        <h4>Safety Risk Assessment:</h4>
+                        <p>Conduct thorough risk assessment including <strong>suicidal ideation</strong>, <strong>plan</strong>, <strong>means</strong>, <strong>intent</strong>, and <strong>protective factors</strong>. Also assess for <strong>homicidal thoughts</strong> or <strong>violence risk</strong>. Document current safety level and any immediate interventions needed.</p>
+                    </div>
+                    
+                    <div class="symptoms-grid" id="risk-symptoms"></div>
+                    <button class="add-button" onclick="addSymptom('risk-symptoms')">+ Add Custom Symptom</button>
+                </div>
+            </div>
+
+            <!-- Insight Block -->
+            <div class="block">
+                <div class="block-header">14. Insight</div>
+                <div class="block-content">
+                    <div class="consultation-directions">
+                        <h4>Insight and Judgment:</h4>
+                        <p>Assess the patient's <strong>awareness of illness</strong>, <strong>understanding of symptoms</strong>, <strong>recognition of need for treatment</strong>, and <strong>judgment capacity</strong>. Evaluate their ability to make reasonable decisions and understand consequences of their actions.</p>
+                    </div>
+                    
+                    <div class="symptoms-grid" id="insight-symptoms"></div>
+                    <button class="add-button" onclick="addSymptom('insight-symptoms')">+ Add Custom Symptom</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-buttons">
+            <button class="control-btn btn-reset" onclick="resetToPreset()">Reset to Preset Values</button>
+            <button class="control-btn btn-generate" onclick="generateMSE()">Generate Formatted MSE Record</button>
+            <button class="control-btn btn-copy" onclick="copyToClipboard()">Copy MSE Record</button>
+        </div>
+    </div>
+
+    <!-- Modal for displaying generated MSE -->
+    <div id="mseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Generated MSE Record</h2>
+            </div>
+            <div class="generated-content" id="generatedMSE"></div>
+        </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast">MSE record copied to clipboard!</div>
+
+    <script>
+        let generatedMSEContent = '';
+        const modal = document.getElementById('mseModal');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        // Close modal functionality
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Symptom data with preset values
+        const symptomData = {
+            'consciousness-symptoms': [
+                { name: 'Clear', chinese: '清醒', preset: 'positive' },
+                { name: 'Somnolent', chinese: '嗜睡', preset: 'negative' },
+                { name: 'Drowsy', chinese: '昏沉', preset: 'none' },
+                { name: 'Clouded', chinese: '意識混濁', preset: 'none' },
+                { name: 'Confused', chinese: '意識模糊', preset: 'none' },
+                { name: 'Delirious', chinese: '譫妄', preset: 'none' },
+                { name: 'Stuporous', chinese: '木僵狀態', preset: 'none' },
+                { name: 'Comatose', chinese: '昏迷', preset: 'none' },
+                { name: 'Alert', chinese: '警覺', preset: 'none' },
+                { name: 'Oriented', chinese: '定向正常', preset: 'none' },
+                { name: 'Disoriented', chinese: '定向障礙', preset: 'none' }
+            ],
+            'appearance-symptoms': [
+                { name: 'Well-groomed', chinese: '儀容整潔', preset: 'positive' },
+                { name: 'Disheveled', chinese: '儀容凌亂', preset: 'none' },
+                { name: 'Unkempt', chinese: '不修邊幅', preset: 'none' },
+                { name: 'Bizarre appearance', chinese: '奇異外觀', preset: 'none' },
+                { name: 'Appropriate dress', chinese: '衣著得體', preset: 'none' },
+                { name: 'Inappropriate dress', chinese: '衣著不當', preset: 'negative' },
+                { name: 'Poor hygiene', chinese: '衛生不佳', preset: 'negative' },
+                { name: 'Good hygiene', chinese: '衛生良好', preset: 'none' },
+                { name: 'Malnourished', chinese: '營養不良', preset: 'negative' },
+                { name: 'Older than stated age', chinese: '看起來比實際年齡老', preset: 'none' },
+                { name: 'Younger than stated age', chinese: '看起來比實際年齡年輕', preset: 'none' }
+            ],
+            'attention-symptoms': [
+                { name: 'Good', chinese: '良好', preset: 'none' },
+                { name: 'Fair', chinese: '尚可', preset: 'positive' },
+                { name: 'Poor', chinese: '不佳', preset: 'none' },
+                { name: 'Impaired on focus', chinese: '無法專注', preset: 'negative' },
+                { name: 'Impaired on sustain', chinese: '無法維持', preset: 'none' },
+                { name: 'Impaired on shift', chinese: '無法切換', preset: 'none' },
+                { name: 'Distractible', chinese: '易分心', preset: 'negative' },
+                { name: 'Self-absorbed', chinese: '自我、只顧自己', preset: 'negative' },
+                { name: 'Hypervigilant', chinese: '過度警覺', preset: 'none' },
+                { name: 'Inattentive', chinese: '不專心', preset: 'none' },
+                { name: 'Easily distracted', chinese: '容易分心', preset: 'none' }
+            ],
+            'attitude-symptoms': [
+                { name: 'Cooperative', chinese: '合作', preset: 'positive' },
+                { name: 'Uncooperative', chinese: '不合作', preset: 'none' },
+                { name: 'Over-polite', chinese: '過度禮貌', preset: 'negative' },
+                { name: 'Defensive', chinese: '防衛性', preset: 'negative' },
+                { name: 'Suspicious', chinese: '多疑', preset: 'none' },
+                { name: 'Argumentative', chinese: '好爭辯', preset: 'none' },
+                { name: 'Demanding', chinese: '要求很多', preset: 'negative' },
+                { name: 'Hostile', chinese: '敵意', preset: 'negative' },
+                { name: 'Evasive', chinese: '迴避', preset: 'none' },
+                { name: 'Seductive', chinese: '誘惑性', preset: 'none' },
+                { name: 'Manipulative', chinese: '操控性', preset: 'none' },
+                { name: 'Friendly', chinese: '友善', preset: 'none' }
+            ],
+            'affect-symptoms': [
+                { name: 'Euthymic', chinese: '情緒穩定', preset: 'positive' },
+                { name: 'Depressed', chinese: '憂鬱', preset: 'negative' },
+                { name: 'Anxious', chinese: '焦慮', preset: 'negative' },
+                { name: 'Euphoric', chinese: '欣快', preset: 'negative' },
+                { name: 'Irritable', chinese: '易怒', preset: 'negative' },
+                { name: 'Labile', chinese: '情緒不穩', preset: 'negative' },
+                { name: 'Flat', chinese: '平淡', preset: 'none' },
+                { name: 'Blunted', chinese: '遲鈍', preset: 'negative' },
+                { name: 'Inappropriate', chinese: '不適當', preset: 'none' },
+                { name: 'Constricted', chinese: '受限', preset: 'none' },
+                { name: 'Bright', chinese: '明亮', preset: 'none' },
+                { name: 'Tearful', chinese: '含淚', preset: 'none' },
+                { name: 'Angry', chinese: '憤怒', preset: 'none' },
+                { name: 'Fearful', chinese: '恐懼', preset: 'none' },
+                { name: 'Apathetic', chinese: '冷漠', preset: 'none' }
+            ],
+            'behavior-symptoms': [
+                { name: 'Calm', chinese: '平靜', preset: 'positive' },
+                { name: 'Restless', chinese: '不安', preset: 'negative' },
+                { name: 'Agitated', chinese: '激動', preset: 'negative' },
+                { name: 'Hyperactive', chinese: '過動', preset: 'negative' },
+                { name: 'Hypoactive', chinese: '活動力低下', preset: 'negative' },
+                { name: 'Bizarre', chinese: '奇異', preset: 'none' },
+                { name: 'Repetitive movements', chinese: '重複動作', preset: 'negative' },
+                { name: 'Compulsive behaviors', chinese: '強迫行為', preset: 'negative' },
+                { name: 'Impulsive', chinese: '衝動', preset: 'none' },
+                { name: 'Aggressive', chinese: '攻擊性', preset: 'negative' },
+                { name: 'Withdrawn', chinese: '退縮', preset: 'none' },
+                { name: 'Catatonic', chinese: '緊張症', preset: 'none' },
+                { name: 'Psychomotor retardation', chinese: '精神運動遲緩', preset: 'none' },
+                { name: 'Psychomotor agitation', chinese: '精神運動激動', preset: 'none' },
+                { name: 'Stereotyped movements', chinese: '刻板動作', preset: 'negative' }
+            ],
+            'speech-symptoms': [
+                { name: 'Normal rate', chinese: '語速正常', preset: 'positive' },
+                { name: 'Slow', chinese: '緩慢', preset: 'negative' },
+                { name: 'Rapid', chinese: '快速', preset: 'negative' },
+                { name: 'Pressured', chinese: '急迫性', preset: 'negative' },
+                { name: 'Normal volume', chinese: '音量正常', preset: 'none' },
+                { name: 'Loud', chinese: '大聲', preset: 'none' },
+                { name: 'Soft', chinese: '輕聲', preset: 'none' },
+                { name: 'Whispered', chinese: '耳語聲', preset: 'none' },
+                { name: 'Clear', chinese: '清晰', preset: 'positive' },
+                { name: 'Mumbled', chinese: '含糊', preset: 'negative' },
+                { name: 'Slurred', chinese: '含糊不清', preset: 'negative' },
+                { name: 'Stuttering', chinese: '結巴', preset: 'negative' },
+                { name: 'Articulation problems', chinese: '構音問題', preset: 'negative' },
+                { name: 'Poverty of speech', chinese: '言語貧乏', preset: 'negative' }
+            ],
+            'thought-symptoms': [
+                { name: 'Goal-directed', chinese: '目標導向', preset: 'positive' },
+                { name: 'Organized', chinese: '有組織', preset: 'positive' },
+                { name: 'Disorganized', chinese: '無組織', preset: 'none' },
+                { name: 'Tangential', chinese: '離題', preset: 'negative' },
+                { name: 'Circumstantial', chinese: '迂迴', preset: 'none' },
+                { name: 'Flight of ideas', chinese: '意念飛躍', preset: 'negative' },
+                { name: 'Loose associations', chinese: '聯想鬆散', preset: 'none' },
+                { name: 'Thought blocking', chinese: '思考中斷', preset: 'none' },
+                { name: 'Perseveration', chinese: '持續現象', preset: 'none' },
+                { name: 'Concrete thinking', chinese: '具體思考', preset: 'none' },
+                { name: 'Abstract thinking', chinese: '抽象思考', preset: 'none' },
+                { name: 'Poverty of thought', chinese: '思考貧乏', preset: 'none' },
+                { name: 'Racing thoughts', chinese: '思緒奔馳', preset: 'negative' },
+                { name: 'Obsessive thoughts', chinese: '強迫思考', preset: 'none' },
+                { name: 'Rumination', chinese: '反芻思考', preset: 'negative' }
+            ],
+            'perception-symptoms': [
+                { name: 'No perceptual disturbances', chinese: '無知覺障礙', preset: 'positive' },
+                { name: 'Auditory hallucinations', chinese: '聲音幻覺', preset: 'negative' },
+                { name: 'Visual hallucinations', chinese: '視覺幻覺', preset: 'negative' },
+                { name: 'Tactile hallucinations', chinese: '觸覺幻覺', preset: 'negative' },
+                { name: 'Olfactory hallucinations', chinese: '嗅覺幻覺', preset: 'none' },
+                { name: 'Gustatory hallucinations', chinese: '味覺幻覺', preset: 'none' },
+                { name: 'Command hallucinations', chinese: '命令性幻覺', preset: 'negative' },
+                { name: 'Illusions', chinese: '錯覺', preset: 'negative' },
+                { name: 'Depersonalization', chinese: '人格解體', preset: 'none' },
+                { name: 'Derealization', chinese: '現實感喪失', preset: 'none' },
+                { name: 'Hypnagogic hallucinations', chinese: '入睡前幻覺', preset: 'none' },
+                { name: 'Hypnopompic hallucinations', chinese: '醒前幻覺', preset: 'none' }
+            ],
+            'cognitive-symptoms': [
+                { name: 'Orientation intact', chinese: '定向正常', preset: 'positive' },
+                { name: 'Disoriented to time', chinese: '時間定向障礙', preset: 'none' },
+                { name: 'Disoriented to place', chinese: '地點定向障礙', preset: 'none' },
+                { name: 'Disoriented to person', chinese: '人物定向障礙', preset: 'none' },
+                { name: 'Memory intact', chinese: '記憶正常', preset: 'positive' },
+                { name: 'Short-term memory impaired', chinese: '短期記憶受損', preset: 'none' },
+                { name: 'Long-term memory impaired', chinese: '長期記憶受損', preset: 'none' },
+                { name: 'Concentration intact', chinese: '專注力正常', preset: 'positive' },
+                { name: 'Concentration impaired', chinese: '專注力受損', preset: 'none' },
+                { name: 'Abstract thinking intact', chinese: '抽象思考正常', preset: 'none' },
+                { name: 'Abstract thinking impaired', chinese: '抽象思考受損', preset: 'none' },
+                { name: 'Judgment intact', chinese: '判斷力正常', preset: 'positive' },
+                { name: 'Judgment impaired', chinese: '判斷力受損', preset: 'none' }
+            ],
+            'somatic-symptoms': [
+                { name: 'No somatic complaints', chinese: '無身體抱怨', preset: 'positive' },
+                { name: 'Headaches', chinese: '頭痛', preset: 'none' },
+                { name: 'Fatigue', chinese: '疲勞', preset: 'none' },
+                { name: 'Sleep disturbances', chinese: '睡眠障礙', preset: 'none' },
+                { name: 'Appetite changes', chinese: '食慾改變', preset: 'none' },
+                { name: 'Weight changes', chinese: '體重改變', preset: 'none' },
+                { name: 'Gastrointestinal complaints', chinese: '腸胃不適', preset: 'none' },
+                { name: 'Pain complaints', chinese: '疼痛抱怨', preset: 'none' },
+                { name: 'Cardiac symptoms', chinese: '心臟症狀', preset: 'none' },
+                { name: 'Respiratory symptoms', chinese: '呼吸症狀', preset: 'none' },
+                { name: 'Neurological symptoms', chinese: '神經症狀', preset: 'none' },
+                { name: 'Sexual dysfunction', chinese: '性功能障礙', preset: 'none' },
+                { name: 'Chronic pain', chinese: '慢性疼痛', preset: 'none' }
+            ],
+            'drive-symptoms': [
+                { name: 'Normal activity level', chinese: '活動水準正常', preset: 'positive' },
+                { name: 'Increased activity', chinese: '活動增加', preset: 'none' },
+                { name: 'Decreased activity', chinese: '活動減少', preset: 'none' },
+                { name: 'Normal appetite', chinese: '食慾正常', preset: 'positive' },
+                { name: 'Increased appetite', chinese: '食慾增加', preset: 'none' },
+                { name: 'Decreased appetite', chinese: '食慾減少', preset: 'none' },
+                { name: 'Normal sleep', chinese: '睡眠正常', preset: 'positive' },
+                { name: 'Insomnia', chinese: '失眠', preset: 'none' },
+                { name: 'Hypersomnia', chinese: '嗜睡', preset: 'none' },
+                { name: 'Normal libido', chinese: '性慾正常', preset: 'positive' },
+                { name: 'Increased libido', chinese: '性慾增加', preset: 'none' },
+                { name: 'Decreased libido', chinese: '性慾減少', preset: 'none' },
+                { name: 'Energy level normal', chinese: '精力正常', preset: 'positive' },
+                { name: 'Low energy', chinese: '精力低下', preset: 'none' },
+                { name: 'High energy', chinese: '精力充沛', preset: 'none' }
+            ],
+            'risk-symptoms': [
+                { name: 'No suicidal ideation', chinese: '無自殺意念', preset: 'positive' },
+                { name: 'Passive suicidal ideation', chinese: '被動自殺意念', preset: 'none' },
+                { name: 'Active suicidal ideation', chinese: '主動自殺意念', preset: 'none' },
+                { name: 'Suicidal plan', chinese: '自殺計畫', preset: 'negative' },
+                { name: 'Previous suicide attempts', chinese: '曾有自殺企圖', preset: 'negative' },
+                { name: 'No homicidal ideation', chinese: '無他殺意念', preset: 'positive' },
+                { name: 'Homicidal ideation', chinese: '他殺意念', preset: 'negative' },
+                { name: 'History of violence', chinese: '暴力史', preset: 'negative' },
+                { name: 'High risk', chinese: '高風險', preset: 'negative' },
+                { name: 'Moderate risk', chinese: '中等風險', preset: 'none' },
+                { name: 'Low risk', chinese: '低風險', preset: 'none' },
+                { name: 'Protective factors present', chinese: '存在保護因子', preset: 'none' }
+            ],
+            'insight-symptoms': [
+                { name: 'Full insight', chinese: '完全病識感', preset: 'positive' },
+                { name: 'Partial insight', chinese: '部分病識感', preset: 'none' },
+                { name: 'Poor insight', chinese: '病識感不佳', preset: 'none' },
+                { name: 'No insight', chinese: '無病識感', preset: 'none' },
+                { name: 'Intellectual insight', chinese: '理智性病識感', preset: 'none' },
+                { name: 'Emotional insight', chinese: '情感性病識感', preset: 'none' },
+                { name: 'Denial of illness', chinese: '否認疾病', preset: 'none' },
+                { name: 'Awareness of symptoms', chinese: '覺察症狀', preset: 'none' },
+                { name: 'Blames others', chinese: '歸咎他人', preset: 'negative' },
+                { name: 'Attributes to external factors', chinese: '歸因於外在因素', preset: 'negative' }
+            ]
+        };
+
+        // Generate symptom rows dynamically
+        function generateSymptomRows() {
+            Object.keys(symptomData).forEach(containerId => {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                
+                symptomData[containerId].forEach(symptom => {
+                    const row = createSymptomRow(symptom.name, symptom.chinese, symptom.preset);
+                    container.appendChild(row);
+                });
+            });
+        }
+
+        // Create a single symptom row
+        function createSymptomRow(name, chinese = '', preset = 'none') {
+            const row = document.createElement('div');
+            row.className = 'symptom-row';
+            row.setAttribute('data-preset', preset);
+            
+            const displayName = chinese ? `${name} | ${chinese}` : name;
+            
+            row.innerHTML = `
+                <div class="checkbox-group">
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-state="none" onclick="toggleCheckbox(this, 'positive')"></div>
+                        <span>+</span>
+                    </div>
+                    <div class="checkbox-container">
+                        <div class="custom-checkbox" data-state="none" onclick="toggleCheckbox(this, 'negative')"></div>
+                        <span>−</span>
+                    </div>
+                </div>
+                <div class="symptom-name">${displayName}</div>
+                <input type="text" class="description-input" placeholder="Additional description...">
+            `;
+            
+            return row;
+        }
+
+        // Initialize everything when page loads
+        window.addEventListener('load', function() {
+            generateSymptomRows();
+            // Use setTimeout to ensure DOM is fully updated before setting presets
+            setTimeout(loadPresetValues, 0);
+        });
+
+        function toggleCheckbox(checkbox, type) {
+            const currentState = checkbox.getAttribute('data-state');
+            const row = checkbox.closest('.symptom-row');
+            const otherCheckboxes = row.querySelectorAll('.custom-checkbox');
+            
+            // Clear all checkboxes in this row
+            otherCheckboxes.forEach(cb => {
+                cb.setAttribute('data-state', 'none');
+                cb.className = 'custom-checkbox';
+            });
+            
+            // Set the clicked checkbox
+            if (currentState === type) {
+                checkbox.setAttribute('data-state', 'none');
+                checkbox.className = 'custom-checkbox';
+            } else {
+                checkbox.setAttribute('data-state', type);
+                checkbox.className = `custom-checkbox ${type}`;
+            }
+        }
+
+        function addSymptom(containerId) {
+            const container = document.getElementById(containerId);
+            const newRow = createSymptomRow('Enter symptom name', '', 'none');
+            
+            // Make the symptom name editable
+            const symptomName = newRow.querySelector('.symptom-name');
+            symptomName.contentEditable = true;
+            symptomName.style.border = '1px dashed #ccc';
+            symptomName.style.padding = '5px';
+            symptomName.style.borderRadius = '4px';
+            
+            container.appendChild(newRow);
+        }
+
+        function resetToPreset() {
+            // Reset all checkboxes
+            const checkboxes = document.querySelectorAll('.custom-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.setAttribute('data-state', 'none');
+                checkbox.className = 'custom-checkbox';
+            });
+            
+            // Clear all description inputs
+            const inputs = document.querySelectorAll('.description-input');
+            inputs.forEach(input => {
+                input.value = '';
+            });
+            
+            // Remove any custom added symptoms (keep only original ones)
+            const containers = ['consciousness-symptoms', 'attention-symptoms', 'attitude-symptoms'];
+            containers.forEach(containerId => {
+                const container = document.getElementById(containerId);
+                const rows = container.querySelectorAll('.symptom-row');
+                const originalCounts = {
+                    'consciousness-symptoms': 6,
+                    'attention-symptoms': 6,
+                    'attitude-symptoms': 6
+                };
+                
+                // Remove extra rows beyond original count
+                for (let i = rows.length - 1; i >= originalCounts[containerId]; i--) {
+                    rows[i].remove();
+                }
+            });
+            
+            // Load preset values after reset
+            loadPresetValues();
+            
+            showToast('Reset to preset values completed!');
+        }
+
+        function generateMSE() {
+            let mseContent = '=== MSE ===\n';
+            const sections = [
+                { id: 'consciousness-symptoms', name: 'Consciousness' },
+                { id: 'appearance-symptoms', name: 'Appearance' },
+                { id: 'attention-symptoms', name: 'Attention' },
+                { id: 'attitude-symptoms', name: 'Attitude' },
+                { id: 'affect-symptoms', name: 'Affect' },
+                { id: 'behavior-symptoms', name: 'Behavior' },
+                { id: 'speech-symptoms', name: 'Speech' },
+                { id: 'thought-symptoms', name: 'Thought' },
+                { id: 'perception-symptoms', name: 'Perception' },
+                { id: 'cognitive-symptoms', name: 'Cognitive Function' },
+                { id: 'somatic-symptoms', name: 'Somatic Complaints' },
+                { id: 'drive-symptoms', name: 'Drive' },
+                { id: 'risk-symptoms', name: 'Suicide/Homicide Risk' },
+                { id: 'insight-symptoms', name: 'Insight' }
+            ];
+            
+            sections.forEach((section, index) => {
+                const container = document.getElementById(section.id);
+                const rows = container.querySelectorAll('.symptom-row');
+                const symptoms = [];
+                
+                rows.forEach(row => {
+                    const checkboxes = row.querySelectorAll('.custom-checkbox');
+                    const symptomName = row.querySelector('.symptom-name').textContent.trim();
+                    const description = row.querySelector('.description-input').value.trim();
+                    
+                    let state = 'none';
+                    checkboxes.forEach(checkbox => {
+                        if (checkbox.getAttribute('data-state') === 'positive') {
+                            state = 'positive';
+                        } else if (checkbox.getAttribute('data-state') === 'negative') {
+                            state = 'negative';
+                        }
+                    });
+                    
+                    if (state !== 'none') {
+                        let symptomText = '';
+                        if (state === 'positive') {
+                            symptomText = `■ ${symptomName.toLowerCase()}`;
+                        } else {
+                            symptomText = `□ ${symptomName.toLowerCase()}`;
+                        }
+                        
+                        if (description) {
+                            symptomText += ` (${description})`;
+                        }
+                        
+                        symptoms.push(symptomText);
+                    }
+                });
+                
+                if (symptoms.length > 0) {
+                    mseContent += `${index + 1}. ${section.name}: ${symptoms.join(', ')}\n`;
+                }
+            });
+            
+            generatedMSEContent = mseContent;
+            document.getElementById('generatedMSE').textContent = mseContent;
+            modal.style.display = 'block';
+        }
+
+        function copyToClipboard() {
+            if (!generatedMSEContent) {
+                generateMSE();
+            }
+            
+            navigator.clipboard.writeText(generatedMSEContent).then(function() {
+                showToast('MSE record copied to clipboard!');
+            }).catch(function() {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = generatedMSEContent;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast('MSE record copied to clipboard!');
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(function() {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        function loadPresetValues() {
+            const allRows = document.querySelectorAll('.symptom-row[data-preset]');
+            
+            allRows.forEach(row => {
+                const presetValue = row.getAttribute('data-preset');
+                if (presetValue && presetValue !== 'none') {
+                    const checkbox = row.querySelector(`.custom-checkbox[onclick*="${presetValue}"]`);
+                    if (checkbox) {
+                        toggleCheckbox(checkbox, presetValue);
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
