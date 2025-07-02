@@ -6,16 +6,47 @@
     <title>Hospital Workflow Management Tools</title>
     <style>
         :root {
+            /* Base colors */
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
             --accent-color: #1abc9c;
             --light-color: #ecf0f1;
             --dark-color: #34495e;
-            --danger-color: #e74c3c;
-            --success-color: #2ecc71;
-            --warning-color: #f39c12;
-            --info-color: #9b59b6;
             --text-color: #333;
+            
+            /* Tool colors - 溫暖親和的現代色彩組合 */
+
+            /* Current tools - 使用你推薦的色彩組合 */
+            --tool-color-1: #6C5CE7;  /* 深紫藍 - SOAP (專業穩重) */
+            --tool-color-2: #26DE81;  /* 翡翠綠 - Admission (歡迎新開始) */
+            --tool-color-3: #45B7D1;  /* 天空藍 - Partogram (清新可信) */
+            --tool-color-4: #FF9F43;  /* 橘子橙 - ROS (溫暖醒目) */
+            --tool-color-5: #4ECDC4;  /* 土耳其藍 - PE (清潔診斷) */
+            --tool-color-6: #FF6B6B;  /* 珊瑚紅 - NE (緊急神經) */
+            --tool-color-7: #5F27CD;  /* 紫羅蘭 - OSCE (學術測驗) */
+            --tool-color-8: #FF9FF3;  /* 櫻花粉 - MSE (心理關懷) */
+
+            /* Additional colors for future tools - 延續同風格的色彩 */
+            --tool-color-9: #54A0FF;   /* 寧靜藍 */
+            --tool-color-10: #FECA57;  /* 芒果黃 */
+            --tool-color-11: #96CEB4;  /* 薄荷綠 */
+            --tool-color-12: #A55EEA;  /* 薰衣紫 */
+            --tool-color-13: #00D2D3;  /* 青綠色 */
+            --tool-color-14: #FD79A8;  /* 玫瑰粉 */
+            --tool-color-15: #FDCB6E;  /* 奶油黃 */
+            --tool-color-16: #F8B500;  /* 琥珀黃 */
+
+            /* Darker variants for hover states - 滑鼠懸停時的深色變化 */
+            --tool-color-1-dark: #5A4FCF;  /* 深紫藍-深色 */
+            --tool-color-2-dark: #1DD1A1;  /* 翡翠綠-深色 */
+            --tool-color-3-dark: #3498DB;  /* 天空藍-深色 */
+            --tool-color-4-dark: #E17055;  /* 橘子橙-深色 */
+            --tool-color-5-dark: #00B894;  /* 土耳其藍-深色 */
+            --tool-color-6-dark: #E55656;  /* 珊瑚紅-深色 */
+            --tool-color-7-dark: #4834D4;  /* 紫羅蘭-深色 */
+            --tool-color-8-dark: #E84393;  /* 櫻花粉-深色 */
+            
+            /* Design system */
             --border-radius: 8px;
             --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
@@ -116,29 +147,15 @@
             text-align: center;
         }
 
-        .tool-soap .tool-header {
-            background-color: var(--info-color);
-        }
-
-        .tool-admission .tool-header {
-            background-color: var(--accent-color);
-        }
-
-        .tool-partogram .tool-header {
-            background-color: var(--secondary-color);
-        }
-
-        .tool-ros .tool-header {
-            background-color: var(--warning-color);
-        }
-
-        .tool-pe .tool-header {
-            background-color: var(--success-color);
-        }
-
-        .tool-ne .tool-header {
-            background-color: var(--danger-color);
-        }
+        /* Tool header colors */
+        .tool-soap .tool-header { background-color: var(--tool-color-1); }
+        .tool-admission .tool-header { background-color: var(--tool-color-2); }
+        .tool-partogram .tool-header { background-color: var(--tool-color-3); }
+        .tool-ros .tool-header { background-color: var(--tool-color-4); }
+        .tool-pe .tool-header { background-color: var(--tool-color-5); }
+        .tool-ne .tool-header { background-color: var(--tool-color-6); }
+        .tool-osce .tool-header { background-color: var(--tool-color-7); }
+        .tool-mse .tool-header { background-color: var(--tool-color-8); }
 
         .tool-icon {
             font-size: 2.5rem;
@@ -175,29 +192,15 @@
             margin-top: auto;
         }
 
-        .tool-soap .tool-link {
-            background-color: var(--info-color);
-        }
-
-        .tool-admission .tool-link {
-            background-color: var(--accent-color);
-        }
-
-        .tool-partogram .tool-link {
-            background-color: var(--secondary-color);
-        }
-
-        .tool-ros .tool-link {
-            background-color: var(--warning-color);
-        }
-
-        .tool-pe .tool-link {
-            background-color: var(--success-color);
-        }
-
-        .tool-ne .tool-link {
-            background-color: var(--danger-color);
-        }
+        /* Tool link colors */
+        .tool-soap .tool-link { background-color: var(--tool-color-1); }
+        .tool-admission .tool-link { background-color: var(--tool-color-2); }
+        .tool-partogram .tool-link { background-color: var(--tool-color-3); }
+        .tool-ros .tool-link { background-color: var(--tool-color-4); }
+        .tool-pe .tool-link { background-color: var(--tool-color-5); }
+        .tool-ne .tool-link { background-color: var(--tool-color-6); }
+        .tool-osce .tool-link { background-color: var(--tool-color-7); }
+        .tool-mse .tool-link { background-color: var(--tool-color-8); }
 
         .tool-link:hover {
             transform: translateY(-2px);
@@ -411,7 +414,7 @@
                         Generate prompt for conversion of free-text daily notes into structured SOAP format with proper medical terminology via AI tools.
                         Perfect for progress notes and daily patient assessments.
                     </p>
-                    <a href="prompter.html?tab=progress-note" class="tool-link">Open Tool</a>
+                    <a href="/prompter.html?tab=progress-note" class="tool-link">Open Tool</a>
                 </div>
             </div>
 
@@ -426,7 +429,7 @@
                     <p class="tool-description">
                         Generate prompt for conversion of free-text clinical notes into logically-structured admission note via AI tools.
                     </p>
-                    <a href="prompter.html?tab=admission-note" class="tool-link">Open tool</a>
+                    <a href="/prompter.html?tab=admission-note" class="tool-link">Open tool</a>
                 </div>
             </div>
 
@@ -441,7 +444,7 @@
                     <p class="tool-description">
                         Direct conversion from messy notes of admission, laboring and nursing process to blue sheet format.
                     </p>
-                    <a href="partogram.html" class="tool-link">Open tool</a>
+                    <a href="/partogram.html" class="tool-link">Open tool</a>
                 </div>
             </div>
 
@@ -489,26 +492,44 @@
                         Structure detailed neurological findings into comprehensive, systematic reports
                         covering mental status, cranial nerves, motor, sensory, and reflex examinations.
                     </p>
-                    <a href="converter.html" class="tool-link">Coming Soon</a>
+                    <a href="/converter.html" class="tool-link">Coming Soon</a>
+                </div>
+            </div>
+
+            <div class="tool-card tool-osce">
+                <div class="tool-header">
+                    <div class="tool-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <div class="tool-title">OSCE Practice Tool</div>
+                </div>
+                <div class="tool-content">
+                    <p class="tool-description">
+                        Interactive OSCE practice prompts for ChatGPT. Generate clinical scenarios, 
+                        practice patient interactions, and improve examination skills with AI feedback.
+                    </p>
+                    <a href="/osce.html" class="tool-link">Open Tool</a>
+                </div>
+            </div>
+
+            <div class="tool-card tool-mse">
+                <div class="tool-header">
+                    <div class="tool-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="tool-title">Mental State Exam (MSE)</div>
+                </div>
+                <div class="tool-content">
+                    <p class="tool-description">
+                        Structure mental state examination findings into comprehensive psychiatric 
+                        assessments covering appearance, behavior, cognition, and thought processes.
+                    </p>
+                    <a href="/mse.html" class="tool-link">Open Tool</a>
                 </div>
             </div>
         </div>
 
-        <div class="tool-card tool-ne">
-                <div class="tool-header">
-                    <div class="tool-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <div class="tool-title">OSCE Self-practicing Prompt</div>
-                </div>
-                <div class="tool-content">
-                    <p class="tool-description">
-                        Prompt to paste in ChatGPT for practicing OSCE.
-                    </p>
-                    <a href="osce.html" class="tool-link">Open tool</a>
-                </div>
-            </div>
-        </div>
+        
 
         <div class="cta-section">
             <div class="cta-content">
