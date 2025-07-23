@@ -143,7 +143,11 @@
             margin-bottom: 1rem;
             font-size: 0.9rem;
             transition: border 0.3s;
-            resize: vertical;
+            resize: none; /* 禁用手動調整大小 */
+            overflow: hidden; /* 隱藏滾動條 */
+            box-sizing: border-box;
+            font-family: inherit;
+            line-height: 1.5;
         }
 
         textarea:focus {
@@ -322,13 +326,13 @@
                 <!-- Subjective Section -->
                 <div class="section-card">
                     <h2><i class="fas fa-comment-medical"></i> [S] Subjective</h2>
-                    <textarea id="subjective-input" placeholder="Enter subjectives here..."></textarea>
+                    <textarea id="subjective-input" class="auto-resize" placeholder="Enter subjectives here..."></textarea>
                 </div>
                 
                 <!-- Objective Section -->
                 <div class="section-card">
                     <h2><i class="fas fa-heartbeat"></i> [O] Objective</h2>
-                    <textarea id="objective-input" placeholder="Paste vital signs here..."></textarea>
+                    <textarea id="objective-input" class="auto-resize" placeholder="Paste vital signs here..."></textarea>
                 </div>
                 
                 <!-- Assessment Section -->
@@ -336,22 +340,22 @@
                     <h2><i class="fas fa-stethoscope"></i> [A] Assessment</h2>
                     <div class="assessment-group">
                         <label><i class="fas fa-list"></i> Underlyings:</label>
-                        <textarea id="underlyings-input" placeholder="Enter underlyings here..."></textarea>
+                        <textarea id="underlyings-input" class="auto-resize" placeholder="Enter underlyings here..."></textarea>
                     </div>
                     <div class="assessment-group">
                         <label><i class="fas fa-clock"></i> Timeline:</label>
-                        <textarea id="timeline-input" placeholder="Enter timeline here..."></textarea>
+                        <textarea id="timeline-input" class="auto-resize" placeholder="Enter timeline here..."></textarea>
                     </div>
                     <div class="assessment-group">
                         <label><i class="fas fa-flask"></i> Examinations:</label>
-                        <textarea id="examinations-input" placeholder="Paste examinations data here..."></textarea>
+                        <textarea id="examinations-input" class="auto-resize" placeholder="Paste examinations data here..."></textarea>
                     </div>
                 </div>
                 
                 <!-- Plan Section -->
                 <div class="section-card">
                     <h2><i class="fas fa-clipboard-list"></i> [P] Plan</h2>
-                    <textarea id="plan-input" placeholder="Enter plan here..."></textarea>
+                    <textarea id="plan-input" class="auto-resize" placeholder="Enter plan here..."></textarea>
                 </div>
             </div>
 
@@ -380,13 +384,13 @@
                 <!-- Chief Complaint Section -->
                 <div class="section-card">
                     <h2><i class="fas fa-exclamation-circle"></i> Chief Complaint</h2>
-                    <textarea id="chief-complaint-input" placeholder="Enter chief complaint here..."></textarea>
+                    <textarea id="chief-complaint-input" class="auto-resize" placeholder="Enter chief complaint here..."></textarea>
                 </div>
                 
                 <!-- History Taken Section -->
                 <div class="section-card">
                     <h2><i class="fas fa-history"></i> History Taken</h2>
-                    <textarea id="history-taken-input" placeholder="Enter detailed history here..."></textarea>
+                    <textarea id="history-taken-input" class="auto-resize" placeholder="Enter detailed history here..."></textarea>
                 </div>
             </div>
 
@@ -456,6 +460,38 @@
                 });
             });
         });
+
+        // 自動調整 textarea 高度的函數
+        function autoResize(textarea) {
+            // 重置高度為自動
+            textarea.style.height = 'auto';
+            // 設定高度為內容的滾動高度
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
+        // 為所有帶有 auto-resize class 的 textarea 添加自動調整功能
+        function initAutoResize() {
+            const textareas = document.querySelectorAll('textarea.auto-resize');
+            
+            textareas.forEach(textarea => {
+                // 監聽輸入事件
+                textarea.addEventListener('input', function() {
+                    autoResize(this);
+                });
+                
+                // 監聽鍵盤事件（處理刪除等操作）
+                textarea.addEventListener('keydown', function() {
+                    // 使用 setTimeout 確保在內容更新後調整高度
+                    setTimeout(() => autoResize(this), 0);
+                });
+                
+                // 初始化時就調整一次高度
+                autoResize(textarea);
+            });
+        }
+
+        // 頁面載入完成後初始化
+        document.addEventListener('DOMContentLoaded', initAutoResize);
 
         // Progress Note functionality
         let progressPrompt = "";
