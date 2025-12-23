@@ -688,25 +688,64 @@ ${planInput}`;
 
             // Simulate processing time (can be removed in production)
             setTimeout(() => {
-                admissionPrompt = `Please polish the following content of my note into paragraphs of chief complaint (in a sentence), present illness, and past history. Please write in fluent and professional medical English and make sure that it follows the timeline and with medical logic. Make sure all first names of people or doctors, and all name of hospitals mentioned preserved in Chinese, and make sure all time are formatted in yyyy/mm/dd or yyyy/mm if no date is presented.
+                admissionPrompt = `Please polish the following content of my note into paragraphs of chief complaint (in a sentence), present illness, and other listed details in specific format. For present illness part, please write in fluent and professional medical English and make sure that it follows the timeline and with medical logic. Make sure all first names of people or doctors, and all name of hospitals mentioned preserved in Chinese (formed like Dr. 姓名, and 醫院名H), and make sure all time are formatted in yyyy/mm/dd (or just mm/dd if the same year is mentioned already) or yyyy/mm if that happened in different year and no date is presented.
 Please organize all the things into the following format, and generate things in a plain text code box for convenient copying:
-[Chief complaint]
+
+>>> Template start >>>
+
+■Chief complaint
 Informant: patient and EMR
-CC: (symptom, for how long.)
-[Present illness] (ensure that every disease is started with "#. " and the s/p procedure followed by "  - ")
-This is a ?-year-old male/female with underlying diseases of:
-#. Disease A. (Preserve all s/p procedures) (make all procedures in smooth timeline)
-#. Disease B, etc. (preserve all underlying diseases as the start of the present illness)
-(Paragraph starts.)
-[Past history]
-(Paragraphs starts, while if there's no important history unrelated to current event, then output "as the above")
-[Other trivial details]
-(Things that don't actually matters but are recorded in my note can be put here)
+CC: (major symptoms, for how long.)
+
+■Present illness
+(ensure that every disease is started with "#. " and the s/p procedure followed by "  - " or after the disease with a comma if it's short)
+History taken by M6 黃牧凡
+
+This is a ??-year-old (male/female) patient with a history of:
+#. Disease A, s/p (procedure).
+#. Disease B.
+  - s/p (long procedure name).
+
+(Write the story fluently with medical logic or timeline.)
+(If there are past events concerning related with current episode, but not the chief complaint, we can simply start the story with "Tracing back this patient's history, ..." to describe the relevant history first.)
+(Make the story in paragraphs rather than list or bullet notes. Put in the medical logic of important decisions, and explain why the thing would be done.)
+(If the patient was admitted from the ER, then the vital sign and examination data are usually placed in the story with fine interpretation. For example, "vital sign showed high fever (up to 41℃). Lab showed mild anemia (Hb 10.0), and ... .")
+(If the data and information seems not enough for a perfect thinking process of differential diagnosis, then please explain and list all lacking items at the bottom for me to add on additional data.)
+
+■Family history:
+. 疾病名 (家庭成員, 家庭成員)
+. 疾病名 (家庭成員, 家庭成員)
+
+■Surgery history: denied
+
+■Current medication: 
+. 台大醫院:
+ - ...
+. 中草藥 and 保健食品: 
+
+■Allergy history:
+. Food allergy: none
+. Drug allergy: none
+
+■TOCC:
+. Travel:     denied
+. Occupation: 
+. Contact:    denied
+. Cluster:    denied
+
+■Social history
+. Alcohol(-), Betelnut(-), Cigarette(-, never smoker)
+
+<<< Template ends <<<
+
 And below is my note of this patient's history.
+
+>>> Case starts >>>
 === Chief complaint === (brief out the patient's major complaint in a sentence)
 ${chiefComplaintInput}
 === History taken === (all the things that are related with the chief complaint should be put in present illness, and other important history that are unrelated with current events should be put in past history, while yet the other trivial things placed in extra section.)
-${historyTakenInput}`;
+${historyTakenInput}
+<<< Case ends <<<`;
                 
                 document.getElementById('admission-output').textContent = admissionPrompt;
                 

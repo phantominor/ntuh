@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>病歷優化助手 (Pro版)</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; padding: 40px; max-width: 900px; margin: 0 auto; background-color: #f9f9f9; }
+        h1 { color: #2c3e50; }
+        
+        .container { display: flex; gap: 20px; flex-direction: column; }
+        
+        textarea { 
+            width: 100%; height: 150px; padding: 15px; 
+            border: 1px solid #ccc; border-radius: 8px; 
+            font-family: monospace; font-size: 14px;
+            box-sizing: border-box; /* 確保 padding 不會撐開寬度 */
+        }
+
+        button { 
+            padding: 12px 24px; background-color: #007bff; color: white; 
+            border: none; border-radius: 5px; cursor: pointer; font-size: 16px; 
+            align-self: flex-start; transition: background 0.3s;
+        }
+        button:hover { background-color: #0056b3; }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+
+        /* 模擬病歷紙的樣式 */
+        #output { 
+            background: white; padding: 30px; border-radius: 8px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            line-height: 1.6; color: #333; min-height: 200px;
+        }
+        
+        /* 讓 Markdown 的輸出更好看 */
+        #output h3 { border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 20px; }
+        #output ul { padding-left: 20px; }
+        #output strong { color: #d9534f; } /* 強調重點顯示紅色 */
+    </style>
+</head>
+<body>
+
+    <h1>🏥 AI 病歷優化助手 (Gemini 2.5 Pro)</h1>
+    <p>請輸入雜亂的臨床筆記或初步病歷，AI 將協助您整理為標準 SOAP 格式並進行優化。</p>
+
+    <div class="container">
+        <textarea id="promptInput" placeholder="範例輸入：
+56歲男性，昨天開始右下腹痛，有噁心感，體溫37.8，白血球12000，McBurney point壓痛明顯，懷疑是盲腸炎..."></textarea>
+        
+        <button id="generateBtn">開始優化病歷</button>
+        
+        <div id="output">等待輸入...</div>
+    </div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import { GoogleGenerativeAI } from "@google/generative-ai";
+
+      // ★★★ 記得換回您的 API Key ★★★
+      const API_KEY = "AIzaSyAI6B2ZzzaYf9hxewBcZj_0QrbfDP9gvDs";
+
+      const genAI = new GoogleGenerativeAI(API_KEY);
+
+      // ★ 關鍵設定 1：使用思考能力較強的 Pro 模型 ★
+      // ★ 關鍵設定 2：System Instruction (角色扮演) ★
+      const model = genAI.getGenerativeModel({ 
+          model: "gemini-2.5-flash",
+          systemInstruction: `
+            Please polish the following content of my note into paragraphs of chief complaint (in a sentence), present illness, and past history. Please write in fluent and professional medical English and make sure that it follows the timeline and with medical logic. Make sure all first names of people or doctors, and all name of hospitals mentioned preserved in Chinese, and make sure all time are formatted in yyyy/mm/dd or yyyy/mm if no date is presented.
+Please organize all the things into the following format, and generate things in a plain text code box for convenient copying:
+[Chief complaint]
+Informant: patient and EMR
+CC: (symptom, for how long.)
+[Present illness] (ensure that every disease is started with "#. " and the s/p procedure followed by "  - ")
+This is a ?-year-old male/female with underlying diseases of:
+#. Disease A. (Preserve all s/p procedures) (make all procedures in smooth timeline)
+#. Disease B, etc. (preserve all underlying diseases as the start of the present illness)
+(Paragraph starts.)
+[Past history]
+(Paragraphs starts, while if there's no important history unrelated to current event, then output "as the above")
+[Other trivial details]
+(Things that don't actually matters but are recorded in my note can be put here)
+And below is my note of this patient's history.
+=== Chief complaint === (brief out the patient's major complaint in a sentence)
+${chiefComplaintInput}
+=== History taken === (all the things that are related with the chief complaint should be put in present illness, and other important history that are unrelated with current events should be put in past history, while yet the other trivial things placed in extra section.)
+${historyTakenInput}`
+      });
+
+      const outputDiv = document.getElementById('output');
+      const btn = document.getElementById('generateBtn');
+      const input = document.getElementById('promptInput');
+
+      btn.addEventListener('click', async () => {
+          const prompt = input.value;
+          if (!prompt) return;
+
+          btn.disabled = true;
+          btn.textContent = "醫師思考中...";
+          outputDiv.innerHTML = "正在分析病情並撰寫病歷..."; // 暫時顯示
+          
+          try {
+              const result = await model.generateContent(prompt);
+              const response = await result.response;
+              const text = response.text();
+              
+              // ★ 關鍵設定 3：使用 marked 將 Markdown 轉換為 HTML ★
+              outputDiv.innerHTML = marked.parse(text);
+          } catch (error) {
+              outputDiv.innerHTML = `<span style="color:red">發生錯誤: ${error.message}</span>`;
+              console.error(error);
+          } finally {
+              btn.disabled = false;
+              btn.textContent = "開始優化病歷";
+          }
+      });
+    </script>
+</body>
+</html>
